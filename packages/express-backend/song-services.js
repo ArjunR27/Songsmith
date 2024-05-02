@@ -46,16 +46,23 @@ mongoose.connect("mongodb://localhost:27017/songs", {
 });
 
 function findSongByName(name) {
-    return songModel.find({ name: name });
+    return songModel.find({ name : name });
 }
 
-function getSongs(name) {
+function findSongsByArtist(artist) {
+    return songModel.find({ artist : artist });
+}
+
+function getSongs(name, artist) {
     let promise;
-    if (name == undefined) {
+    if (name === undefined && artist === undefined) {
         promise = songModel.find();
     }
-    else {
+    else if (name && !artist) {
         promise = findSongByName(name);
+    }
+    else {
+        promise = findSongsByArtist(artist);
     }
     return promise; 
 }
