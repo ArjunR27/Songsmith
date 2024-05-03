@@ -5,31 +5,39 @@ import Table from "./SongsTable.jsx"
 //import "./Home.css"
 
 function Songs() {
-    const [characters, setCharacters] = useState([
+    const [songs, setSongs] = useState([
         {
-          name: "Charlie",
-          job: "Janitor"
+            "track_name": "Fortnight (feat. Post Malone)",
+            "artist_name": "Taylor Swift",
+            "album_name": "THE TORTURED POETS DEPARTMENT",
+            "track_duration_min": 3.8160833333333333,
+            "album_image_url": "https://i.scdn.co/image/ab67616d0000b2735076e4160d018e378f488c33"
         },
         {
-          name: "Mac",
-          job: "Bouncer"
+            "track_name": "Feather",
+            "artist_name": "Sabrina Carpenter",
+            "album_name": "emails i can\u2019t send fwd:",
+            "track_duration_min": 3.0925333333333334,
+            "album_image_url": "https://i.scdn.co/image/ab67616d0000b2730f45623be014a592a5815827"
         },
         {
-          name: "Dee",
-          job: "Aspring actress"
-        },
-        {
-          name: "Dennis",
-          job: "Bartender"
+            "track_name": "love is embarrassing",
+            "artist_name": "Olivia Rodrigo",
+            "album_name": "GUTS",
+            "track_duration_min": 2.575266666666667,
+            "album_image_url": "https://i.scdn.co/image/ab67616d0000b273e85259a1cae29a8d91f2093d"
         }
     ]);
 
     return (
         <>
             <div className="App">
-                Check out this table!
+                Songs
+                    
+                
+
                 <Table 
-                    characterData={characters} 
+                    songData={songs} 
                 />
             </div> 
         </>

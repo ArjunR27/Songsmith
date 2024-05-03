@@ -3,19 +3,30 @@ function TableHeader() {
     return (
         <thead>
             <tr>
-            <th>Name</th>
-            <th>Job</th>
+            <th>Track Name</th>
+            <th>Artist Name</th>
+            <th>Album Name</th>
+            <th>Track Duration</th>
+            <th>Album Image</th>
             </tr>
         </thead>
     );
   }
 
+function convertMins(mins) {
+    const message = `${Math.floor(mins / 1)} mins ${Math.floor((mins % 1) * 60)} secs`;
+    return message;
+} 
 function TableBody(props) {
-    const rows = props.characterData.map((row, index) => {
+    const rows = props.songData.map((row, index) => {
         return (
             <tr key={index}>
-                <td>{row.name}</td>
-                <td>{row.job}</td>
+                <td>{row.track_name}</td>
+                <td>{row.artist_name}</td>
+                <td>{row.album_name}</td>
+                <td>{convertMins(row.track_duration_min)}</td>
+                <td><img src={row.album_image_url} alt="Album Image" style={{ width: '100px', height: '100px' }} /></td>
+                
             </tr>
         );
     });
@@ -33,9 +44,11 @@ function Table(props) {
         <table>
             <TableHeader/>
             <TableBody
-                characterData={props.characterData}
+                songData={props.songData}
             />
+            
         </table>
+        
     );
 }
 
