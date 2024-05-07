@@ -26,5 +26,7 @@ app.get("/songs", async (req, res) => {
   const song_name = req.query["name"];
   const artist_name = req.query["artist"]
   const result = await songServices.getSongs(song_name, artist_name)
-  res.send({ song_list : result })
+  
+  res.send({ song_list: result });
+  
 });

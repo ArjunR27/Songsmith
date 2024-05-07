@@ -47,7 +47,9 @@ th, td {
     padding: 8px;
     text-align: left;
     border-bottom: 1px solid #ddd;
-    color: #EBE6D5
+    color: #EBE6D5;
+    word-wrap: break-word;
+    max-width: 150px;
 }
 
 th {
@@ -56,9 +58,9 @@ th {
 
 /* Album Image styles */
 td img {
-    width: 100px;
-    height: 100px;
-    object-fit: cover; /* Ensures the image covers the specified dimensions */
+    max-width: 75px;
+    max-height: 75px;
+    object-fit: scale-down; /* Ensures the image covers the specified dimensions */
 }
 
 .menu-bar {

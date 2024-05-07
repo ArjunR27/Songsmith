@@ -1,5 +1,6 @@
 import './Songs.css'
 
+
 function TableHeader() {
     return (
         <thead>
@@ -24,11 +25,11 @@ function TableBody(props) {
         return (
             <tr key={index}>
                 <td>{1 + index}</td>
-                <td><img src={row.album_image_url} alt="Album Image" style={{ width: '100px', height: '100px' }} /></td>
-                <td>{row.track_name}</td>
-                <td>{row.artist_name}</td>
-                <td>{row.album_name}</td>
-                <td>{convertMins(row.track_duration_min)}</td>
+                <td><img src={row.image_link} alt="Album Image" style={{ width: '100px', height: '100px' }} /></td>
+                <td className> {row.name}</td>
+                <td>{row.artist}</td>
+                <td>{row.album}</td>
+                <td>{convertMins(row.duration)}</td>
                 
                 
             </tr>
@@ -37,7 +38,6 @@ function TableBody(props) {
     return (
         <tbody>
             {rows}
-
         </tbody>
     );
 
