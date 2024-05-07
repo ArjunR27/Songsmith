@@ -1,31 +1,27 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import './App.css'
-import Home from "./pages/Home.jsx"
-import Songs from "./pages/Songs.jsx"
-import Playlists from "./pages/Playlists.jsx"
+// App.jsx
 
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Header from './Header.jsx'; 
+import './App.css'; 
+import Home from './pages/Home.jsx';
+import Songs from './pages/Songs.jsx';
+import Playlists from './pages/Playlists.jsx';
 
 function App() {
-  const [count, setCount] = useState(0)
   return (
     <div className="App">
-      <header className="App-header">
-              <BrowserRouter>
-                  <Routes>
-                      <Route exact path="/" element={<Home />}>
-                      </Route>
-                      <Route exact path="/playlists" element={<Playlists/>}>
-                      </Route>
-                      <Route exact path="/songs" element={<Songs />}>
-                      </Route>
-                  </Routes>
-              </BrowserRouter>
-      </header>
+      <BrowserRouter>
+        <Header /> {/*Header component */}
+        <Routes>
+          <Route exact path="/" element={<Home />} />
+          <Route exact path="/playlists" element={<Playlists />} />
+          <Route exact path="/songs" element={<Songs />} />
+        </Routes>
+      </BrowserRouter>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
+
