@@ -6,14 +6,18 @@ import './App.css'
 import Home from "./pages/Home.jsx"
 import Songs from "./pages/Songs.jsx"
 import Playlists from "./pages/Playlists.jsx"
+import Sidebar from './components/SideBar';
 
 
 function App() {
   const [count, setCount] = useState(0)
   return (
     <div className="App">
+       <BrowserRouter>
+      
       <header className="App-header">
-              <BrowserRouter>
+      <Sidebar />
+             
                   <Routes>
                       <Route exact path="/" element={<Home />}>
                       </Route>
@@ -22,9 +26,11 @@ function App() {
                       <Route exact path="/songs" element={<Songs />}>
                       </Route>
                   </Routes>
-              </BrowserRouter>
-      </header>
+        </header>
+        </BrowserRouter>
+         
     </div>
+    
   )
 }
 
