@@ -39,14 +39,7 @@ function Songs() {
             <div className="table-container">
                 <Table songData={songs} />
             </div>
-
-      
-        </>
-        
-            
-          
-  
-
+        </>    
     )
 }
 

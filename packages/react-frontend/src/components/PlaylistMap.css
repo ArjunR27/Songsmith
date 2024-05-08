@@ -1,0 +1,6 @@
+.playlist-map {
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: flex-start; 
+    width: 80vw;
+}
