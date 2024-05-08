@@ -44,7 +44,7 @@ function Songs() {
                 <Table songData={songs} />
             </div>
 
-            <MenuBar></MenuBar>
+      
         </>
         
             
