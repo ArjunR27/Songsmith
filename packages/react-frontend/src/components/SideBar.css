@@ -1,15 +1,13 @@
 
 .sidebar {
-    width: 200px;
-    background-color: #333;
-    height: 100%;
+    background-color: #3A3A40;
+    width: 200px; /* Adjust width as needed */
+    height: calc(100vh - 110px); /* Adjust height to fit remaining space */
     position: fixed;
-    top: 0;
+    top: 110px; /* Height of navbar */
     left: 0;
-    padding: 20px;
+    color: #ffffff;
     transition: transform 0.3s ease;
-    z-index: 1000; /* Ensure the sidebar appears above other content */
-    color:#fff
 }
 
 .sidebar.closed {
