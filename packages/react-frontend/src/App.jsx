@@ -1,4 +1,14 @@
-// App.jsx
+
+import { useState } from 'react'
+import reactLogo from './assets/react.svg'
+import viteLogo from '/vite.svg'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import './App.css'
+import Home from "./pages/Home.jsx"
+import Songs from "./pages/Songs.jsx"
+import Playlists from "./pages/Playlists.jsx"
+import Sidebar from './components/SideBar';
+
 
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
@@ -11,16 +21,23 @@ import Playlists from './pages/Playlists.jsx';
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>
-        <Header /> {/*Header component */}
-        <Routes>
-          <Route exact path="/" element={<Home />} />
-          <Route exact path="/playlists" element={<Playlists />} />
-          <Route exact path="/songs" element={<Songs />} />
-        </Routes>
-      </BrowserRouter>
+       <BrowserRouter>    
+          <Sidebar />
+            <Header />       
+                  <Routes>
+                      <Route exact path="/" element={<Home />}>
+                      </Route>
+                      <Route exact path="/playlists" element={<Playlists/>}>
+                      </Route>
+                      <Route exact path="/songs" element={<Songs />}>
+                      </Route>
+                  </Routes>
+        </BrowserRouter>
+         
     </div>
-  );
+    
+  )
+
 }
 
 export default App;

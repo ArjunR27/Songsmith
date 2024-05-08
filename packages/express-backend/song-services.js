@@ -9,9 +9,6 @@ mongoose.connect("mongodb://localhost:27017/songs", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 }).then(async () => {
-    // Clear the database
-    console.log("Database cleared successfully.");
-
     // Read JSON file
     const jsonData = fs.readFileSync("./songs.json");
     const songsData = JSON.parse(jsonData);
