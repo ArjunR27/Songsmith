@@ -4,7 +4,8 @@
     width: 200px; /* Adjust width as needed */
     height: calc(100vh - 110px); /* Adjust height to fit remaining space */
     position: fixed;
-    top: 110px; /* Height of navbar */
+    top: 10vh; /* Height of navbar */
+    padding: 20px;
     left: 0;
     color: #ffffff;
     transition: transform 0.3s ease;

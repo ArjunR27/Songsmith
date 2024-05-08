@@ -35,11 +35,7 @@ function Songs() {
     }, [] );
 
     return (
-        <>
-            <div className="navTop"> 
-                <h1>Songsmith</h1>
-            </div>
-                
+        <>                
             <div className="table-container">
                 <Table songData={songs} />
             </div>

@@ -8,15 +8,9 @@ import Home from "./pages/Home.jsx"
 import Songs from "./pages/Songs.jsx"
 import Playlists from "./pages/Playlists.jsx"
 import Sidebar from './components/SideBar';
-
-
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Header from './Header.jsx'; 
-import './App.css'; 
-import Home from './pages/Home.jsx';
-import Songs from './pages/Songs.jsx';
-import Playlists from './pages/Playlists.jsx';
+
 
 function App() {
   return (
