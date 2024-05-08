@@ -55,6 +55,20 @@ app.get("/songs", async (req, res) => {
   res.send({ song_list : result })
 });
 
+app.get("/playlists", async (req, res) => {
+  try {
+    const allPlaylists = await playlistServices.getAllPlaylists();
+    if (!allPlaylists) {
+      return res.status(404).send("Playlists not found")
+    }
+    res.send({ playlist_list : allPlaylists})
+  }
+  catch (error) {
+    console.error(error);
+    res.status(500).send("error fetching playlists");
+  }
+});
+
 app.get("/users/:id/playlists", async (req, res) => {
   try {
     const userId = req.params["id"];
