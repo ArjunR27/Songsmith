@@ -1,7 +1,7 @@
 
 .sidebar {
     background-color: #3A3A40;
-    width: 200px; /* Adjust width as needed */
+    width: 20vh; /* Adjust width as needed */
     height: calc(100vh - 110px); /* Adjust height to fit remaining space */
     position: fixed;
     top: 10vh; /* Height of navbar */

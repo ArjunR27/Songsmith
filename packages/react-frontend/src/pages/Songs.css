@@ -21,13 +21,13 @@ body {
 }
 
 .table-container {
-    margin-top: 100px; 
-    margin-left: 200px; 
+    margin-top: 80px; 
+    margin-left: 15vw; 
     padding-top: 4px;
+    padding-right: 12px;
     padding: 20px;
 
 }
-
 
 .song-header {
     font-size: 36px; 
