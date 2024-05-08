@@ -1,11 +1,10 @@
-import React from "react"
+import {React, useState, useEffect} from "react"
 import "./Playlists.css"
 import PlaylistMap from "../components/PlaylistMap.jsx"
 
 export default function Playlists() {
-    //const [playlists, setPlaylists] = useState([]);
+    const [playlists, setPlaylists] = useState([]);
 
-    /*
     function fetchPlaylists() {
         const promise = fetch("http://localhost:8000/playlists");
         return promise;
@@ -14,11 +13,11 @@ export default function Playlists() {
     useEffect(() => {   
         fetchPlaylists()
         .then((res) => res.json())
-        .then((json) => setPlaylists(json["playlists_lists"]))
+        .then((json) => setPlaylists(json["playlist_list"]))
         .catch((error) => { console.log(error); });
     }, [] );
-    */
 
+    console.log(playlists);
     return (
         <>
             <div className="playlists">
@@ -27,7 +26,7 @@ export default function Playlists() {
                     Search for Playlists
                     Add Songs
                 </div>
-                <PlaylistMap/>
+                <PlaylistMap playlistsData = {playlists}/>
                 
             </div>
         </>

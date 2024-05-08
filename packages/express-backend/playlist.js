@@ -18,7 +18,8 @@ const playlistSchema = new mongoose.Schema(
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Song'
         }]
-    }
+    },
+    { collection: "playlist_list" }
 );
 
 const Playlist = mongoose.model("Playlist", playlistSchema);
