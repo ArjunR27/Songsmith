@@ -1,46 +1,55 @@
 
-import React, {useState} from "react"
-import '../App.css'
+import React, {useState, useEffect} from "react"
 import Table from "./SongsTable.jsx"
-//import "./Home.css"
+import './Songs.css'
+
+function MenuBar() {
+    return (
+        <div className="menu-bar">
+            <h1>Menu</h1> 
+
+            <h3>Songs</h3>
+            <h3>Playlists</h3>
+   
+        </div>
+    );
+}
+
+
 
 function Songs() {
-    const [songs, setSongs] = useState([
-        {
-            "track_name": "Fortnight (feat. Post Malone)",
-            "artist_name": "Taylor Swift",
-            "album_name": "THE TORTURED POETS DEPARTMENT",
-            "track_duration_min": 3.8160833333333333,
-            "album_image_url": "https://i.scdn.co/image/ab67616d0000b2735076e4160d018e378f488c33"
-        },
-        {
-            "track_name": "Feather",
-            "artist_name": "Sabrina Carpenter",
-            "album_name": "emails i can\u2019t send fwd:",
-            "track_duration_min": 3.0925333333333334,
-            "album_image_url": "https://i.scdn.co/image/ab67616d0000b2730f45623be014a592a5815827"
-        },
-        {
-            "track_name": "love is embarrassing",
-            "artist_name": "Olivia Rodrigo",
-            "album_name": "GUTS",
-            "track_duration_min": 2.575266666666667,
-            "album_image_url": "https://i.scdn.co/image/ab67616d0000b273e85259a1cae29a8d91f2093d"
-        }
-    ]);
+    const [songs, setSongs] = useState([]);
+
+     // FETCH Users
+    function fetchUsers() {
+        const promise = fetch("http://localhost:8000/songs");
+        
+        return promise;
+    }
+
+    useEffect(() => {   
+        fetchUsers()
+        .then((res) => res.json())
+        .then((json) => setSongs(json["song_list"]))
+        .catch((error) => { console.log(error); });
+    }, [] );
 
     return (
         <>
-            <div className="App">
-                Songs
-                    
+            <div className="navTop"> 
+                <h1>Songsmith</h1>
+            </div>
                 
+            <div className="table-container">
+                <Table songData={songs} />
+            </div>
 
-                <Table 
-                    songData={songs} 
-                />
-            </div> 
+            <MenuBar></MenuBar>
         </>
+        
+            
+          
+  
 
     )
 }
