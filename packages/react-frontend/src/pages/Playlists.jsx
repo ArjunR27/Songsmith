@@ -22,9 +22,10 @@ export default function Playlists() {
         <>
             <div className="playlists">
                 <h1>Playlists</h1>
-                <div>
-                    Search for Playlists
-                    Add Songs
+                <div className = "tools">
+                    <text>Search for Playlists</text>
+                    <text>Add Songs</text>
+                    
                 </div>
                 <PlaylistMap playlistsData = {playlists}/>
                 

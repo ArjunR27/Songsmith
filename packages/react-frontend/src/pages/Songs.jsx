@@ -1,6 +1,6 @@
 
 import React, {useState, useEffect} from "react"
-import Table from "./SongsTable.jsx"
+import Table from "../components/SongsTable.jsx"
 import './Songs.css'
 
 
