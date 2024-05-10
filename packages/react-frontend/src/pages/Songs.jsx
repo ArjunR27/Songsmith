@@ -1,20 +1,7 @@
 
 import React, {useState, useEffect} from "react"
-import Table from "./SongsTable.jsx"
+import Table from "../components/SongsTable.jsx"
 import './Songs.css'
-
-function MenuBar() {
-    return (
-        <div className="menu-bar">
-            <h1>Menu</h1> 
-
-            <h3>Songs</h3>
-            <h3>Playlists</h3>
-   
-        </div>
-    );
-}
-
 
 
 function Songs() {
@@ -39,14 +26,7 @@ function Songs() {
             <div className="table-container">
                 <Table songData={songs} />
             </div>
-
-      
-        </>
-        
-            
-          
-  
-
+        </>    
     )
 }
 

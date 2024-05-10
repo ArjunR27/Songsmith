@@ -9,7 +9,6 @@ function Header() {
           <div className="logo kumar-one-font">Songsmith</div>
         </div>
         <button className="menu-icon" aria-label="Menu">
-          {/* Three-line menu icon */}
           <div className="line"></div>
           <div className="line"></div>
           <div className="line"></div>

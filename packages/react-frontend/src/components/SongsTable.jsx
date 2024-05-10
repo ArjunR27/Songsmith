@@ -1,5 +1,6 @@
-import './Songs.css'
 
+import './SongsTable.css'
+import React from "react"
 
 function TableHeader() {
     return (
