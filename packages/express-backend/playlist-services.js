@@ -16,7 +16,7 @@ function getAllPlaylists() {
 function getPlaylistById(id) {
     let promise; 
     try {
-        promise = playlistModel.findById().populate('songs');
+        promise = playlistModel.findById(id).populate('songs');
         return promise
     } catch (error) {
         throw new Error(`Error fetching playlists: ${error.message}`)
