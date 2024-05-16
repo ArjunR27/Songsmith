@@ -2,9 +2,6 @@
 import PlaylistBox from "./PlaylistBox.jsx"
 import "./PlaylistMap.css"
 
-/*
-
-*/
 
 export default function PlaylistsMap({playlistsData}) {
     if (!playlistsData || playlistsData.length === 0) {
@@ -17,8 +14,8 @@ export default function PlaylistsMap({playlistsData}) {
 
     return (
         <div className="playlist-map">
-            {playlistsData.map((playlist) => (
-                <PlaylistBox playlist={playlist} />
+            {playlistsData.map((playlist, index) => (
+                <PlaylistBox key={index} playlist={playlist} />
             ))}
         </div>
     );

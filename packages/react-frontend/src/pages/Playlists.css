@@ -4,10 +4,3 @@
     padding-left: 15vw;
     text-align: left;
 }
-
-.tools {
-    display: flex;
-    justify-content: space-between; 
-    align-items: left;
-    width: 60vw
-}
