@@ -3,7 +3,6 @@ import Song from "./song.js"
 
 const playlistSchema = new mongoose.Schema(
     { 
-        
         playlist_name: {
             type: String,
             required: true,

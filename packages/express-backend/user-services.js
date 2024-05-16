@@ -4,7 +4,6 @@ import userModel from "./user.js"
 mongoose.set("debug", true);
 
 
-
 function addUser(user) {
     const userToAdd = new userModel(user)
     const promise = userToAdd.save();
@@ -25,11 +24,14 @@ function getUsers() {
     }
 }
 
-// Need a function that will show the playlists for each user
-// I think the path is /:id/playlists
+function getPlaylistsForUser(id) {
+    return userModel.findById(id).populate('playlists')
+}
+
 
 export default {
     getUsers,
     findUserById,
     addUser,
+    getPlaylistsForUser,
 }
