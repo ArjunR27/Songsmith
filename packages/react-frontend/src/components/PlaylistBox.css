@@ -17,11 +17,12 @@
 }
 
 .playlist-name {
-    padding-top: 10px;
+    padding-top: 5px;
     font-size: 36px;
+    cursor: pointer;
 }
 
 .playlist-desc {
-    padding-top: 50px;
+    margin-top: 50px;
     font-size: 16px;
 }
