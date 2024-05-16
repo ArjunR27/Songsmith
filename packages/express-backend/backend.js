@@ -1,10 +1,15 @@
 // backend.js
 import express from "express";
 import cors from "cors";
+import dotenv from "dotenv"
 import songServices from "./song-services.js"
 import playlistServices from "./playlist-services.js";
 import userServices from "./user-services.js"
 import User from "./user.js";
+
+
+
+dotenv.config();
 
 const app = express();
 const port = 8000;
@@ -69,10 +74,26 @@ app.get("/playlists", async (req, res) => {
   }
 });
 
+app.get("/playlists/:id", async (req, res) => {
+  try {
+    const playlistId = req.params["id"];
+    const result = await playlistServices.getPlaylistById(playlistId)
+    if (result == undefined || result == null)
+      res.status(404).send("Resource not found")
+    else {
+      res.send({playlist_list : result})
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error fetching playlists")
+  }
+
+});
+
 app.get("/users/:id/playlists", async (req, res) => {
   try {
     const userId = req.params["id"];
-    const user = await userServices.findUserById(userId).populate('playlists');
+    const user = await userServices.getPlaylistsForUser(userId)
 
     if (!user) {
       return res.status(404).send("User not found");

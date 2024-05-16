@@ -13,6 +13,16 @@ function getAllPlaylists() {
     }
 }
 
+function getPlaylistById(id) {
+    let promise; 
+    try {
+        promise = playlistModel.findById(id).populate('songs');
+        return promise
+    } catch (error) {
+        throw new Error(`Error fetching playlists: ${error.message}`)
+    }
+}
+
 function createPlaylist(playlist) {
     try {
         const playlistToAdd = new playlistModel(playlist);
@@ -27,4 +37,5 @@ function createPlaylist(playlist) {
 export default {
     getAllPlaylists,
     createPlaylist,
+    getPlaylistById,
 }
