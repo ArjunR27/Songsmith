@@ -51,13 +51,19 @@ async function addSong(song) {
             artist: song.artist,
             album: song.album
         })
+
         if (!existingSong) {
-            const songToAdd = new songModel(song);
-            const promise = songToAdd.save()
-            return promise
+            const songToAdd = new songModel({
+                name: song.name,
+                artist: song.artist,
+                album: song.album,
+                duration: song.duration,
+                image_link: song.image_link
+            });
+            console.log(songToAdd)
+            const savedSong = await songToAdd.save()
+            return savedSong
         } else {
-            // if the song already exists in the database return null, so on the frontend, if you 
-            // get a return value of null prompt the user? 
             return null; 
         }
     } catch (error) {

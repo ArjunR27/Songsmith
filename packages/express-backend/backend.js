@@ -55,6 +55,7 @@ app.get("/songs", async (req, res) => {
   res.send({ song_list : result })
 });
 
+
 app.get("/playlists", async (req, res) => {
   try {
     const allPlaylists = await playlistServices.getAllPlaylists();
@@ -105,6 +106,15 @@ app.get("/users/:id/playlists", async (req, res) => {
   }
 });
 
+app.post("/songs", async (req, res) => {
+  try {
+  const songAddition = req.body;
+  const result = await songServices.addSong(songAddition)
+  res.send({ song_list : result})
+  } catch (error) {
+    res.status(500).send({ error: error.message });
+  }
+});
 
 app.post("/playlists", async (req, res) => {
     const playlist = req.body;
