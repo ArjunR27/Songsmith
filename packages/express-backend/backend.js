@@ -1,15 +1,10 @@
 // backend.js
 import express from "express";
 import cors from "cors";
-import dotenv from "dotenv"
 import songServices from "./song-services.js"
 import playlistServices from "./playlist-services.js";
 import userServices from "./user-services.js"
-import User from "./user.js";
 
-
-
-dotenv.config();
 
 const app = express();
 const port = 8000;
