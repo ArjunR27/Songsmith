@@ -1,7 +1,15 @@
 import mongoose from "mongoose"
+import dotenv from "dotenv"
 import userModel from "./user.js"
 
+dotenv.config(); 
 mongoose.set("debug", true);
+mongoose
+    .connect(process.env.MONGODB_URI, {
+        useNewUrlParser : true,
+        useUnifiedTopology : true,
+    })
+    .catch((error) => console.log(error));
 
 
 function addUser(user) {
