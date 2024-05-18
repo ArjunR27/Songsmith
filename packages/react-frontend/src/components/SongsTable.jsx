@@ -22,6 +22,9 @@ function convertMins(mins) {
     return message;
 } 
 function TableBody(props) {
+    if (!props || !Array.isArray(props.songData)) {
+        return <tbody></tbody>;
+    }
     const rows = props.songData.map((row, index) => {
         return (
             <tr key={index}>
@@ -31,8 +34,6 @@ function TableBody(props) {
                 <td>{row.artist}</td>
                 <td>{row.album}</td>
                 <td>{convertMins(row.duration)}</td>
-                
-                
             </tr>
         );
     });
@@ -48,15 +49,11 @@ function TableBody(props) {
 function Table(props) {
     return (
         <>
-            <h1 className = "song-header">Songs</h1>
             <table className="song-table">
                 <TableHeader />
                 <TableBody songData={props.songData} />
             </table>
         </>
-            
-       
-        
     );
 }
 

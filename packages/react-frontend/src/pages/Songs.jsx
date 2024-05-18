@@ -22,10 +22,14 @@ function Songs() {
     }, [] );
 
     return (
-        <>                
-            <div className="table-container">
-                <Table songData={songs} />
-            </div>
+        <>           
+            <div className="songs">
+                <h1 className ="song-header">Songs</h1>   
+                <div className="table-container">
+                    <Table songData={songs} />
+                </div>
+            </div>  
+            
         </>    
     )
 }
