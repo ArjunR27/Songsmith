@@ -1,11 +1,11 @@
 
 .sidebar {
     background-color: #3A3A40;
-    width: 20vh; /* Adjust width as needed */
-    height: calc(100vh - 110px); /* Adjust height to fit remaining space */
+    width: 12vw; /* Adjust width as needed */
+    height: calc(100vh - 12vh); /* Adjust height to fit remaining space */
     position: fixed;
-    top: 10vh; /* Height of navbar */
-    padding: 20px;
+    top: 12vh; /* Height of navbar */
+    padding: 0px;
     left: 0;
     color: #ffffff;
     transition: transform 0.3s ease;
