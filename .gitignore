@@ -1,2 +1,2 @@
-packages/express-backend/.env
-node_modules
+/packages/express-backend/.env
+/node_modules
