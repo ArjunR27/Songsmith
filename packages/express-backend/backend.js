@@ -77,7 +77,7 @@ app.get("/playlists/:id", async (req, res) => {
     if (result == undefined || result == null)
       res.status(404).send("Resource not found")
     else {
-      res.send({playlist_list : result})
+      res.send({ playlist_list : result})
     }
   } catch (error) {
     console.error(error);
@@ -111,15 +111,18 @@ app.post("/songs", async (req, res) => {
   try {
   const songAddition = req.body;
   const result = await songServices.addSong(songAddition)
-  res.send({ song_list : result})
+  if (result) res.send(201).send(result)
   } catch (error) {
     res.status(500).send({ error: error.message });
   }
 });
 
 app.post("/playlists", async (req, res) => {
+  try {
     const playlist = req.body;
-    const savedPlaylist = await playlistServices.createPlaylist(playlist)
-    if (savedPlaylist) res.status(201).send(savedPlaylist);
-    else res.status(500).send();
+    const result  = await playlistServices.createPlaylist(playlist)
+    if (result) res.send(201).send(result)
+  } catch (error) {
+    res.status(500).send({ error: error.mesage }); 
+  }
 });
