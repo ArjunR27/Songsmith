@@ -16,7 +16,7 @@
 .pl-top {
     display: flex; 
     height: 30vh;
-    width: 100%;
+    width: 100%; 
     padding-top: 10px
    
 }
@@ -71,3 +71,11 @@
 .pl-buttons > * {
     font-size: 36px; 
 }
+
+.search-input {
+    width: 300px;
+    background-color: #EBE6D5;
+    border-radius: 10px;
+}
+
+  

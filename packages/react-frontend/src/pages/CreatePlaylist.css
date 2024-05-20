@@ -1,0 +1,56 @@
+.create-playlist {
+    position: fixed;
+    top: 12vh;
+    left: 12vw;
+    width: 76vw;
+    margin-top: 10px;
+    margin-left: 18px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: #EBE6D5;
+    padding: 20px;
+    border-radius: 10px;
+  }
+  
+  .create-playlist h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #2a2b2f;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .form-group label {
+    display: block;
+    font-size: 18px;
+    margin-bottom: 8px;
+    color: #2a2b2f;
+  }
+  
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+  }
+  
+  button[type="submit"] {
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: #2a2b2f;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #1e1f23;
+  }
