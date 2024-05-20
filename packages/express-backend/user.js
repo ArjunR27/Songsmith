@@ -20,6 +20,7 @@ const userSchema = new mongoose.Schema(
         }]
         
     },
+    
     { collection : "user_list" }
 );
 
