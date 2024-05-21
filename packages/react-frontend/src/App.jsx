@@ -10,6 +10,7 @@ import Playlists from "./pages/Playlists.jsx"
 import Sidebar from './components/SideBar';
 import React from 'react';
 import Header from './Header.jsx'; 
+import AddSong from './pages/AddSong';
 
 
 function App() {
@@ -24,6 +25,8 @@ function App() {
                       <Route exact path="/playlists" element={<Playlists/>}>
                       </Route>
                       <Route exact path="/songs" element={<Songs />}>
+                      </Route>
+                      <Route exact path="/addSong" element={<AddSong />}>
                       </Route>
                   </Routes>
         </BrowserRouter>

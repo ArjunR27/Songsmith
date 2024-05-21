@@ -1,0 +1,29 @@
+
+.input-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  
+  .label {
+    min-width: 200px; 
+    text-align: left;
+    margin-right: 300px;
+    font-size: 2rem; 
+    color: #ebe6d5;
+    margin-left: 20px;
+    margin-bottom:10px;
+  }
+  
+  .input {
+    border-radius: 999px; 
+    border: 1px solid #ccc; 
+    padding: 0.5rem 1rem; 
+    background-color: #ebe6d5; 
+    color: #555; 
+    width: 100%;
+    box-sizing: border-box; 
+    margin-bottom:10px;  
+}
+  
+  

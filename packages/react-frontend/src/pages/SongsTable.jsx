@@ -47,7 +47,10 @@ function TableBody(props) {
 function Table(props) {
     return (
         <>
+            <div className="header-container">
             <h1 className = "song-header">Songs</h1>
+                <button onClick={props.handleButtonClick} className="navigate-button">Add Song</button>
+                </div>
             <table className="song-table">
                 <TableHeader />
                 <TableBody songData={props.songData} />

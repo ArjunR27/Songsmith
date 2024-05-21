@@ -1,53 +1,39 @@
-
-import React, {useState, useEffect} from "react"
-import Table from "./SongsTable.jsx"
-import './Songs.css'
-
-function MenuBar() {
-    return (
-        <div className="menu-bar">
-            <h1>Menu</h1> 
-
-            <h3>Songs</h3>
-            <h3>Playlists</h3>
-   
-        </div>
-    );
-}
-
-
+import React, { useState, useEffect } from "react";
+import Table from "./SongsTable.jsx";
+import "./Songs.css";
+import { useNavigate } from "react-router-dom";
 
 function Songs() {
-    const [songs, setSongs] = useState([]);
+  const [songs, setSongs] = useState([]);
+  const navigate = useNavigate();
+  // FETCH Users
+  function fetchUsers() {
+    const promise = fetch("http://localhost:8000/songs");
 
-     // FETCH Users
-    function fetchUsers() {
-        const promise = fetch("http://localhost:8000/songs");
-        
-        return promise;
-    }
+    return promise;
+  }
 
-    useEffect(() => {   
-        fetchUsers()
-        .then((res) => res.json())
-        .then((json) => setSongs(json["song_list"]))
-        .catch((error) => { console.log(error); });
-    }, [] );
+  useEffect(() => {
+    fetchUsers()
+      .then((res) => res.json())
+      .then((json) => setSongs(json["song_list"]))
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
-    return (
-        <>                
-            <div className="table-container">
-                <Table songData={songs} />
-            </div>
+  const handleButtonClick = () => {
+    navigate("/addSong"); // Change '/different-page' to the actual path you want to navigate to
+  };
 
+  return (
+    <>
       
-        </>
-        
-            
-          
-  
-
-    )
+      <div className="table-container">
+        <Table songData={songs} handleButtonClick={handleButtonClick}/>
+      </div>
+    </>
+  );
 }
 
 export default Songs;
