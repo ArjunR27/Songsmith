@@ -25,7 +25,7 @@ function AppContent() {
         <Route exact path="/signup" element={<SignupPage />} />
         <Route exact path="/playlists" element={<Playlists />} />
         <Route exact path="/playlists/:id" element={<Playlist />} />
-         <Route exact path="/CreatePlaylist" element={<CreatePlaylist />} />
+         <Route exact path="/createPlaylist" element={<CreatePlaylist />} />
         <Route exact path="/songs" element={<Songs />} />
       </Routes>
     </>

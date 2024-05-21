@@ -40,6 +40,7 @@ function Playlist() {
     }
   }
 
+
   return (
     <div className="playlist">
       <div className="pl-top">
@@ -57,20 +58,6 @@ function Playlist() {
             <FontAwesomeIcon icon={faThumbsDown} />
             <FontAwesomeIcon icon={faComment} />
           </div>
-        </div>
-        <div className="pl-search">
-          <input
-            type="text"
-            placeholder="Search songs"
-            className="search-input" 
-          />
-          <button className="search-button">Search</button>{" "}
-          {}
-        </div>
-        <div className="pl-create">
-          <Link to="/playlists/new">
-            <button>Create Playlist</button>
-          </Link>
         </div>
       </div>
       <div className="pl-table">
