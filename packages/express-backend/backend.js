@@ -4,10 +4,15 @@ import cors from "cors";
 import songServices from "./song-services.js"
 import playlistServices from "./playlist-services.js";
 import userServices from "./user-services.js"
+import { registerUser, loginUser, authenticateUser} from "./auth.js";
+
+
 
 
 const app = express();
 const port = 8000;
+
+
 
 app.use(cors())
 app.use(express.json());
@@ -16,14 +21,19 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
-
-
 app.listen(port, () => {
   console.log(
     `Example app listening at http://localhost:${port}`
   );
 });
 
+
+// Login and Register
+app.post("/signup", registerUser);
+
+app.post("/login", loginUser);
+
+// Database
 app.post("/users", async (req, res) => {
   console.log(req.body);
   const user = req.body;
@@ -31,6 +41,7 @@ app.post("/users", async (req, res) => {
   if (savedUser) res.status(201).send(savedUser)
   else res.status(500).send();
 })
+
 
 app.get("/users/:id", async (req, res) => {
   const id = req.params["id"];
