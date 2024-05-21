@@ -1,8 +1,17 @@
-import mongoose from "mongoose"
-import userModel from "./user.js"
+import dotenv from "dotenv";
+import mongoose from "mongoose";
+import userModel from "./user.js";
 
+
+dotenv.config(); 
+const uri = process.env.MONGODB_URI;
 mongoose.set("debug", true);
-
+mongoose
+    .connect(uri, {
+        useNewUrlParser : true,
+        useUnifiedTopology : true,
+    })
+    .catch((error) => console.log(error));
 
 
 function addUser(user) {
@@ -25,11 +34,13 @@ function getUsers() {
     }
 }
 
-// Need a function that will show the playlists for each user
-// I think the path is /:id/playlists
+function getPlaylistsForUser(id) {
+    return userModel.findById(id).populate('playlists')
+}
 
 export default {
     getUsers,
     findUserById,
     addUser,
+    getPlaylistsForUser,
 }

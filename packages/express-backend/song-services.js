@@ -1,11 +1,13 @@
 import mongoose from "mongoose";
+import dotenv from "dotenv"
 import fs from "fs";
 import songModel from "./song.js";
 
+dotenv.config();
 mongoose.set("debug", true);
 
 // Connect to MongoDB
-mongoose.connect("mongodb://localhost:27017/songs", {
+mongoose.connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 }).then(async () => {
@@ -14,7 +16,7 @@ mongoose.connect("mongodb://localhost:27017/songs", {
     const songsData = JSON.parse(jsonData);
 
     // Iterate over each song data
-    for (const songData of songsData) {
+    /*for (const songData of songsData) {
         try {
             // Check if the song already exists in the database
             const existingSong = await songModel.findOne({
@@ -37,10 +39,37 @@ mongoose.connect("mongodb://localhost:27017/songs", {
         } catch (error) {
             console.error(`Error adding song to the database: ${error}`);
         }
-    }
+    } */
 }).catch((error) => {
     console.error(`Error connecting to MongoDB: ${error}`);
 });
+
+async function addSong(song) {
+    try {
+        const existingSong = await songModel.findOne({
+            name: song.name,
+            artist: song.artist,
+            album: song.album
+        })
+
+        if (!existingSong) {
+            const songToAdd = new songModel({
+                name: song.name,
+                artist: song.artist,
+                album: song.album,
+                duration: song.duration,
+                image_link: song.image_link
+            });
+            console.log(songToAdd)
+            const savedSong = await songToAdd.save()
+            return savedSong
+        } else {
+            return null; 
+        }
+    } catch (error) {
+        throw new Error(`Error adding song`)
+    }
+}
 
 function findSongByName(name) {
     return songModel.find({ name : name });
@@ -66,4 +95,7 @@ function getSongs(name, artist) {
 
 export default {
     getSongs,
+    findSongByName,
+    findSongsByArtist,
+    addSong,
 }

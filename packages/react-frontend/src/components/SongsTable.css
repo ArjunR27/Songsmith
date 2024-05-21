@@ -1,0 +1,27 @@
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    color: #EBE6D5;
+    word-wrap: break-word;
+    max-width: 150px;
+}
+
+th {
+    color:#ffffff
+}
+
+/* Album Image styles */
+td img {
+    max-width: 75px;
+    max-height: 75px;
+    object-fit: scale-down; /* Ensures the image covers the specified dimensions */
+}

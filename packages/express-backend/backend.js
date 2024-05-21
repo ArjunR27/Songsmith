@@ -4,10 +4,15 @@ import cors from "cors";
 import songServices from "./song-services.js"
 import playlistServices from "./playlist-services.js";
 import userServices from "./user-services.js"
-import User from "./user.js";
+import { registerUser, loginUser, authenticateUser} from "./auth.js";
+
+
+
 
 const app = express();
 const port = 8000;
+
+
 
 app.use(cors())
 app.use(express.json());
@@ -16,14 +21,19 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
-
-
 app.listen(port, () => {
   console.log(
     `Example app listening at http://localhost:${port}`
   );
 });
 
+
+// Login and Register
+app.post("/signup", registerUser);
+
+app.post("/login", loginUser);
+
+// Database
 app.post("/users", async (req, res) => {
   console.log(req.body);
   const user = req.body;
@@ -31,6 +41,7 @@ app.post("/users", async (req, res) => {
   if (savedUser) res.status(201).send(savedUser)
   else res.status(500).send();
 })
+
 
 app.get("/users/:id", async (req, res) => {
   const id = req.params["id"];
@@ -55,6 +66,7 @@ app.get("/songs", async (req, res) => {
   res.send({ song_list : result })
 });
 
+
 app.get("/playlists", async (req, res) => {
   try {
     const allPlaylists = await playlistServices.getAllPlaylists();
@@ -69,10 +81,26 @@ app.get("/playlists", async (req, res) => {
   }
 });
 
+app.get("/playlists/:id", async (req, res) => {
+  try {
+    const playlistId = req.params["id"];
+    const result = await playlistServices.getPlaylistById(playlistId)
+    if (result == undefined || result == null)
+      res.status(404).send("Resource not found")
+    else {
+      res.send({ playlist_list : result})
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error fetching playlists")
+  }
+
+});
+
 app.get("/users/:id/playlists", async (req, res) => {
   try {
     const userId = req.params["id"];
-    const user = await userServices.findUserById(userId).populate('playlists');
+    const user = await userServices.getPlaylistsForUser(userId)
 
     if (!user) {
       return res.status(404).send("User not found");
@@ -90,9 +118,22 @@ app.get("/users/:id/playlists", async (req, res) => {
 });
 
 
+app.post("/songs", async (req, res) => {
+  try {
+  const songAddition = req.body;
+  const result = await songServices.addSong(songAddition)
+  if (result) res.send(201).send(result)
+  } catch (error) {
+    res.status(500).send({ error: error.message });
+  }
+});
+
 app.post("/playlists", async (req, res) => {
+  try {
     const playlist = req.body;
-    const savedPlaylist = await playlistServices.createPlaylist(playlist)
-    if (savedPlaylist) res.status(201).send(savedPlaylist);
-    else res.status(500).send();
+    const result  = await playlistServices.createPlaylist(playlist)
+    if (result) res.send(201).send(result)
+  } catch (error) {
+    res.status(500).send({ error: error.mesage }); 
+  }
 });

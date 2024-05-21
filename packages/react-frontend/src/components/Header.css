@@ -1,0 +1,48 @@
+.header {
+  background-color: #2a2b2f;
+  color: white;
+  
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100vw;
+  height: 12vh;
+  padding-left: 15px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  font-size: 1.9rem;
+  font-weight: bold;
+  margin-right: auto;
+  margin-left: 50px;
+}
+
+.kumar-one-font {
+  font-family: "Kumar One";
+}
+
+.menu-icon {
+  border: none; 
+  background: none;
+  cursor: pointer;
+  position: absolute; 
+  top: 15px; 
+  margin-top: 20px; 
+  left: 20px; 
+}
+
+.line {
+  width: 25px;
+  height: 3px;
+  background-color: #EBE6D5;
+  margin: 3px 0;
+}

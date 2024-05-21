@@ -1,3 +1,26 @@
+.songs {
+  position: fixed;
+  top: 12vh;
+  left: 12vw;
+  width: 88vw;
+  height: 88vw;
+  margin-top: 10px;
+  margin-left: 18px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.song-header {
+  font-size: 36px;
+  color: #fff;
+  margin-top: 12px;
+  margin-bottom: 12px;
+  height: auto;
+  align-self: center;
+}
+
 body {
   background-color: #5a585c; /* Change to gray color */
   margin: 0;
@@ -21,10 +44,11 @@ body {
 }
 
 .table-container {
-  margin-top: 100px;
-  margin-left: 200px;
+  width: calc(100vw - 18vw);
+  padding: 18px;
   padding-top: 4px;
-  padding: 20px;
+  overflow-y: auto;
+  max-height: 80vh;
 }
 
 .song-header {
@@ -80,7 +104,7 @@ td img {
   position: absolute; /* Set position to absolute */
   right: 8%; /* Adjust the right position to keep it responsive */
   top: 16%; /* Adjust the top position */
-  transform: translateY(-50%); 
+  transform: translateY(-50%);
 }
 
 .header-container {

@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
-import Table from "./SongsTable.jsx";
-import "./Songs.css";
+
+import React, {useState, useEffect} from "react"
+import Table from "../components/SongsTable.jsx"
+import './Songs.css'
 import { useNavigate } from "react-router-dom";
 
 function Songs() {
