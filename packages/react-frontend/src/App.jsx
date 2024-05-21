@@ -9,6 +9,7 @@ import SignupPage from "./pages/Signup.jsx";
 import Sidebar from './components/SideBar';
 import React from 'react';
 import Header from './components/Header.jsx';
+import CreatePlaylist from "./pages/CreatePlaylist.jsx";
 
 function AppContent() {
   const location = useLocation();
@@ -24,6 +25,7 @@ function AppContent() {
         <Route exact path="/signup" element={<SignupPage />} />
         <Route exact path="/playlists" element={<Playlists />} />
         <Route exact path="/playlists/:id" element={<Playlist />} />
+         <Route exact path="/CreatePlaylist" element={<CreatePlaylist />} />
         <Route exact path="/songs" element={<Songs />} />
       </Routes>
     </>
