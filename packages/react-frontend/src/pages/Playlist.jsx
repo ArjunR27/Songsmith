@@ -40,7 +40,6 @@ function Playlist() {
     }
   }
 
-
   return (
     <div className="playlist">
       <div className="pl-top">

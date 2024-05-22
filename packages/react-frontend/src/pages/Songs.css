@@ -79,22 +79,6 @@ th {
   color: #ffffff;
 }
 
-/* Album Image styles */
-td img {
-  max-width: 75px;
-  max-height: 75px;
-  object-fit: scale-down; /* Ensures the image covers the specified dimensions */
-}
-
-.menu-bar {
-  background-color: #3a3a40;
-  width: 200px; /* Adjust width as needed */
-  height: calc(100vh - 110px); /* Adjust height to fit remaining space */
-  position: fixed;
-  top: 110px; /* Height of navbar */
-  left: 0;
-  color: #ffffff;
-}
 .navigate-button {
   padding: 10px 30px;
   font-size: 16px;
@@ -103,7 +87,7 @@ td img {
   border-radius: 9999px;
   position: absolute; /* Set position to absolute */
   right: 8%; /* Adjust the right position to keep it responsive */
-  top: 16%; /* Adjust the top position */
+  top: 4%; /* Adjust the top position */
   transform: translateY(-50%);
 }
 

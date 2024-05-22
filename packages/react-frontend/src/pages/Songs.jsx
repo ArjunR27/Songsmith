@@ -1,7 +1,6 @@
-
-import React, {useState, useEffect} from "react"
-import Table from "../components/SongsTable.jsx"
-import './Songs.css'
+import React, { useState, useEffect } from "react";
+import Table from "../components/SongsTable.jsx";
+import "./Songs.css";
 import { useNavigate } from "react-router-dom";
 
 function Songs() {
@@ -24,15 +23,23 @@ function Songs() {
   }, []);
 
   const handleButtonClick = () => {
-    navigate("/addSong"); // Change '/different-page' to the actual path you want to navigate to
+    navigate("/createSong"); // Change '/different-page' to the actual path you want to navigate to
   };
 
   return (
     <>
-      
-      <div className="table-container">
-        <Table songData={songs} handleButtonClick={handleButtonClick}/>
+      <div className="songs">
+        <div className = "header-container">
+        <h1 className="song-header">Songs</h1>
+        <button onClick={handleButtonClick} className="navigate-button">
+            Add Song
+          </button>
+          </div>
+        <div className="table-container">
+          <Table songData={songs} />
+        </div>
       </div>
+      
     </>
   );
 }

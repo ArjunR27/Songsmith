@@ -1,46 +1,45 @@
-
 .sidebar {
-    background-color: #3A3A40;
-    width: 12vw; /* Adjust width as needed */
-    height: calc(100vh - 12vh); /* Adjust height to fit remaining space */
-    position: fixed;
-    top: 12vh; /* Height of navbar */
-    padding: 0px;
-    left: 0;
-    color: #ffffff;
-    transition: transform 0.3s ease;
+  background-color: #3a3a40;
+  width: 12vw;
+  height: calc(100vh - 12vh);
+  position: fixed;
+  top: 12vh;
+  padding: 0px;
+  left: 0;
+  color: #ffffff;
+  transition: transform 0.3s ease;
 }
 
 .sidebar.closed {
-    transform: translateX(-200px);
-  }
+  transform: translateX(-200px);
+}
 
-  button {
-    background-color: transparent;
-    border: none;
-    color: #fff;
-    cursor: pointer;
-  }
-  .sidebar ul {
-    list-style: none; /* Remove default list-style */
-    padding: 0; /* Optionally remove default padding */
-    margin: 0; /* Optionally remove default margin */
-  }
+button {
+  background-color: transparent;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+}
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
 
 .sidebar ul li {
-    margin-bottom: 10px;
-    color:#fff
-  }
-  
-  .main-content {
-    margin-left: 200px; /* Adjust margin when sidebar is open */
-    transition: margin-left 0.3s ease;
-  }
-  .sidebar button {
-    display: block;
-    background-color: transparent;
-    border: none;
-    color: #fff;
-    cursor: pointer;
-  }
+  margin-bottom: 10px;
+  margin-top: 20px;
+  color: #fff;
+}
 
+.main-content {
+  margin-left: 200px;
+  transition: margin-left 0.3s ease;
+}
+.sidebar button {
+  display: block;
+  background-color: transparent;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+}

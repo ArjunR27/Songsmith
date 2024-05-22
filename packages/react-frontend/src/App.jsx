@@ -8,7 +8,7 @@ import LoginPage from "./pages/LoginPage.jsx";
 import SignupPage from "./pages/Signup.jsx";
 import Sidebar from "./components/SideBar";
 import React from "react";
-
+import CreateSong from "./pages/CreateSong.jsx";
 import Header from "./components/Header.jsx";
 import CreatePlaylist from "./pages/CreatePlaylist.jsx";
 
@@ -31,6 +31,7 @@ function AppContent() {
         <Route exact path="/playlists/:id" element={<Playlist />} />
         <Route exact path="/createPlaylist" element={<CreatePlaylist />} />
         <Route exact path="/songs" element={<Songs />} />
+        <Route exact path="/createSong" element={<CreateSong />} />
       </Routes>
     </>
   );
@@ -40,14 +41,7 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Sidebar />
-        <Header />
-        <Routes>
-          <Route exact path="/" element={<Home />}></Route>
-          <Route exact path="/playlists" element={<Playlists />}></Route>
-          <Route exact path="/songs" element={<Songs />}></Route>
-          <Route exact path="/addSong" element={<AddSong />}></Route>
-        </Routes>
+        <AppContent />
       </BrowserRouter>
     </div>
   );

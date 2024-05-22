@@ -1,81 +1,76 @@
-
 .playlist {
-    position: fixed;
-    top: 12vh;
-    left: 12vw;
-    width: 88vw;
-    height: 88vw;
-    margin-top: 10px;
-    margin-left: 18px;
-    text-align: left;
-    display: flex;
-    flex-direction: column; 
-    align-items: flex-start;
+  position: fixed;
+  top: 12vh;
+  left: 12vw;
+  width: 88vw;
+  height: 88vw;
+  margin-top: 10px;
+  margin-left: 18px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .pl-top {
-    display: flex; 
-    height: 30vh;
-    width: 100%; 
-    padding-top: 10px
-   
+  display: flex;
+  height: 30vh;
+  width: 100%;
+  padding-top: 10px;
 }
 .pl-image {
-    height: 100%;
-    object-fit: contain;
+  height: 100%;
+  object-fit: contain;
 }
 
 .pl-image img {
-    width: auto; 
-    height: 100%; 
-    aspect-ratio: 1/1;
+  width: auto;
+  height: 100%;
+  aspect-ratio: 1/1;
 }
 
 .pl-info {
-    margin-top: 40px;
-    margin-left: 40px;
+  margin-top: 40px;
+  margin-left: 40px;
 }
 
 .pl-name {
-    font-size: 40px;
-    text-align: left;
-    color: #EBE6D5;
-    font-weight: bold;
+  font-size: 40px;
+  text-align: left;
+  color: #ebe6d5;
+  font-weight: bold;
 }
 
 .pl-desc {
-    margin-top: 8px;
-    font-size: 20px;
-    text-align: left;
-    font-weight: lighter;
-    color: #EBE6D5;
-    
+  margin-top: 8px;
+  font-size: 20px;
+  text-align: left;
+  font-weight: lighter;
+  color: #ebe6d5;
 }
 
 .pl-table {
-    margin-top: 20px;
-    width: calc(100vw - 18vw);
-    padding: 18px;
-    overflow-y: auto; 
-    max-height: 50vh;
+  margin-top: 20px;
+  width: calc(100vw - 18vw);
+  padding: 18px;
+  overflow-y: auto;
+  max-height: 50vh;
 }
 
 .pl-buttons {
-    margin-top: 64px;
-    display: flex;
-    justify-content: space-between; 
-    width: 16vw;
-    color: #7b7b84;
+  margin-top: 64px;
+  display: flex;
+  justify-content: space-between;
+  width: 16vw;
+  color: #7b7b84;
 }
 
 .pl-buttons > * {
-    font-size: 36px; 
+  font-size: 36px;
 }
 
 .search-input {
-    width: 300px;
-    background-color: #EBE6D5;
-    border-radius: 10px;
+  width: 300px;
+  background-color: #ebe6d5;
+  border-radius: 10px;
 }
-
-  
