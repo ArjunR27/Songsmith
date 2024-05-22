@@ -7,7 +7,7 @@ function CreatePlaylist() {
     description: "",
     coverImage: null,
   });
-
+  
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setPlaylistData({

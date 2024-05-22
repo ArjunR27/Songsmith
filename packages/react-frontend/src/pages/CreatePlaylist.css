@@ -20,7 +20,7 @@
 .form-group {
   margin-bottom: 20px;
   display: flex;
-  align-items: center;
+  align-items:first baseline;
   width: 1000px;
   margin-left: 30px;
 }
@@ -50,6 +50,7 @@
   border-radius: 20px;
   background-color: #ebe6d5;
   resize: vertical;
+  
 }
 
 .form-group select {
