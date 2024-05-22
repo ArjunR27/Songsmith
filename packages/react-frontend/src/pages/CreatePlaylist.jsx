@@ -56,7 +56,7 @@ function CreatePlaylist() {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="coverImage">Playlist Cover</label>
+          <label htmlFor="coverImage">Playlist Cover (url) </label>
           <input
             type="text"
             id="coverImage"
