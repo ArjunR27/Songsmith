@@ -49,6 +49,7 @@
   border: 1px solid #ccc;
   border-radius: 20px;
   background-color: #ebe6d5;
+  resize: vertical;
 }
 
 .form-group select {
