@@ -19,7 +19,9 @@ const userSchema = new mongoose.Schema(
             ref: 'Playlist'
         }]
         
-    }
+    },
+    
+    { collection : "user_list" }
 );
 
 const User = mongoose.model("User", userSchema)

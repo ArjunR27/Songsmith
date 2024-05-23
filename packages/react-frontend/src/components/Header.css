@@ -1,7 +1,7 @@
 .header {
   background-color: #2a2b2f;
   color: white;
-  
+
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -31,18 +31,18 @@
 }
 
 .menu-icon {
-  border: none; 
+  border: none;
   background: none;
   cursor: pointer;
-  position: absolute; 
-  top: 15px; 
-  margin-top: 20px; 
-  left: 20px; 
+  position: absolute;
+  top: 15px;
+  margin-top: 20px;
+  left: 20px;
 }
 
 .line {
   width: 25px;
   height: 3px;
-  background-color: #EBE6D5;
+  background-color: #ebe6d5;
   margin: 3px 0;
 }

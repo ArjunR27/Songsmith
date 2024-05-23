@@ -13,11 +13,12 @@
 }
 
 .pl-top {
-  display: flex;
-  height: 30vh;
-  width: 100%;
-  padding-top: 10px;
+    display: flex; 
+    height: 36vh;
+    width: 100%; 
+    padding-top: 10px
 }
+
 .pl-image {
   height: 100%;
   object-fit: contain;
@@ -50,54 +51,59 @@
 }
 
 .pl-table {
-  margin-top: 20px;
-  width: calc(100vw - 18vw);
-  padding: 18px;
-  overflow-y: auto;
-  max-height: 50vh;
+    margin-top: 12px;
+    width: calc(100vw - 18vw);
+    padding: 12px;
+    overflow-y: auto; 
+    max-height: 42vh;
 }
 
+
+
 .pl-buttons {
-  margin-top: 64px;
-  display: flex;
-  justify-content: space-between;
-  width: 16vw;
-  color: #7b7b84;
+    display:flex;
+    justify-content: space-between;
+    width: 15vw;
+    color: #7b7b84;
 }
 
 .pl-buttons > * {
   font-size: 36px;
 }
-.pl-search {
-  display: flex;
-  align-items: center;
-  width: 35%;
-}
-.pl-search {
-    display: flex;
-    align-items: center;
-    width: 35%;
+
+.pl-toolbar {
+    display: flex; /* Make the container a flex container */
+    justify-content: flex-start; /* Align items from left to right */
+    margin-top: 64px;
 }
 
-.search-input {
-    width: 100%;
-    background-color: #EBE6D5;
-    border-radius: 20px;
-    padding: 10px;
-    border: none;
+.pl-song-input {
+    margin-top: 30px;
+    border-radius: 40px;
+    padding: 6px 50px;
+
+    color: #5A585C;
+    font-family: 'League Spartan', sans-serif;
+    font-style: normal;
+    font-weight: 400;
     font-size: 16px;
+    text-decoration: none;
 }
-.search-button {
+
+.pl-song-button {
+    box-sizing: border-box;
     margin-left: 10px;
-    padding: 10px 20px;
+    padding: 6px 30px;
+    
+    background: #EBE6D5;
+    border: 4px solid #EBE6D5;
+    border-radius: 40px;
+    
+    color: #5A585C;
+    font-family: 'League Spartan', sans-serif;
+    font-style: normal;
+    font-weight: 400;
     font-size: 16px;
-    background-color: #2a2b2f;
-    color: #fff;
-    border: none;
-    border-radius: 20px;
-    cursor: pointer;
-}
-
-.search-button:hover {
-    background-color: #1e1f23;
+    text-decoration: none;
+         
 }

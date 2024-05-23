@@ -4,11 +4,7 @@ import "./Playlist.css";
 import { useLocation } from "react-router-dom";
 import SongsTable from "../components/SongsTable";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faThumbsUp,
-  faThumbsDown,
-  faComment,
-} from "@fortawesome/free-solid-svg-icons";
+import {faThumbsUp, faThumbsDown,faComment} from "@fortawesome/free-solid-svg-icons";
 
 function Playlist() {
   const location = useLocation();
@@ -40,6 +36,58 @@ function Playlist() {
     }
   }
 
+
+  function AddSong() {
+    const [song, setSong] = useState('');
+
+    const handleInputChange = (event) => {
+        setSong(event.target.value);
+    };
+
+    const handleAddSong = () => {
+        console.log('Adding song:', song);
+        
+        fetch("http://localhost:8000/playlists/" + path, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ name: song }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+            fetchPlaylist()
+              .then(res => res.json())
+              .then(json => {
+                setPlaylist(json["playlist_list"]);
+              })
+              .catch(error => {
+                console.log(error);
+              });
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+    
+        setSong('');
+    };
+
+    return (
+        <div className="pl-add-song">
+            <input 
+                placeholder="Song" 
+                className="pl-song-input"
+                value={song}
+                onChange={handleInputChange}
+            />
+            <button onClick={handleAddSong} className="pl-song-button">Add Song</button>
+        </div>
+    );
+
+    
+  }
+
   return (
     <div className="playlist">
       <div className="pl-top">
@@ -52,27 +100,17 @@ function Playlist() {
         <div className="pl-info">
           <div className="pl-name">{playlist["playlist_name"]}</div>
           <div className="pl-desc">{playlist["description"]}</div>
-          <div className="pl-buttons">
-            <FontAwesomeIcon icon={faThumbsUp} />
-            <FontAwesomeIcon icon={faThumbsDown} />
-            <FontAwesomeIcon icon={faComment} />
+          <div className="pl-toolbar">
+            <div className="pl-buttons">
+                    <FontAwesomeIcon icon={faThumbsUp} />
+                    <FontAwesomeIcon icon={faThumbsDown} />
+                    <FontAwesomeIcon icon={faComment} />
+                </div>
           </div>
-        </div>
-        <div className="pl-search">
-          <input
-            type="text"
-            placeholder="Search songs"
-            className="search-input" 
-          />
-          <button className="search-button">Search</button>{" "}
-          {}
-        </div>
-        <div className="pl-create">
-          <Link to="/playlists/new">
-            <button>Create Playlist</button>
-          </Link>
+            <AddSong/>
         </div>
       </div>
+     
       <div className="pl-table">
         <PlaylistSongs songData={playlist["songs"]} />
       </div>

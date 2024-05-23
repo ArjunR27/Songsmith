@@ -55,12 +55,9 @@ export default function Playlists() {
           value={searchTerm}
           onChange={handleSearchChange}
         />
-        <Link to="/playlists/new">
+        <Link to="/createPlaylist">
           <button>Create Playlist</button>
         </Link>
-      </div>
-      <div className="tools">
-        <p>Add Songs</p>
       </div>
       <PlaylistMap playlistsData={filteredPlaylists} />
     </div>

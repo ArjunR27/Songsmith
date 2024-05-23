@@ -1,24 +1,26 @@
 .create-playlist {
   position: fixed;
   top: 12vh;
-  left: 15vw;
-  width: 90vw;
+  left: 12vw;
+  width: 76vw;
+  margin-top: 10px;
   margin-left: 18px;
+  text-align: left;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  background-color: #ebe6d5;
   padding: 20px;
   border-radius: 10px;
 }
 
 .create-playlist h2 {
-  font-size: 50px;
+  font-size: 24px;
   margin-bottom: 20px;
-  color: #ffffff;
+  color: #2a2b2f;
 }
 
 .form-group {
-  margin-bottom: 20px;
   display: flex;
   align-items:first baseline;
   width: 1000px;
@@ -61,15 +63,26 @@
   border: 1px solid #ccc;
   border-radius: 20px;
   background-color: #ebe6d5;
+  color: #2a2b2f;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
 }
 
 button[type="submit"] {
   padding: 10px 20px;
   font-size: 18px;
-  background-color: #3a3a40;
+  background-color: #2a2b2f;
   color: #fff;
   border: none;
-  border-radius: 20px;
+  border-radius: 8px;
   cursor: pointer;
 }
 
