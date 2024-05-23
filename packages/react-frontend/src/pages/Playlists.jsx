@@ -51,7 +51,7 @@ export default function Playlists() {
       <div className="search-bar">
         <input
           type="text"
-          placeholder="Search playlists"
+          placeholder="search for playlists"
           value={searchTerm}
           onChange={handleSearchChange}
         />

@@ -71,7 +71,6 @@
   font-size: 36px;
 }
 
-
 .pl-toolbar {
     display: flex; /* Make the container a flex container */
     justify-content: flex-start; /* Align items from left to right */

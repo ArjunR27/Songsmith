@@ -7,7 +7,7 @@ function CreatePlaylist() {
     description: "",
     coverImage: null,
   });
-
+  
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setPlaylistData({
@@ -32,9 +32,10 @@ function CreatePlaylist() {
   return (
     <div className="create-playlist">
       <h2>Create Playlist</h2>
+      
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label htmlFor="name">Name:</label>
+          <label htmlFor="name">Playlist Name</label>
           <input
             type="text"
             id="name"
@@ -45,7 +46,7 @@ function CreatePlaylist() {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="description">Description:</label>
+          <label htmlFor="description">Description</label>
           <textarea
             id="description"
             name="description"
@@ -55,9 +56,9 @@ function CreatePlaylist() {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="coverImage">Cover Image:</label>
+          <label htmlFor="coverImage">Playlist Cover (url) </label>
           <input
-            type="file"
+            type="text"
             id="coverImage"
             name="coverImage"
             accept="image/*"
