@@ -1,68 +1,66 @@
 .home {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 }
 .blacksmith-bg {
-    z-index: -1;
-    box-sizing: border-box;
+  z-index: -1;
+  box-sizing: border-box;
 
-    position: absolute;
-    width: 100%;
-    height: auto;
-    left: 0px;
-    top: -500px;
-   
-    border: 1px solid #000000;
-    filter: grayscale(100%) contrast(80%) brightness(70%);
-    overflow: hidden;
+  position: absolute;
+  width: 100%;
+  height: auto;
+  left: 0px;
+  top: -500px;
+
+  border: 1px solid #000000;
+  filter: grayscale(100%) contrast(80%) brightness(70%);
+  overflow: hidden;
 }
 
-
 .songsmith-title {
-    margin-top: 42vh;
-    height: 10vh;
-    z-index: 10;
+  margin-top: 42vh;
+  height: 10vh;
+  z-index: 10;
 
-    font-family: 'Kumar One';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 64px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+  font-family: "Kumar One";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 64px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 
-    color: #E1DFD6;
+  color: #e1dfd6;
 
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .songsmith-subtitle {
-    margin-top: 5px;
-    margin-bottom: 30px;
+  margin-top: 5px;
+  margin-bottom: 30px;
 
-    font-family: 'League Spartan', sans-serif;
-    font-style: normal;
-    font-weight: 300;
-    color: #FFFFFF;
-    
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  font-family: "League Spartan", sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  color: #ffffff;
+
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .login-button {
-    box-sizing: border-box;
+  box-sizing: border-box;
 
-    padding: 10px 50px;
+  padding: 10px 50px;
 
-    background: #EBE6D5;
-    border: 4px solid #EBE6D5;
-    border-radius: 40px;
+  background: #ebe6d5;
+  border: 4px solid #ebe6d5;
+  border-radius: 40px;
 
-    color: #5A585C;
-    font-family: 'League Spartan', sans-serif;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 20px;
-    text-decoration: none;
-
+  color: #5a585c;
+  font-family: "League Spartan", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  text-decoration: none;
 }

@@ -1,37 +1,47 @@
-
-import React, {useState, useEffect} from "react"
-import Table from "../components/SongsTable.jsx"
-import './Songs.css'
-
+import React, { useState, useEffect } from "react";
+import Table from "../components/SongsTable.jsx";
+import "./Songs.css";
+import { useNavigate } from "react-router-dom";
 
 function Songs() {
-    const [songs, setSongs] = useState([]);
+  const [songs, setSongs] = useState([]);
+  const navigate = useNavigate();
+  // FETCH Users
+  function fetchUsers() {
+    const promise = fetch("http://localhost:8000/songs");
 
-     // FETCH Users
-    function fetchUsers() {
-        const promise = fetch("http://localhost:8000/songs");
-        
-        return promise;
-    }
+    return promise;
+  }
 
-    useEffect(() => {   
-        fetchUsers()
-        .then((res) => res.json())
-        .then((json) => setSongs(json["song_list"]))
-        .catch((error) => { console.log(error); });
-    }, [] );
+  useEffect(() => {
+    fetchUsers()
+      .then((res) => res.json())
+      .then((json) => setSongs(json["song_list"]))
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
-    return (
-        <>           
-            <div className="songs">
-                <h1 className ="song-header">Songs</h1>   
-                <div className="table-container">
-                    <Table songData={songs} />
-                </div>
-            </div>  
-            
-        </>    
-    )
+  const handleButtonClick = () => {
+    navigate("/createSong"); // Change '/different-page' to the actual path you want to navigate to
+  };
+
+  return (
+    <>
+      <div className="songs">
+        <div className = "header-container">
+        <h1 className="song-header">Songs</h1>
+        <button onClick={handleButtonClick} className="navigate-button">
+            Add Song
+          </button>
+          </div>
+        <div className="table-container">
+          <Table songData={songs} />
+        </div>
+      </div>
+      
+    </>
+  );
 }
 
 export default Songs;

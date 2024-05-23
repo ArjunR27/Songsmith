@@ -1,12 +1,10 @@
-import React from "react"
+import React from "react";
 //import "./Home.css"
 
 export default function Signup() {
-    return (
-        <>
-            <div className="signup">
-                Signup
-            </div>
-        </>
-    )
+  return (
+    <>
+      <div className="signup">Signup</div>
+    </>
+  );
 }
