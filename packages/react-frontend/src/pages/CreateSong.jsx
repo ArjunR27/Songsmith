@@ -7,28 +7,35 @@ function CreateSong() {
   const [name, setName] = useState("");
   const [artist, setArtist] = useState("");
   const [album, setAlbum] = useState("");
-  const [duration, setDuration] = useState("");
+  const [duration, setDuration] = useState(0);
   const [songImg, setImg] = useState("");
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
-    const songInfo = { name, artist, album, duration, songImg };
-    console.log("Song Info:", songInfo);
+    console.log("Adding song:", name);
 
-    try {
-      const response = await fetch("http://localhost:8000/songs", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(songInfo),
+    fetch(`http://localhost:8000/songs`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: name,
+        artist: artist,
+        album: album,
+        duration: duration,
+        image_link: songImg,
+      }),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Failed to add song");
+        }
+        return response.json();
+      })
+      .catch((error) => {
+        console.error("Error:", error);
       });
-      if (!response.ok) {
-        throw new Error("Failed to add song");
-      }
-    } catch (error) {
-      console.error("Error:", error.message);
-    }
   };
 
   return (

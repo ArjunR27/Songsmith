@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import dotenv from "dotenv"
+import dotenv from "dotenv";
 import fs from "fs";
 import songModel from "./song.js";
 
@@ -7,10 +7,12 @@ dotenv.config();
 mongoose.set("debug", true);
 
 // Connect to MongoDB
-mongoose.connect(process.env.MONGODB_URI, {
+mongoose
+  .connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-}).then(async () => {
+  })
+  .then(async () => {
     // Read JSON file
     const jsonData = fs.readFileSync("./songs.json");
     const songsData = JSON.parse(jsonData);
@@ -40,62 +42,58 @@ mongoose.connect(process.env.MONGODB_URI, {
             console.error(`Error adding song to the database: ${error}`);
         }
     } */
-}).catch((error) => {
+  })
+  .catch((error) => {
     console.error(`Error connecting to MongoDB: ${error}`);
-});
+  });
 
 async function addSong(song) {
-    try {
-        const existingSong = await songModel.findOne({
-            name: song.name,
-            artist: song.artist,
-            album: song.album
-        })
+  console.log(song);
+  try {
+    const existingSong = await songModel.find({
+      name: song.name,
+      artist: song.artist,
+      album: song.album,
+    });
 
-        if (!existingSong) {
-            const songToAdd = new songModel({
-                name: song.name,
-                artist: song.artist,
-                album: song.album,
-                duration: song.duration,
-                image_link: song.image_link
-            });
-            console.log(songToAdd)
-            const savedSong = await songToAdd.save()
-            return savedSong
-        } else {
-            return null; 
-        }
-    } catch (error) {
-        throw new Error(`Error adding song`)
-    }
+    const songToAdd = new songModel({
+      name: song.name,
+      artist: song.artist,
+      album: song.album,
+      duration: song.duration,
+      image_link: song.image_link,
+    });
+    console.log(songToAdd);
+    const savedSong = await songToAdd.save();
+    return savedSong;
+  } catch (error) {
+    throw new Error(`Error adding song`);
+  }
 }
 
 function findSongByName(name) {
-    return songModel.find({ name : name });
+  return songModel.find({ name: name });
 }
 
 function findSongsByArtist(artist) {
-    return songModel.find({ artist : artist });
+  return songModel.find({ artist: artist });
 }
 
 function getSongs(name, artist) {
-    let promise;
-    if (name === undefined && artist === undefined) {
-        promise = songModel.find();
-    }
-    else if (name && !artist) {
-        promise = findSongByName(name);
-    }
-    else {
-        promise = findSongsByArtist(artist);
-    }
-    return promise; 
+  let promise;
+  if (name === undefined && artist === undefined) {
+    promise = songModel.find();
+  } else if (name && !artist) {
+    promise = findSongByName(name);
+  } else {
+    promise = findSongsByArtist(artist);
+  }
+  return promise;
 }
 
 export default {
-    getSongs,
-    findSongByName,
-    findSongsByArtist,
-    addSong,
-}
+  getSongs,
+  findSongByName,
+  findSongsByArtist,
+  addSong,
+};

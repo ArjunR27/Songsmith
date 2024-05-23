@@ -37,7 +37,7 @@ function TableBody(props) {
             style={{ width: "100px", height: "100px" }}
           />
         </td>
-        <td className> {row.name}</td>
+        <td> {row.name}</td>
         <td>{row.artist}</td>
         <td>{row.album}</td>
         <td>{convertMins(row.duration)}</td>
