@@ -1,11 +1,12 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import "./CreatePlaylist.css";
 
 function CreatePlaylist() {
   const [playlistData, setPlaylistData] = useState({
-    name: "",
+    playlist_name: "",
     description: "",
-    coverImage: null,
+    cover: "",
   });
   
   const handleInputChange = (event) => {
@@ -16,31 +17,44 @@ function CreatePlaylist() {
     });
   };
 
-  const handleFileChange = (event) => {
-    const file = event.target.files[0];
-    setPlaylistData({
-      ...playlistData,
-      coverImage: file,
-    });
-  };
-
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("Submitted data:", playlistData);
+    console.log(playlistData);
+
+    fetch(`http://localhost:8000/playlists`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(playlistData),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Failed to add playlist");
+        }
+        return response.json();
+      })
+      .then(() => {
+        // After successful creation, navigate to /playlists
+        window.location.href = "/playlists";
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
   };
 
   return (
-    <div className="create-playlist">
-      <h2>Create Playlist</h2>
+    <div className="page">
+      <h1 className="cp-header">Create Playlist</h1>
       
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="name">Playlist Name</label>
           <input
             type="text"
-            id="name"
-            name="name"
-            value={playlistData.name}
+            id="playlist_name"
+            name="playlist_name"
+            value={playlistData.playlist_name}
             onChange={handleInputChange}
             required
           />
@@ -56,13 +70,13 @@ function CreatePlaylist() {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="coverImage">Playlist Cover (url) </label>
+          <label htmlFor="coverImage">Cover URL </label>
           <input
             type="text"
-            id="coverImage"
-            name="coverImage"
-            accept="image/*"
-            onChange={handleFileChange}
+            id="cover"
+            name="cover"
+            value={playlistData.cover}
+            onChange={handleInputChange}
             required
           />
         </div>

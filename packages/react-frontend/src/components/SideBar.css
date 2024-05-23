@@ -3,11 +3,14 @@
   width: 12vw;
   height: calc(100vh - 12vh);
   position: fixed;
-  top: 12vh;
+  top: 90px;
   padding: 0px;
   left: 0;
   color: #ffffff;
   transition: transform 0.3s ease;
+
+  
+
 }
 
 .sidebar.closed {
@@ -31,6 +34,22 @@ button {
   margin-top: 20px;
   color: #fff;
 }
+
+
+.sidebar ul li a{
+  text-align: center;
+  font-family: "League Spartan", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 22px;
+  color:white;
+  text-decoration: none;
+}
+
+.sidebar ul li a:hover {
+  color: #87f5ff;
+}
+
 
 .main-content {
   margin-left: 200px;

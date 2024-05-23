@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation} from "react-router-dom";
 import "./App.css";
 import Home from "./pages/Home.jsx";
 import Songs from "./pages/Songs.jsx";
@@ -19,10 +19,12 @@ function AppContent() {
     location.pathname === "/login" ||
     location.pathname === "/signup";
 
+  
+
   return (
     <>
       {!hideHeaderAndSidebar && <Sidebar />}
-      {!hideHeaderAndSidebar && <Header />}
+      {!hideHeaderAndSidebar && <Header/>}
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route exact path="/login" element={<LoginPage />} />

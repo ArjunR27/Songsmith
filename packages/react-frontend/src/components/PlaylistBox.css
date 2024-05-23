@@ -16,11 +16,25 @@
 
 .playlist-name {
   padding-top: 5px;
-  font-size: 36px;
+  font-size: 42px;
+  font-weight: 500;
+  height: 80px;
   cursor: pointer;
+  color: #EBE6D5;
+  text-decoration: none;
+  white-space: nowrap; 
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
+.playlist-name:hover {
+    color: #87f5ff;
+}
+  
+
 .playlist-desc {
-  margin-top: 50px;
+  margin-top: 60px;
   font-size: 16px;
+  font-weight: 200;
+  color: #EBE6D5;
 }

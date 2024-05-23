@@ -8,12 +8,12 @@ const Sidebar = ({isOpen}) => {
     <div className={`sidebar ${isOpen ? "open" : "closed"}`}>
       <ul>
         <li>
-          <Link to="/songs" style={{ color: "#fff", fontFamily:"inder" }}>
+          <Link to="/songs">
             Songs
           </Link>
         </li>
         <li>
-          <Link to="/playlists" style={{ color: "#fff", fontFamily:"inder"  }}>
+          <Link to="/playlists">
             Playlists
           </Link>
         </li>

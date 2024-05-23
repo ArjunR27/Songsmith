@@ -28,13 +28,14 @@ function Songs() {
 
   return (
     <>
-      <div className="songs">
+      <div className="page">
         <div className = "header-container">
         <h1 className="song-header">Songs</h1>
-        <button onClick={handleButtonClick} className="navigate-button">
+    
+          </div>
+          <button onClick={handleButtonClick} className="navigate-button">
             Add Song
           </button>
-          </div>
         <div className="table-container">
           <Table songData={songs} />
         </div>

@@ -36,7 +36,6 @@ function Playlist() {
     }
   }
 
-
   function AddSong() {
     const [song, setSong] = useState('');
 
@@ -93,7 +92,7 @@ function Playlist() {
       <div className="pl-top">
         <div className="pl-image">
           <img
-            src="https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTEyL2xyL21vbnoxNzU2NjItaW1hZ2UuanBn.jpg"
+            src={playlist.cover ? playlist.cover : "https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTEyL2xyL21vbnoxNzU2NjItaW1hZ2UuanBn.jpg"}
             alt="Playlist Image"
           />
         </div>
