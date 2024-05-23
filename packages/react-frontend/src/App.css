@@ -5,4 +5,19 @@
 .App {
   text-align: center;
   font-family: "League Spartan", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.App h1 {
+  font-size: 48px;
+  color: white;
+  margin-top: 0px
+}
+
+.page {
+  margin-top: 120px;
+  margin-left: 15vw;
+  text-align: left;
 }

@@ -14,6 +14,11 @@ const playlistSchema = new mongoose.Schema(
             trim: true,
         },
 
+        cover: {
+            type: String,
+            trim: true,
+        },
+
         songs: [{
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Song'

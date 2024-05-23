@@ -1,14 +1,4 @@
-.playlists {
-  padding-top: 12vh;
-  padding-left: 15vw;
-  text-align: left;
-}
 
-.playlists h1 {
-  font-size: 50px;
-  margin-bottom: 20px;
-  color: #ffffff;
-}
 
 .search-bar {
   margin-bottom: 20px;
@@ -17,23 +7,37 @@
 }
 
 .search-bar input[type="text"] {
-  width: 700px;
-  padding: 10px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 20px;
-  background-color: #ebe6d5;
-  margin-right: 10px;
+    width: 700px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    background-color: #ebe6d5;
+    margin-right: 10px;
+
+    color: #5A585C;
+    font-family: 'League Spartan', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    text-decoration: none;
 }
 
 .search-bar button {
-  padding: 10px 20px;
-  font-size: 18px;
-  background-color: #3a3a40;
-  color: #fff;
-  border: none;
-  border-radius: 20px;
-  cursor: pointer;
+    padding: 10px 30px;
+    font-size: 18px;
+    background-color: #3a3a40;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+
+    
+    font-family: 'League Spartan', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    text-decoration: none;
 }
 
 .search-bar button:hover {

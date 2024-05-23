@@ -121,8 +121,9 @@ app.post("/songs", async (req, res) => {
 app.post("/playlists", async (req, res) => {
   try {
     const playlist = req.body;
+    console.log(req.body)
     const result = await playlistServices.createPlaylist(playlist);
-    if (result) res.send(201).send(result);
+    if (result) res.status(201).send(result);
   } catch (error) {
     res.status(500).send({ error: error.mesage });
   }

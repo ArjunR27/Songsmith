@@ -1,28 +1,9 @@
-.create-playlist {
-  position: fixed;
-  top: 12vh;
-  left: 12vw;
-  width: 76vw;
-  margin-top: 10px;
-  margin-left: 18px;
-  text-align: left;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  background-color: #ebe6d5;
-  padding: 20px;
-  border-radius: 10px;
-}
 
-.create-playlist h2 {
-  font-size: 24px;
-  margin-bottom: 20px;
-  color: #2a2b2f;
-}
 
 .form-group {
+  margin-bottom: 20px;
   display: flex;
-  align-items:first baseline;
+  align-items: center;
   width: 1000px;
   margin-left: 30px;
 }
@@ -51,8 +32,6 @@
   border: 1px solid #ccc;
   border-radius: 20px;
   background-color: #ebe6d5;
-  resize: vertical;
-  
 }
 
 .form-group select {
@@ -63,27 +42,22 @@
   border: 1px solid #ccc;
   border-radius: 20px;
   background-color: #ebe6d5;
-  color: #2a2b2f;
-}
-
-.form-group input,
-.form-group textarea,
-.form-group select {
-  width: 100%;
-  padding: 10px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
 }
 
 button[type="submit"] {
   padding: 10px 20px;
   font-size: 18px;
-  background-color: #2a2b2f;
+  background-color: #3a3a40;
   color: #fff;
   border: none;
-  border-radius: 8px;
+  border-radius: 20px;
   cursor: pointer;
+
+  font-family: 'League Spartan', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  text-decoration: none;
 }
 
 button[type="submit"]:hover {

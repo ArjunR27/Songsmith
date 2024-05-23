@@ -46,7 +46,7 @@ export default function Playlists() {
   }
 
   return (
-    <div className="playlists">
+    <div className="page">
       <h1>Playlists</h1>
       <div className="search-bar">
         <input

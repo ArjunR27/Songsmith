@@ -3,7 +3,7 @@ import "./Header.css";
 import SideBar from "./SideBar.jsx";
 
 function Header() {
-  const [isSideBarOpen, setIsSideBarOpen] = useState(false);
+  const [isSideBarOpen, setIsSideBarOpen] = useState(true);
 
   const toggleSidebar = () => {
     setIsSideBarOpen(!isSideBarOpen);

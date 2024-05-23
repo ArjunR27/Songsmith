@@ -23,7 +23,7 @@
 
 .addSong button{
   color: black; /* White text */
-  padding: 10px 20px; /* Padding */
+  padding: 10px 20px; 
   border: none; /* No border */
   border-radius: 5px; /* Rounded corners */
   cursor: pointer; /* Cursor style */

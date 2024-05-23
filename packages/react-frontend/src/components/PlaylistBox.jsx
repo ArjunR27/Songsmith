@@ -8,10 +8,11 @@ export default function PlaylistBox({ playlist }) {
     <div>
       <div className="playlist-box">
         <img
-          src="https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTEyL2xyL21vbnoxNzU2NjItaW1hZ2UuanBn.jpg"
-          alt="Image"
-          style={{ width: "300px", height: "300px" }}
-        />
+            src={playlist.cover ? playlist.cover : "https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTEyL2xyL21vbnoxNzU2NjItaW1hZ2UuanBn.jpg"}
+            alt="Playlist cover"
+            
+            style={{ width: "300px", height: "300px" }}
+        />      
         <div className="playlist-name">
           <Link className="playlist-name" to={"/playlists/" + playlist._id}>
             {" "}

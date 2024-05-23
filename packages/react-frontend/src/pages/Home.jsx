@@ -8,11 +8,11 @@ export default function Home() {
       <div className="home">
         <img className="blacksmith-bg" src="blacksmith-bg.jpg" alt="" />
         <title className="songsmith-title">Songsmith</title>
-        <h1 className="songsmith-subtitle">
+        <h2 className="songsmith-subtitle">
           Forge breathtaking collections of songs.
-        </h1>
-        <Link className="login-button" to="/login">
-          Login
+        </h2>
+        <Link className="login-button" to="/songs">
+          Start
         </Link>
       </div>
     </>
