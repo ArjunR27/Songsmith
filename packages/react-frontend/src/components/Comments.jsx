@@ -1,16 +1,41 @@
 import React, { useState } from "react";
 import "./Comments.css";
+import Comment from "./Comment.jsx";
 
-function Comments() {
+function Comments({ playlistId, userId }) { 
   const [newComment, setNewComment] = useState("");
 
   const handleCommentChange = (event) => {
     setNewComment(event.target.value);
   };
+  
+  const submitComment = async (commentText) => {
+    try {
+      const response = await fetch(`http://localhost:8000/playlists/${playlistId}/comments`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userId: userId, 
+          commentText: commentText,
+        }),
+      });
+      if (!response.ok) {
+        throw new Error("Failed to submit comment");
+      }
+      const data = await response.json();
+      console.log("Comment submitted successfully:", data);
+    } catch (error) {
+      console.error("Error submitting comment:", error.message);
+    }
+  };
 
   const handleSubmitComment = () => {
-    console.log("New comment:", newComment);
-    setNewComment("");
+    if (newComment.trim()) {
+      submitComment(newComment);
+      setNewComment(""); 
+    }
   };
 
   return (
@@ -25,9 +50,9 @@ function Comments() {
       <button className="comment-send-button" onClick={handleSubmitComment}>
         Post Comment
       </button>
+      <Comment username="ExampleUser" commentText={'test comment'} />
     </div>
   );
 }
 
 export default Comments;
-

@@ -10,6 +10,7 @@ import {
   faComment,
 } from "@fortawesome/free-solid-svg-icons";
 import Comments from "../components/Comments.jsx";
+import Comment from "../components/Comment.jsx";
 
 function Playlist() {
   const location = useLocation();
@@ -17,7 +18,7 @@ function Playlist() {
   const [playlist, setPlaylist] = useState([]);
   const [showComments, setShowComments] = useState(false);
   const [likes, setLikes] = useState(0);
-
+  
   function fetchPlaylist() {
     const promise = fetch("http://localhost:8000/playlists/" + path);
     return promise;
@@ -138,8 +139,11 @@ function Playlist() {
       </div>
 
       <div className="pl-table">
-        {showComments && <Comments />}
+      {showComments ? (
+        <Comments />
+      ) : (
         <SongsTable songData={playlist["songs"]} />
+      )}
       </div>
     </div>
   );
