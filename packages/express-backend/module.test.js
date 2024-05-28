@@ -8,8 +8,7 @@ dotenv.config()
 
 beforeAll(async () => {
     // Connect to MongoDB before running tests
-    const uri = "mongodb+srv://epicarjun27:dsez1nAuISGKO9Rh@songsmithdb.nq0couy.mongodb.net/?retryWrites=true&w=majority&appName=SongsmithDB";
-    await mongoose.connect(uri, {
+    await mongoose.connect(process.env.MONGODB_URI, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
     });
