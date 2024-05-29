@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import "./Playlists.css";
 import PlaylistMap from "../components/PlaylistMap.jsx";
 
+
+
 export default function Playlists() {
   const [playlists, setPlaylists] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -12,7 +14,7 @@ export default function Playlists() {
   useEffect(() => {
     const fetchPlaylists = async () => {
       try {
-        const response = await fetch("http://localhost:8000/playlists");
+        const response = await fetch("songsmith.azurewebsites.net/playlists");
         if (!response.ok) {
           throw new Error("Failed to fetch playlists");
         }

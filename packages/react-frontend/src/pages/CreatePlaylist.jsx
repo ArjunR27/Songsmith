@@ -1,7 +1,9 @@
 import { useState } from "react";
-import "./CreatePlaylist.css";
+import "./CreatePlaylist.css"
+
 
 function CreatePlaylist() {
+  
   const [playlistData, setPlaylistData] = useState({
     playlist_name: "",
     description: "",
@@ -20,7 +22,7 @@ function CreatePlaylist() {
     event.preventDefault();
     console.log(playlistData);
 
-    fetch(`http://localhost:8000/playlists`, {
+    fetch("songsmith.azurewebsites.net/playlists", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
