@@ -8,7 +8,7 @@ function Songs() {
   const navigate = useNavigate();
   // FETCH Users
   function fetchUsers() {
-    const promise = fetch("http://localhost:8000/songs");
+    const promise = fetch("songsmith.azurewebsites.net/songs");
 
     return promise;
   }

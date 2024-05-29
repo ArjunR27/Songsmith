@@ -1,17 +1,18 @@
 import { useState } from "react";
 import Login from "../components/Login.jsx";
 
-function LoginPage() {
+
+function LoginPage() {  
   const INVALID_TOKEN = "INVALID_TOKEN";
   const [token, setToken] = useState(INVALID_TOKEN);
   const [message, setMessage] = useState("");
 
   console.log(message)
 
-  const API_PREFIX = "http://localhost:8000";
+  const API_PREFIX = process.env.API_PREFIX;
 
   function loginUser(creds) {
-    const promise = fetch(`${API_PREFIX}/login`, {
+    const promise = fetch("songsmith.azurewebsites.net/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
