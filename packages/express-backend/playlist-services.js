@@ -43,11 +43,4 @@ function createPlaylist(playlist) {
 }
     
 
-
-
-
-export default {
-    getAllPlaylists,
-    createPlaylist,
-    getPlaylistById,
-}
+export default { getAllPlaylists, createPlaylist, getPlaylistById };
