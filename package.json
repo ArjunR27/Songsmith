@@ -30,8 +30,5 @@
     "dotenv": "^16.4.5",
     "jsonwebtoken": "^9.0.2",
     "react-router-dom": "^6.23.1"
-  },
-  "workspaces": [
-    "packages/*"
-  ]
+  }
 }
