@@ -6,13 +6,10 @@ import playlistServices from "./playlist-services.js";
 import userServices from "./user-services.js";
 import { registerUser, loginUser, authenticateUser } from "./auth.js";
 
-
 const app = express();
 const port = 8000;
 
-
-
-app.use(cors())
+app.use(cors());
 app.use(express.json());
 
 app.get("/", (req, res) => {
@@ -92,16 +89,15 @@ app.post("/playlists/:id", async (req, res) => {
     const playlistId = req.params["id"];
     const songInput = req.body;
 
-    const result = await playlistServices.getPlaylistById(playlistId)
+    const result = await playlistServices.getPlaylistById(playlistId);
 
     const song = await songServices.getSongs(songInput["name"]);
     await result.addSong(song[0]["_id"]);
     res.send(result);
   } catch (error) {
     console.error(error);
-    res.status(500).send("Error fetching playlists")
+    res.status(500).send("Error fetching playlists");
   }
-
 });
 
 app.post("/songs", async (req, res) => {
@@ -121,7 +117,7 @@ app.post("/songs", async (req, res) => {
 app.post("/playlists", async (req, res) => {
   try {
     const playlist = req.body;
-    console.log(req.body)
+    console.log(req.body);
     const result = await playlistServices.createPlaylist(playlist);
     if (result) res.status(201).send(result);
   } catch (error) {

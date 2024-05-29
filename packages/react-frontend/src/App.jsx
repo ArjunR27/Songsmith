@@ -7,7 +7,6 @@ import Playlist from "./pages/Playlist.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
 import SignupPage from "./pages/Signup.jsx";
 import Sidebar from "./components/SideBar";
-import React from "react";
 import CreateSong from "./pages/CreateSong.jsx";
 import Header from "./components/Header.jsx";
 import CreatePlaylist from "./pages/CreatePlaylist.jsx";

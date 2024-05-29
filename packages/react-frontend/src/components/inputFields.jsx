@@ -1,4 +1,3 @@
-import React from "react";
 import "./inputFields.css"; // Ensure the correct path to the CSS file
 
 const inputFields = ({ type, placeholder, value, onChange, id, labelName }) => {
