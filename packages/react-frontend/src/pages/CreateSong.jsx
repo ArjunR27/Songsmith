@@ -1,4 +1,3 @@
-import React from "react";
 import "./CreateSong.css";
 import { useState } from "react";
 import InputFields from "../components/inputFields";

@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import PlaylistBox from "./PlaylistBox.jsx";
 import "./PlaylistMap.css";
 
@@ -18,3 +19,14 @@ export default function PlaylistsMap({ playlistsData }) {
     </div>
   );
 }
+
+PlaylistsMap.propTypes = {
+  playlistsData: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      cover: PropTypes.string,
+      playlist_name: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+};

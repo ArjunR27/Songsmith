@@ -1,5 +1,5 @@
+import PropTypes from "prop-types"; // Add PropTypes import
 import "./SongsTable.css";
-import React from "react";
 
 function TableHeader() {
   return (
@@ -22,6 +22,7 @@ function convertMins(mins) {
   )} secs`;
   return message;
 }
+
 function TableBody(props) {
   if (!props || !Array.isArray(props.songData)) {
     return <tbody></tbody>;
@@ -47,6 +48,19 @@ function TableBody(props) {
   return <tbody>{rows}</tbody>;
 }
 
+// Add PropTypes validation for TableBody component
+TableBody.propTypes = {
+  songData: PropTypes.arrayOf(
+    PropTypes.shape({
+      image_link: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      artist: PropTypes.string.isRequired,
+      album: PropTypes.string.isRequired,
+      duration: PropTypes.number.isRequired,
+    })
+  ),
+};
+
 function Table(props) {
   return (
     <>
@@ -57,5 +71,18 @@ function Table(props) {
     </>
   );
 }
+
+// Add PropTypes validation for Table component
+Table.propTypes = {
+  songData: PropTypes.arrayOf(
+    PropTypes.shape({
+      image_link: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      artist: PropTypes.string.isRequired,
+      album: PropTypes.string.isRequired,
+      duration: PropTypes.number.isRequired,
+    })
+  ),
+};
 
 export default Table;

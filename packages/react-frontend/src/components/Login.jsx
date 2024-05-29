@@ -1,10 +1,24 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import PropTypes from "prop-types";
 
 function Login(props) {
   const [creds, setCreds] = useState({
     username: "",
     password: "",
   });
+
+  function handleChange(event) {
+    const { name, value } = event.target;
+    setCreds((prevCreds) => ({
+      ...prevCreds,
+      [name]: value,
+    }));
+  }
+
+  function submitForm() {
+    props.handleSubmit(creds);
+    setCreds({ username: "", password: "" });
+  }
 
   return (
     <form>
@@ -31,22 +45,11 @@ function Login(props) {
       />
     </form>
   );
-
-  function handleChange(event) {
-    const { name, value } = event.target;
-    switch (name) {
-      case "username":
-        setCreds({ ...creds, username: value });
-        break;
-      case "password":
-        setCreds({ ...creds, password: value });
-        break;
-    }
-  }
-
-  function submitForm() {
-    props.handleSubmit(creds);
-    setCreds({ username: "", password: "" });
-  }
 }
+
+Login.propTypes = {
+  buttonLabel: PropTypes.string,
+  handleSubmit: PropTypes.func.isRequired,
+};
+
 export default Login;

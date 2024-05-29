@@ -1,20 +1,23 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect, useCallback} from "react";
 import "./Playlist.css";
 import { useLocation } from "react-router-dom";
 import SongsTable from "../components/SongsTable";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faThumbsUp, faThumbsDown,faComment} from "@fortawesome/free-solid-svg-icons";
+import PropTypes from 'prop-types'; // Import PropTypes
 
 function Playlist() {
   const location = useLocation();
   const path = location.pathname.split("/")[2];
   const [playlist, setPlaylist] = useState([]);
 
-  function fetchPlaylist() {
-    const promise = fetch("http://localhost:8000/playlists/" + path);
-    return promise;
-  }
+  const fetchPlaylist = useCallback(() => {
+    return fetch("http://localhost:8000/playlists/" + path);
+  }, [path]);
+
+  Playlist.propTypes = {
+    songData: PropTypes.array // Update the prop type as per your data structure
+  };
 
   useEffect(() => {
     fetchPlaylist()
@@ -25,7 +28,7 @@ function Playlist() {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [fetchPlaylist]);
 
   function PlaylistSongs(props) {
     console.log(props.songData);
