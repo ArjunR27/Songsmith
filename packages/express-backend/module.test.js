@@ -7,7 +7,7 @@ dotenv.config();
 
 beforeAll(async () => {
   // Connect to MongoDB before running tests
-  await mongoose.connect(process.env.MONGODB_URI, {
+  await mongoose.connect("mongodb://localhost:27017/mylocaldb", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });
