@@ -9,7 +9,6 @@ function LoginPage() {
 
   console.log(message)
 
-  const API_PREFIX = process.env.API_PREFIX;
 
   function loginUser(creds) {
     const promise = fetch("songsmith.azurewebsites.net/login", {
