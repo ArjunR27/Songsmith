@@ -30,7 +30,7 @@
     "bcrypt": "^5.1.1",
     "dotenv": "^16.4.5",
     "jsonwebtoken": "^9.0.2",
-    "lint": "^0.8.19",
+    "lint": "^1.1.2",
     "react-router-dom": "^6.23.1"
   },
   "workspaces": [

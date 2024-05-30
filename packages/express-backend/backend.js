@@ -4,6 +4,7 @@ import cors from "cors";
 import songServices from "./song-services.js";
 import playlistServices from "./playlist-services.js";
 import userServices from "./user-services.js";
+import commentsServices from "./comments-services.js";
 import { registerUser, loginUser, authenticateUser } from "./auth.js";
 
 const app = express();
@@ -84,6 +85,21 @@ app.get("/playlists/:id", async (req, res) => {
   }
 });
 
+app.get("/playlists/:id/comments", async (req, res) => {
+  try {
+    const playlistId = req.params["id"];
+    const result = await commentsServices.getAllCommentsByPlaylistId(playlistId);
+    if (result == undefined || result == null)
+      res.status(404).send("Resource not found");
+    else {
+      res.send({ comments_list: result });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error fetching playlists");
+  }
+});
+
 app.post("/playlists/:id", async (req, res) => {
   try {
     const playlistId = req.params["id"];
@@ -124,3 +140,25 @@ app.post("/playlists", async (req, res) => {
     res.status(500).send({ error: error.mesage });
   }
 });
+
+app.post("/playlists/:id/comments", async (req, res) => {
+  try {
+    const playlistId = req.params["id"];
+    const commentInput = req.body;
+    
+    if(!commentInput) {
+      return res.status(500).send({ error: error.message}) ;
+    }
+    const playlist = await playlistServices.getPlaylistById(playlistId)
+    if (!playlist) {
+      return res.status(500).send({ error: error.message});
+    }
+ 
+   const newComment =  commentsServices.addComment(commentInput);
+    res.status(201).send(newComment);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error fetching playlists")
+  }
+ });
+ 
