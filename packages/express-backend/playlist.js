@@ -18,13 +18,24 @@ const playlistSchema = new mongoose.Schema(
       type: String,
       trim: true,
     },
-
     songs: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Song",
       },
     ],
+    likes: [
+      {
+        user:{
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "User",
+        },
+        liked: {
+          type: Boolean,
+          default: false
+        } 
+      }
+    ]
   },
   { collection: "playlist_list" },
 );

@@ -34,15 +34,6 @@ function getAllCommentsByPlaylistId(playlistId) {
      throw new Error(`Error fetching playlists: ${error.message}`);
    }
  }
- 
- function getCommentById(id) {
-   let promise;
-   try {
-     promise = playlistModel.findById(id).populate("songs");
-     return promise;
-   } catch (error) {
-     throw new Error(`Error fetching playlists: ${error.message}`);
-   }
- }
+
 
 export default {addComment, getAllCommentsByPlaylistId};

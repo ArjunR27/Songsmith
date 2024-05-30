@@ -162,3 +162,26 @@ app.post("/playlists/:id/comments", async (req, res) => {
   }
  });
  
+ app.post("/playlists/:id/likes", async (req, res) => {
+  try {
+    const playlistId = req.params["id"];
+    const userId = req.body;
+    
+    const playlist = await playlistServices.getPlaylistById(playlistId)
+    
+    //check if user already liked playlist
+    const existingCheck = playlist.likes.find(like => like.user.equals(userId))
+    
+    if(!existingCheck){
+      playlist.likes.push({user:userId, liked: true})
+    }
+    await playlist.save();
+      
+      res.status(200).send("Playlist liked successfully");
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error fetching playlists")
+  }
+
+ });
