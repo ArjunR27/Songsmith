@@ -2,8 +2,8 @@ import { useState, useEffect, useCallback} from "react";
 import "./Playlist.css";
 import { useLocation } from "react-router-dom";
 import SongsTable from "../components/SongsTable";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {faThumbsUp, faThumbsDown,faComment} from "@fortawesome/free-solid-svg-icons";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import {faThumbsUp, faThumbsDown,faComment} from "@fortawesome/free-solid-svg-icons";
 import PropTypes from 'prop-types'; // Import PropTypes
 
 function Playlist() {
@@ -104,9 +104,9 @@ function Playlist() {
           <div className="pl-desc">{playlist["description"]}</div>
           <div className="pl-toolbar">
             <div className="pl-buttons">
-                    <FontAwesomeIcon icon={faThumbsUp} />
-                    <FontAwesomeIcon icon={faThumbsDown} />
-                    <FontAwesomeIcon icon={faComment} />
+                    Like
+                    Dislike
+                    Comment
                 </div>
           </div>
             <AddSong/>
