@@ -10,9 +10,10 @@ function Playlist() {
   const location = useLocation();
   const path = location.pathname.split("/")[2];
   const [playlist, setPlaylist] = useState([]);
+  
 
   const fetchPlaylist = useCallback(() => {
-    return fetch("http://localhost:8000/playlists/" + path);
+    return fetch("songsmith.azurewebsites.net/playlists/" + path);
   }, [path]);
 
   Playlist.propTypes = {
@@ -49,7 +50,7 @@ function Playlist() {
     const handleAddSong = () => {
         console.log('Adding song:', song);
         
-        fetch("http://localhost:8000/playlists/" + path, {
+        fetch("songsmith.azurewebsites.net/playlists/" + path, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
