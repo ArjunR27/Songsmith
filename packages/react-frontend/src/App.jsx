@@ -4,8 +4,8 @@ import Home from "./pages/Home.jsx";
 import Songs from "./pages/Songs.jsx";
 import Playlists from "./pages/Playlists.jsx";
 import Playlist from "./pages/Playlist.jsx";
-import LoginPage from "./pages/LoginPage.jsx";
-import SignupPage from "./pages/Signup.jsx";
+import Login from "./pages/Login.jsx";
+import Signup from "./pages/Signup.jsx";
 import Sidebar from "./components/SideBar";
 import React from "react";
 import CreateSong from "./pages/CreateSong.jsx";
@@ -14,21 +14,22 @@ import CreatePlaylist from "./pages/CreatePlaylist.jsx";
 
 function AppContent() {
   const location = useLocation();
-  const hideHeaderAndSidebar =
+  const hideSidebar =
     location.pathname === "/" ||
     location.pathname === "/login" ||
     location.pathname === "/signup";
+  const hideHeader =
+    location.pathname === "/";
 
   
-
   return (
     <>
-      {!hideHeaderAndSidebar && <Sidebar />}
-      {!hideHeaderAndSidebar && <Header/>}
+      {!hideSidebar && <Sidebar />}
+      {!hideHeader && <Header/>}
       <Routes>
         <Route exact path="/" element={<Home />} />
-        <Route exact path="/login" element={<LoginPage />} />
-        <Route exact path="/signup" element={<SignupPage />} />
+        <Route exact path="/login" element={<Login />} />
+        <Route exact path="/signup" element={<Signup />} />
         <Route exact path="/playlists" element={<Playlists />} />
         <Route exact path="/playlists/:id" element={<Playlist />} />
         <Route exact path="/createPlaylist" element={<CreatePlaylist />} />

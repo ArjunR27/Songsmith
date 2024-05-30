@@ -3,9 +3,9 @@ import "./SideBar.css"; // Import CSS for styling
 //import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Link } from "react-router-dom";
 
-const Sidebar = ({isOpen}) => {
+function Sidebar() {
   return (
-    <div className={`sidebar ${isOpen ? "open" : "closed"}`}>
+    <div className="sidebar">
       <ul>
         <li>
           <Link to="/songs">

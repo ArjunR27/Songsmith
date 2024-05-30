@@ -28,6 +28,15 @@ app.post("/signup", registerUser);
 
 app.post("/login", loginUser);
 
+app.get('/auth', authenticateUser, (req, res) => {
+  try {
+    res.status(200).json({ message: "User is authenticated" });
+  } catch (error) {
+    res.status(400).json({ message: "User cannot be authenticated" });
+  }
+ 
+});
+
 // Database
 app.post("/users", async (req, res) => {
   console.log(req.body);
@@ -47,10 +56,7 @@ app.get("/users/:id", async (req, res) => {
   }
 });
 
-app.get("/users", async (req, res) => {
-  const users = await userServices.getUsers();
-  res.send({ user_list: users });
-});
+
 
 app.get("/songs", async (req, res) => {
   const song_name = req.query["name"];
@@ -128,3 +134,27 @@ app.post("/playlists", async (req, res) => {
     res.status(500).send({ error: error.mesage });
   }
 });
+
+app.get("/users", (req, res) => {
+  const username = req.query.name;
+
+  let promise = userServices.getUsers(username);
+
+  promise
+      .then(result => {
+          res.send({ users_list: result });
+      })
+      .catch(error => {
+          res.status(400).send("Failed to fetch users.");
+      });
+});
+
+app.post("/", async (req, res) => {
+  try {
+    const user = req.body;
+    const result = await userServices.createUser(user);
+    if (result) res.status(201).send(result);
+  } catch (error) {
+    res.status(500).send({ error: error.mesage });
+  }
+})

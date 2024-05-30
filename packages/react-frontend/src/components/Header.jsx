@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import "./Header.css";
-import SideBar from "./SideBar.jsx";
+import { Link } from "react-router-dom";
+
+const INVALID_TOKEN = "INVALID_TOKEN";
 
 function Header() {
   const [isSideBarOpen, setIsSideBarOpen] = useState(true);
@@ -9,6 +11,13 @@ function Header() {
     setIsSideBarOpen(!isSideBarOpen);
   };
 
+  const logoutUser = () => {
+    localStorage.setItem("authToken", INVALID_TOKEN);
+    window.location.reload();
+  }
+
+
+  
   return (
     <header className="header">
       <div className="left-container">
@@ -21,7 +30,17 @@ function Header() {
           <div className="line"></div>
         </button>
       </div>
-      <SideBar isOpen={isSideBarOpen} />
+      <div className="right-container">
+        <Link to="/login">
+            Login
+        </Link>
+        <Link to="/signup">
+            Signup
+        </Link>
+        <Link to="/login"> 
+          <button onClick={logoutUser}>Logout</button>
+          </Link>
+      </div>
     </header>
   );
 }
