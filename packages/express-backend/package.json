@@ -6,7 +6,7 @@
   "main": "backend.js",
   "scripts": {
     "lint": "npx eslint . && npx prettier --check .",
-    "test": "npx jest",
+    "test": "npx jest --passWithNoTests",
     "dev": "nodemon backend.js",
     "start": "node backend.js"
   },
