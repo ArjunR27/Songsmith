@@ -5,7 +5,7 @@ import songServices from "./song-services.js";
 import playlistServices from "./playlist-services.js";
 import userServices from "./user-services.js";
 import { registerUser, loginUser, authenticateUser } from "./auth.js";
-import dotenv from "dotenv"
+import dotenv from "dotenv";
 
 dotenv.config();
 
