@@ -1,9 +1,6 @@
 import mongoose from "mongoose";
 import userModel from "./user-services.js";
 import User from "./user.js";
-import dotenv from "dotenv";
-
-dotenv.config();
 
 beforeAll(async () => {
   // Connect to MongoDB before running tests
