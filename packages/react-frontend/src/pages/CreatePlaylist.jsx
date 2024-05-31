@@ -22,7 +22,7 @@ function CreatePlaylist() {
     event.preventDefault();
     console.log(playlistData);
 
-    fetch("songsmith.azurewebsites.net/playlists", {
+    fetch("https://songsmith.azurewebsites.net/playlists", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

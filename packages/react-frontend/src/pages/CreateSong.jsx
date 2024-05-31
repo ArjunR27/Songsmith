@@ -13,7 +13,7 @@ function CreateSong() {
     event.preventDefault();
     console.log("Adding song:", name);
 
-    fetch("songsmith.azurewebsites.net/songs", {
+    fetch("https://songsmith.azurewebsites.net/songs", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

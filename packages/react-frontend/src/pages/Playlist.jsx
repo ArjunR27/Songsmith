@@ -50,7 +50,7 @@ function Playlist() {
     const handleAddSong = () => {
         console.log('Adding song:', song);
         
-        fetch("songsmith.azurewebsites.net/playlists/" + path, {
+        fetch("https://songsmith.azurewebsites.net/playlists/" + path, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

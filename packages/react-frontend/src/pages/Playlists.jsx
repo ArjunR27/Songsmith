@@ -14,7 +14,7 @@ export default function Playlists() {
   useEffect(() => {
     const fetchPlaylists = async () => {
       try {
-        const response = await fetch("songsmith.azurewebsites.net/playlists");
+        const response = await fetch("https://songsmith.azurewebsites.net/playlists");
         if (!response.ok) {
           throw new Error("Failed to fetch playlists");
         }
