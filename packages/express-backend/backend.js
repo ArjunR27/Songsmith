@@ -154,8 +154,9 @@ app.post("/playlists/:id/comments", async (req, res) => {
       return res.status(500).send({ error: error.message});
     }
  
-   const newComment =  commentsServices.addComment(commentInput);
-    res.status(201).send(newComment);
+   const newComment =  await commentsServices.createComment(commentInput);
+   await playlist.addComment(newComment._id);
+   res.status(201).send(newComment);
   } catch (error) {
     console.error(error);
     res.status(500).send("Error fetching playlists")

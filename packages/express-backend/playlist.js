@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import Song from "./song.js";
+import Comment from "./comments.js";
 
 const playlistSchema = new mongoose.Schema(
   {
@@ -23,6 +24,12 @@ const playlistSchema = new mongoose.Schema(
         type: mongoose.Schema.Types.ObjectId,
         ref: "Song",
       },
+    ],
+    comments: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Comment",
+      }
     ],
     likes: [
       {
@@ -54,6 +61,17 @@ playlistSchema.methods.addSong = async function (songId) {
     }
 
     this.songs.push(songId);
+    this.save();
+
+    return this;
+  } catch (error) {
+    throw new Error(`Error adding song: ${error.message}`);
+  }
+};
+
+playlistSchema.methods.addComment = async function (commentId) {
+  try {
+    this.comments.push(commentId);
     this.save();
 
     return this;

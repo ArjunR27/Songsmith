@@ -15,7 +15,7 @@ mongoose
  .catch((error) => console.log(error));
 
 
-function addComment(comment) {
+function createComment(comment) {
  try{
     const comToAdd = new commentModel(comment);
     const promise = comToAdd.save();
@@ -36,4 +36,4 @@ function getAllCommentsByPlaylistId(playlistId) {
  }
 
 
-export default {addComment, getAllCommentsByPlaylistId};
+export default {createComment, getAllCommentsByPlaylistId};

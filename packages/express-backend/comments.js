@@ -15,10 +15,6 @@ const userSchema = new mongoose.Schema(
      //ref: "User",
      type: String,
      required: true
-   },
-   playlistId: {
-       type: mongoose.Schema.Types.ObjectId,
-       ref: "Playlist"
    }
  },
 
