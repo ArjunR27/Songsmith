@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const INVALID_TOKEN = "INVALID_TOKEN";
 
-function Header() {
+function Header(props) {
   const [isSideBarOpen, setIsSideBarOpen] = useState(true);
 
   const toggleSidebar = () => {
@@ -16,7 +16,22 @@ function Header() {
     window.location.reload();
   }
 
-
+  function HeaderRight(props) {
+    if (props.isAuthenticated)
+      return (
+        <div className="right-container">
+            <button onClick={logoutUser}>Logout</button>
+        </div>
+      );
+    else {
+      return (
+        <div className="right-container">
+          <Link to="/login">Login</Link>
+          <Link to="/signup">Signup</Link>
+        </div>
+      );
+    }
+  }
   
   return (
     <header className="header">
@@ -30,19 +45,12 @@ function Header() {
           <div className="line"></div>
         </button>
       </div>
-      <div className="right-container">
-        <Link to="/login">
-            Login
-        </Link>
-        <Link to="/signup">
-            Signup
-        </Link>
-        <Link to="/login"> 
-          <button onClick={logoutUser}>Logout</button>
-          </Link>
-      </div>
+      <HeaderRight isAuthenticated={props.isAuthenticated}/>
+      
     </header>
   );
+  
+  
 }
 
 export default Header;

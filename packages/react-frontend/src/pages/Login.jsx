@@ -50,12 +50,10 @@ function LoginForm(props) {
   }
 }
 
-function LoginPage() {
-  const INVALID_TOKEN = "INVALID_TOKEN";
-  const [token, setToken] = useState(localStorage.getItem("authToken") || INVALID_TOKEN);
+function LoginPage(props) {
   //const [token, setToken] = useState(INVALID_TOKEN);
   const [message, setMessage] = useState("");
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  
 
   const API_PREFIX = "http://localhost:8000";
 
@@ -72,7 +70,7 @@ function LoginPage() {
           response.json().then((payload) => {
             console.log(payload);
             localStorage.setItem("authToken", payload.token); // Store token in localStorage
-            setToken(payload.token);
+            props.setToken(payload.token);
             setMessage("Login successful; auth token saved");
           });
         } else {
@@ -86,47 +84,14 @@ function LoginPage() {
       });
   }
 
-  function addAuthHeader(otherHeaders = {}) {
-    if (token === INVALID_TOKEN) {
-      return otherHeaders;
-    } else {
-      return {
-        ...otherHeaders,
-        Authorization: `Bearer ${token}`,
-      };
-    }
-  }
 
-  function checkAuthentication() {
-    fetch(`${API_PREFIX}/auth`, {
-      method: "GET",
-      headers: addAuthHeader(),
-    })
-      .then((response) => {
-        if (response.status === 200) {
-          setIsAuthenticated(true);
-        } else {
-          setIsAuthenticated(false);
-        }
-      })
-      .catch((error) => {
-        setIsAuthenticated(false);
-        console.log("Authentication check error:", error);
-      });
-  }
 
-  useEffect(() => {
-    if (token !== INVALID_TOKEN) {
-      checkAuthentication();
-    }
-  }, [token]);
 
   return (
     <>
       <div className="page">
         <LoginForm handleSubmit={loginUser} />
-        <div>Token: {token} </div>
-        Authenticated: {`${isAuthenticated}`}
+        Authenticated: {`${props.isAuthenticated}`}
       </div>
     </>
   );

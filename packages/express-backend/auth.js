@@ -2,11 +2,9 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import userServices from "./user-services.js";
 
-const creds = [];
 
 export function registerUser(req, res) {
     const { username, password } = req.body; // from form
-    console.log(creds);
 
     if (!username || !password) {
         return res.status(400).send("Bad request: Invalid input data.");
@@ -96,10 +94,6 @@ export function loginUser(req, res) {
             return res.status(500).send("Server error: Could not retrieve user.");
         });
 };
-
-
-    
-
 
 export function authenticateUser(req, res, next) {
     const authHeader = req.headers["authorization"];

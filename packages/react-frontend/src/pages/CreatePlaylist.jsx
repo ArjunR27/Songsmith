@@ -35,7 +35,6 @@ function CreatePlaylist() {
         return response.json();
       })
       .then(() => {
-        // After successful creation, navigate to /playlists
         window.location.href = "/playlists";
       })
       .catch((error) => {
