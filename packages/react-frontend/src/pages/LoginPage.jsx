@@ -11,7 +11,7 @@ function LoginPage() {
 
 
   function loginUser(creds) {
-    const promise = fetch("songsmith.azurewebsites.net/login", {
+    const promise = fetch("https://songsmith.azurewebsites.net/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
