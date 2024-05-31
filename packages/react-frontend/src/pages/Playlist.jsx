@@ -13,7 +13,7 @@ function Playlist() {
   
 
   const fetchPlaylist = useCallback(() => {
-    return fetch("songsmith.azurewebsites.net/playlists/" + path);
+    return fetch("https://songsmith.azurewebsites.net/playlists/" + path);
   }, [path]);
 
   Playlist.propTypes = {
