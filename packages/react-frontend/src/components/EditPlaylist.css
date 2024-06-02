@@ -1,0 +1,112 @@
+/* EditPlaylist.css */
+.edit-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.edit-popup-content {
+  background: #3a3a40;
+  padding: 20px;
+  border-radius: 10px;
+  width: 400px;
+  
+}
+.pl-save-button,
+.pl-cancel-button {
+  padding: 8px 13px;
+  font-size: 18px;
+  background-color: #f3f3f3; 
+  color: #000; 
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  margin-right: 10px; 
+  font-family: 'League Spartan', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+}
+.pl-save-button:hover,
+.pl-cancel-button:hover {
+  background-color: #e0e0e0; 
+}
+
+.edit-popup-content h2 {
+  margin-top: 0;
+  color: white;
+  font-family: 'League Spartan', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.edit-popup-content label {
+  display: block;
+  margin: 10px 0 5px;
+  color: white;
+}
+
+.edit-popup-content input,
+.edit-popup-content textarea {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+  font-family: 'League Spartan', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  border-radius: 15px;
+  
+}
+
+.edit-popup-content textarea {
+  height: 100px;
+  font-family: 'League Spartan', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.edit-popup-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  
+}
+
+.edit-popup-buttons {
+  display: flex;
+  align-items: center; 
+  margin-top: 20px;
+}
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(2px); 
+}
+
+
+.pl-edit-button {
+  padding: 10px 40px;
+  font-size: 18px;
+  background-color: #3a3a40; 
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;  
+  margin-left: 25px; 
+  white-space: nowrap;
+  font-family: 'League Spartan', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.pl-edit-button:hover {
+  background-color: #1e1f23; 
+}

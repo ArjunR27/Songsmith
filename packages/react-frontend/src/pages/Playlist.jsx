@@ -11,6 +11,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Comments from "../components/Comments.jsx";
 import Comment from "../components/Comment.jsx";
+import EditPlaylist from "../components/EditPlaylist";
 
 function Playlist() {
   const location = useLocation();
@@ -18,7 +19,8 @@ function Playlist() {
   const [playlist, setPlaylist] = useState([]);
   const [showComments, setShowComments] = useState(false);
   const [likes, setLikes] = useState(0);
-  
+  const [showEdit, setShowEdit] = useState(false);
+
   function fetchPlaylist() {
     const promise = fetch("http://localhost:8000/playlists/" + path);
     return promise;
@@ -40,6 +42,10 @@ function Playlist() {
 
   const handleDislike = () => {
     setDislikes(dislikes + 1);
+  };
+
+  const toggleEdit = () => {
+    setShowEdit(!showEdit);
   };
 
   function PlaylistSongs(props) {
@@ -108,6 +114,7 @@ function Playlist() {
 
   return (
     <div className="playlist">
+      
       <div className="pl-top">
         <div className="pl-image">
           <img
@@ -132,18 +139,28 @@ function Playlist() {
                 onClick={toggleComments}
                 style={{ cursor: "pointer" }}
               />
+              <button onClick={toggleEdit} className="pl-edit-button">
+                Edit Playlist
+              </button>{" "}
+              {/* Edit Playlist button */}
             </div>
           </div>
           <AddSong />
         </div>
+        {showEdit && (
+          <EditPlaylist
+            playlist={playlist}
+            onClose={() => setShowEdit(false)}
+          />
+        )}
       </div>
 
       <div className="pl-table">
-      {showComments ? (
-        <Comments />
-      ) : (
-        <SongsTable songData={playlist["songs"]} />
-      )}
+        {showComments ? (
+          <Comments />
+        ) : (
+          <SongsTable songData={playlist["songs"]} />
+        )}
       </div>
     </div>
   );
