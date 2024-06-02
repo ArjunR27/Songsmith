@@ -7,6 +7,7 @@ import userServices from "./user-services.js";
 import commentsServices from "./comments-services.js";
 import { registerUser, loginUser, authenticateUser } from "./auth.js";
 
+
 const app = express();
 const port = 8000;
 
@@ -85,7 +86,7 @@ app.get("/playlists/:id", async (req, res) => {
   }
 });
 
-app.get("/playlists/:id/comments", async (req, res) => {
+/*app.get("/playlists/:id/comments", async (req, res) => {
   try {
     const playlistId = req.params["id"];
     const result = await commentsServices.getAllCommentsByPlaylistId(playlistId);
@@ -98,7 +99,8 @@ app.get("/playlists/:id/comments", async (req, res) => {
     console.error(error);
     res.status(500).send("Error fetching playlists");
   }
-});
+  
+});*/
 
 app.post("/playlists/:id", async (req, res) => {
   try {
@@ -166,23 +168,39 @@ app.post("/playlists/:id/comments", async (req, res) => {
  app.post("/playlists/:id/likes", async (req, res) => {
   try {
     const playlistId = req.params["id"];
-    const userId = req.body;
+    const userId = req.body.userId;
     
     const playlist = await playlistServices.getPlaylistById(playlistId)
-    
-    //check if user already liked playlist
-    const existingCheck = playlist.likes.find(like => like.user.equals(userId))
-    
-    if(!existingCheck){
-      playlist.likes.push({user:userId, liked: true})
+    if (!playlist) {
+      return res.status(500).send({ error: error.message});
     }
-    await playlist.save();
-      
-      res.status(200).send("Playlist liked successfully");
+    
+    await playlist.addLike(userId);
+
+    res.status(200).send("Playlist liked successfully");
 
   } catch (error) {
     console.error(error);
     res.status(500).send("Error fetching playlists")
   }
+});
 
- });
+app.post("/playlists/:id/dislikes", async (req, res) => {
+  try {
+    const playlistId = req.params["id"];
+    const userId = req.body.userId;
+    
+    const playlist = await playlistServices.getPlaylistById(playlistId)
+    if (!playlist) {
+      return res.status(500).send({ error: error.message});
+    }
+    
+    await playlist.addDislike(userId);
+
+    res.status(200).send("Playlist disliked successfully");
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error fetching playlists")
+  }
+});

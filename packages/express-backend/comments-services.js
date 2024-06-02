@@ -2,6 +2,7 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 import userModel from "./user.js";
 import commentModel from "./comments.js";
+import playlistModel from "./playlist.js"
 
 
 dotenv.config();
@@ -28,7 +29,8 @@ function createComment(comment) {
 function getAllCommentsByPlaylistId(playlistId) {
    let promise;
    try {
-     promise = commentModel.find({playlistId: playlistId}).exec();
+     promise = playlistModel.find().populate("comments")
+                                  .exec();
      return promise;
    } catch (error) {
      throw new Error(`Error fetching playlists: ${error.message}`);
