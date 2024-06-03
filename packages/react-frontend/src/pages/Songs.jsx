@@ -4,6 +4,7 @@ import "./Songs.css";
 import { useNavigate } from "react-router-dom";
 
 function Songs() {
+  const [songs, setSongs] = useState([]);
   const navigate = useNavigate();
   // FETCH Users
   function fetchUsers() {

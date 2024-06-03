@@ -16,7 +16,6 @@ import CreatePlaylist from "./pages/CreatePlaylist.jsx";
 function AppContent() {
   const location = useLocation();
   const hideSidebar = location.pathname === "/" || location.pathname === "/login" || location.pathname === "/signup";
-  const hideHeader = location.pathname === "/";
 
   const INVALID_TOKEN = "INVALID_TOKEN";
   const [token, setToken] = useState(localStorage.getItem("authToken") || INVALID_TOKEN);
@@ -57,21 +56,21 @@ function AppContent() {
       if (token !== INVALID_TOKEN) {
         checkAuthentication();
       }
-    }, [token]);
+    }, token);
 
   return (
     <>
       {!hideSidebar && <Sidebar />}
-      {!hideHeader && <Header isAuthenticated={isAuthenticated}/>}
+      <Header isAuthenticated={isAuthenticated}/>
       <Routes>
-        <Route exact path="/" element={<Home />} />
-        <Route exact path="/login" element={<Login isAuthenticated={isAuthenticated} setToken={setToken}/>} />
-        <Route exact path="/signup" element={<Signup />} />
-        <Route exact path="/playlists" element={<Playlists />} />
-        <Route exact path="/playlists/:id" element={<Playlist />} />
-        <Route exact path="/createPlaylist" element={<CreatePlaylist />} />
-        <Route exact path="/songs" element={<Songs />} />
-        <Route exact path="/createSong" element={<CreateSong />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login isAuthenticated={isAuthenticated} setToken={setToken}/>} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/playlists" element={<Playlists />} />
+        <Route path="/playlists/:id" element={<Playlist />} />
+        <Route path="/createPlaylist" element={<CreatePlaylist />} />
+        <Route path="/songs" element={<Songs />} />
+        <Route path="/createSong" element={<CreateSong />} />
       </Routes>
     </>
   );

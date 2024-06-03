@@ -1,4 +1,7 @@
 import { React, useState, useEffect } from "react";
+import "./Auth.css"
+import { useNavigate } from "react-router-dom";
+
 
 function LoginForm(props) {
   const [creds, setCreds] = useState({
@@ -7,28 +10,30 @@ function LoginForm(props) {
   });
 
   return (
-    <form>
-      <label htmlFor="username">UserName</label>
-      <input
-        type="text"
-        name="username"
-        id="username"
-        value={creds.username}
-        onChange={handleChange}
-      />
-      <label htmlFor="password">Password</label>
-      <input
-        type="password"
-        name="password"
-        id="password"
-        value={creds.password}
-        onChange={handleChange}
-      />
-      <input
-        type="button"
-        value={props.buttonLabel || "Log In"}
-        onClick={submitForm}
-      />
+    <form onSubmit={submitForm}>
+      <div className="auth-form-field">
+        <label htmlFor="username">Username</label>
+        <input
+          type="text"
+          name="username"
+          id="username"
+          value={creds.username}
+          onChange={handleChange}
+        />
+      </div>
+      <div className="auth-form-field">
+        <label htmlFor="password">Password</label>
+        <input
+          type="password"
+          name="password"
+          id="password"
+          value={creds.password}
+          onChange={handleChange}
+        />
+      </div>
+      <button type="submit">
+        Log In
+      </button>
     </form>
   );
 
@@ -45,6 +50,7 @@ function LoginForm(props) {
   }
 
   function submitForm() {
+    event.preventDefault();
     props.handleSubmit(creds);
     setCreds({ username: "", password: "" });
   }
@@ -53,8 +59,7 @@ function LoginForm(props) {
 function LoginPage(props) {
   //const [token, setToken] = useState(INVALID_TOKEN);
   const [message, setMessage] = useState("");
-  
-
+  const navigate = useNavigate();
   const API_PREFIX = "http://localhost:8000";
 
   function loginUser(creds) {
@@ -72,6 +77,7 @@ function LoginPage(props) {
             localStorage.setItem("authToken", payload.token); // Store token in localStorage
             props.setToken(payload.token);
             setMessage("Login successful; auth token saved");
+            navigate("/songs");
           });
         } else {
           response.text().then((text) => {
@@ -85,13 +91,13 @@ function LoginPage(props) {
   }
 
 
-
-
   return (
     <>
-      <div className="page">
-        <LoginForm handleSubmit={loginUser} />
-        Authenticated: {`${props.isAuthenticated}`}
+      <div className="auth-page">
+        <div className="auth-form-container">
+          <h1 className="auth-form-header">Login</h1>
+          <LoginForm handleSubmit={loginUser}/>
+        </div>
       </div>
     </>
   );

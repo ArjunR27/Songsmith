@@ -1,19 +1,20 @@
 import { useState, useEffect } from "react";
 import "./Header.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const INVALID_TOKEN = "INVALID_TOKEN";
 
 function Header(props) {
-  const [isSideBarOpen, setIsSideBarOpen] = useState(true);
+  const navigate = useNavigate();
+  const [logoutTrigger, setLogoutTrigger] = useState(false);
 
   const toggleSidebar = () => {
     setIsSideBarOpen(!isSideBarOpen);
   };
 
-  const logoutUser = () => {
+  const logoutUser = () => { 
     localStorage.setItem("authToken", INVALID_TOKEN);
-    window.location.reload();
+    window.location.href = "/";
   }
 
   function HeaderRight(props) {

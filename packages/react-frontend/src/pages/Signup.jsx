@@ -1,5 +1,5 @@
 import { React, useState, useEffect } from "react";
-import "./Signup.css"
+import "./Auth.css"
 
 function SignupForm(props) {
   const [creds, setCreds] = useState({
@@ -8,28 +8,31 @@ function SignupForm(props) {
   });
 
   return (
-    <form>
-      <label htmlFor="username">UserName</label>
-      <input
-        type="text"
-        name="username"
-        id="username"
-        value={creds.username}
-        onChange={handleChange}
-      />
-      <label htmlFor="password">Password</label>
-      <input
-        type="password"
-        name="password"
-        id="password"
-        value={creds.password}
-        onChange={handleChange}
-      />
-      <input
-        type="button"
-        value={props.buttonLabel || "Signup"}
-        onClick={submitForm}
-      />
+    <form onSubmit={submitForm}>
+      <div className="auth-form-field">
+        <label htmlFor="username">Username</label>
+        <input
+          type="text"
+          name="username"
+          id="username"
+          value={creds.username}
+          onChange={handleChange}
+        />
+      </div>
+      <div className="auth-form-field">
+        <label htmlFor="password">Password</label>
+        <input
+          type="password"
+          name="password"
+          id="password"
+          value={creds.password}
+          onChange={handleChange}
+        />
+      </div>
+      <button
+        type="submit">
+          Sign Up
+        </button>
     </form>
   );
 
@@ -46,6 +49,7 @@ function SignupForm(props) {
   }
 
   function submitForm() {
+    event.preventDefault();
     props.handleSubmit(creds);
     setCreds({ username: "", password: "" });
   }
@@ -91,8 +95,11 @@ export default function Signup() {
 
   return (
     <>
-      <div className="page">
-        <SignupForm handleSubmit={signupUser}/>
+      <div className="auth-page">
+        <div className="auth-form-container">
+          <h1 className="auth-form-header">Signup</h1>
+          <SignupForm handleSubmit={signupUser}/>
+        </div>
       </div>
     </>
   );
