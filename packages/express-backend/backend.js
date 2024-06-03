@@ -204,3 +204,21 @@ app.post("/playlists/:id/dislikes", async (req, res) => {
     res.status(500).send("Error fetching playlists")
   }
 });
+
+app.put("/playlists/:id", async (req, res) => {
+  try {
+    const playlistId = req.params["id"];
+    const newDetails = req.body;
+
+    const playlist = await playlistServices.getPlaylistById(playlistId);
+    if (!playlist) {
+      return res.status(500).send({ error: error.message});
+    }
+
+    await playlist.editPlaylist(newDetails);
+    res.send("Playlist updated");
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error fetching playlists");
+  }
+});

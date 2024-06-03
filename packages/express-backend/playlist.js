@@ -80,7 +80,7 @@ playlistSchema.methods.addComment = async function (commentId) {
 
     return this;
   } catch (error) {
-    throw new Error(`Error adding song: ${error.message}`);
+    throw new Error(`Error adding comment: ${error.message}`);
   }
 };
 
@@ -105,7 +105,7 @@ playlistSchema.methods.addLike = async function (userId) {
 
     return this;
   } catch (error) {
-    throw new Error(`Error adding song: ${error.message}`);
+    throw new Error(`Error adding like: ${error.message}`);
   }
 };
 
@@ -129,9 +129,24 @@ playlistSchema.methods.addDislike = async function (userId) {
 
     return this;
   } catch (error) {
-    throw new Error(`Error adding song: ${error.message}`);
+    throw new Error(`Error adding dislike: ${error.message}`);
   }
 };
+
+playlistSchema.methods.editPlaylist = async function (newInfo) {
+  try{
+    if(newInfo.playlist_name){
+      this.playlist_name = newInfo.playlist_name;
+    }
+    if(newInfo.description){
+      this.description = newInfo.description;
+    }
+    await this.save();
+    return this;
+  } catch(error){
+    throw new Error(`Error updating playlist: ${error.message}`);
+  }
+}
 
 
 const Playlist = mongoose.model("Playlist", playlistSchema);
