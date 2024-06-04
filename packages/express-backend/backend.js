@@ -88,21 +88,20 @@ app.get("/playlists/:id", async (req, res) => {
   }
 });
 
-/*app.get("/playlists/:id/comments", async (req, res) => {
+app.get("/playlists/:id/comments", async (req, res) => {
   try {
     const playlistId = req.params["id"];
-    const result = await commentsServices.getAllCommentsByPlaylistId(playlistId);
+    const result = await playlistServices.getPlaylistById(playlistId);
     if (result == undefined || result == null)
       res.status(404).send("Resource not found");
     else {
-      res.send({ comments_list: result });
+      res.send({ comment_list: result.comments });
     }
   } catch (error) {
     console.error(error);
     res.status(500).send("Error fetching playlists");
   }
-  
-});*/
+});
 
 app.post("/playlists/:id", async (req, res) => {
   try {
