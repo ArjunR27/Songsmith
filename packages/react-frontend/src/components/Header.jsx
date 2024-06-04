@@ -1,17 +1,10 @@
-import { useState, useEffect } from "react";
 import "./Header.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import PropTypes from 'prop-types';
 
 const INVALID_TOKEN = "INVALID_TOKEN";
 
 function Header(props) {
-  const navigate = useNavigate();
-  const [logoutTrigger, setLogoutTrigger] = useState(false);
-
-  const toggleSidebar = () => {
-    setIsSideBarOpen(!isSideBarOpen);
-  };
-
   const logoutUser = () => { 
     localStorage.setItem("authToken", INVALID_TOKEN);
     window.location.href = "/";
@@ -55,3 +48,7 @@ function Header(props) {
 }
 
 export default Header;
+
+Header.propTypes = {
+  isAuthenticated: PropTypes.bool.isRequired
+};

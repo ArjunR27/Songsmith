@@ -1,6 +1,7 @@
-import { React, useState, useEffect } from "react";
+import { useState } from "react";
 import "./Auth.css"
 import { useNavigate } from "react-router-dom";
+import PropTypes from "prop-types";
 
 
 function LoginForm(props) {
@@ -56,13 +57,18 @@ function LoginForm(props) {
   }
 }
 
+LoginForm.propTypes = {
+  handleSubmit: PropTypes.func.isRequired,
+};
+
 function LoginPage(props) {
-  //const [token, setToken] = useState(INVALID_TOKEN);
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
-  const API_PREFIX = "http://localhost:8000";
+  const API_PREFIX = "https://songsmith.azurewebsites.net";
 
   function loginUser(creds) {
+    console.log(message);
+
     fetch(`${API_PREFIX}/login`, {
       method: "POST",
       headers: {
@@ -104,3 +110,8 @@ function LoginPage(props) {
 }
 
 export default LoginPage;
+
+LoginPage.propTypes = {
+  setToken: PropTypes.func.isRequired,
+};
+

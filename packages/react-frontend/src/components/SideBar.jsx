@@ -14,8 +14,8 @@ function Sidebar() {
         </li>
       </ul>
     </div>
-  );
-};
+  )
+}
 
 // Add PropTypes validation
 Sidebar.propTypes = {

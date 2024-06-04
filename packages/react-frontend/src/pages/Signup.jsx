@@ -1,4 +1,5 @@
-import { React, useState, useEffect } from "react";
+import { useState } from "react";
+import PropTypes from "prop-types";
 import "./Auth.css"
 
 function SignupForm(props) {
@@ -36,6 +37,7 @@ function SignupForm(props) {
     </form>
   );
 
+
   function handleChange(event) {
     const { name, value } = event.target;
     switch (name) {
@@ -55,15 +57,17 @@ function SignupForm(props) {
   }
 }
 
+SignupForm.propTypes = {
+  handleSubmit: PropTypes.func.isRequired,
+};
 
 export default function Signup() {
-  const INVALID_TOKEN = "INVALID_TOKEN";
-  const [token, setToken] = useState(INVALID_TOKEN);
   const [message, setMessage] = useState("");
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   function signupUser(creds) {
-    const API_PREFIX = "http://localhost:8000";
+    const API_PREFIX = "https://songsmith.azurewebsites.net";
+
+    console.log(message);
   
     const promise = fetch(`${API_PREFIX}/signup`, {
       method: "POST",
@@ -76,7 +80,6 @@ export default function Signup() {
         if (response.status === 201) {
           response
             .json()
-            .then((payload) => setToken(payload.token));
           setMessage(
             `Signup successful for user: ${creds.username}; auth token saved`
           );
@@ -104,4 +107,3 @@ export default function Signup() {
     </>
   );
 }
-

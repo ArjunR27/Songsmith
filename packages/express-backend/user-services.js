@@ -23,7 +23,7 @@ function findUserById(id) {
 }
 
 function findUserByName(username) {
-    return userModel.find({ username: username });
+  return userModel.find({ username: username });
 }
 
 function getUsers(username) {
@@ -41,9 +41,9 @@ function getPlaylistsForUser(id) {
 }
 
 export default {
-    getUsers,
-    findUserById,
-    findUserByName,
-    addUser,
-    getPlaylistsForUser,
-}
+  getUsers,
+  findUserById,
+  findUserByName,
+  addUser,
+  getPlaylistsForUser,
+};

@@ -19,39 +19,39 @@ function AppContent() {
   const INVALID_TOKEN = "INVALID_TOKEN";
   const [token, setToken] = useState(localStorage.getItem("authToken") || INVALID_TOKEN);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const API_PREFIX = "http://localhost:8000";
-  
-    function checkAuthentication() {
-      fetch(`${API_PREFIX}/auth`, {
-        method: "GET",
-        headers: addAuthHeader(),
-      })
-        .then((response) => {
-          if (response.status === 200) {
-            setIsAuthenticated(true);
-          } else {
-            setIsAuthenticated(false);
-          }
-        })
-        .catch((error) => {
-          setIsAuthenticated(false);
-          console.log("Authentication check error:", error);
-        });
-    }
-
-
-  function addAuthHeader(otherHeaders = {}) {
-    if (token === INVALID_TOKEN) {
-      return otherHeaders;
-    } else {
-      return {
-        ...otherHeaders,
-        Authorization: `Bearer ${token}`,
-      };
-    }
-  }
+  const API_PREFIX = "https://songsmith.azurewebsites.net";
   
     useEffect(() => {
+      function checkAuthentication() {
+        fetch(`${API_PREFIX}/auth`, {
+          method: "GET",
+          headers: addAuthHeader(),
+        })
+          .then((response) => {
+            if (response.status === 200) {
+              setIsAuthenticated(true);
+            } else {
+              setIsAuthenticated(false);
+            }
+          })
+          .catch((error) => {
+            setIsAuthenticated(false);
+            console.log("Authentication check error:", error);
+          });
+      }
+
+      function addAuthHeader(otherHeaders = {}) {
+        if (token === INVALID_TOKEN) {
+          return otherHeaders;
+        } else {
+          return {
+            ...otherHeaders,
+            Authorization: `Bearer ${token}`,
+          };
+        }
+      }
+
+
       if (token !== INVALID_TOKEN) {
         checkAuthentication();
       }

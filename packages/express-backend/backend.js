@@ -21,7 +21,7 @@ app.get("/", (req, res) => {
 });
 
 app.listen(process.env.PORT || port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
+  console.log(`Example app listening at https://songsmith.azurewebsites.net`);
 });
 
 // Login and Register
@@ -29,13 +29,12 @@ app.post("/signup", registerUser);
 
 app.post("/login", loginUser);
 
-app.get('/auth', authenticateUser, (req, res) => {
+app.get("/auth", authenticateUser, (req, res) => {
   try {
     res.status(200).json({ message: "User is authenticated" });
   } catch (error) {
     res.status(400).json({ message: "User cannot be authenticated" });
   }
- 
 });
 
 // Database
@@ -56,8 +55,6 @@ app.get("/users/:id", async (req, res) => {
     res.send({ users_list: result });
   }
 });
-
-
 
 app.get("/songs", async (req, res) => {
   const song_name = req.query["name"];
