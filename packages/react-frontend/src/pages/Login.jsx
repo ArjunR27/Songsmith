@@ -1,7 +1,9 @@
 import { React, useState, useEffect } from "react";
 import "./Auth.css"
+import { useNavigate } from "react-router-dom";
 
-function SignupForm(props) {
+
+function LoginForm(props) {
   const [creds, setCreds] = useState({
     username: "",
     password: "",
@@ -29,10 +31,9 @@ function SignupForm(props) {
           onChange={handleChange}
         />
       </div>
-      <button
-        type="submit">
-          Sign Up
-        </button>
+      <button type="submit">
+        Log In
+      </button>
     </form>
   );
 
@@ -55,53 +56,51 @@ function SignupForm(props) {
   }
 }
 
-
-export default function Signup() {
-  const INVALID_TOKEN = "INVALID_TOKEN";
-  const [token, setToken] = useState(INVALID_TOKEN);
+function LoginPage(props) {
+  //const [token, setToken] = useState(INVALID_TOKEN);
   const [message, setMessage] = useState("");
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const navigate = useNavigate();
+  const API_PREFIX = "http://localhost:8000";
 
-  function signupUser(creds) {
-    const API_PREFIX = "http://localhost:8000";
-  
-    const promise = fetch(`${API_PREFIX}/signup`, {
+  function loginUser(creds) {
+    fetch(`${API_PREFIX}/login`, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(creds)
+      body: JSON.stringify(creds),
     })
       .then((response) => {
-        if (response.status === 201) {
-          response
-            .json()
-            .then((payload) => setToken(payload.token));
-          setMessage(
-            `Signup successful for user: ${creds.username}; auth token saved`
-          );
+        if (response.status === 200) {
+          response.json().then((payload) => {
+            console.log(payload);
+            localStorage.setItem("authToken", payload.token); // Store token in localStorage
+            props.setToken(payload.token);
+            setMessage("Login successful; auth token saved");
+            navigate("/songs");
+          });
         } else {
-          setMessage(
-            `Signup Error ${response.status}: ${response.data}`
-          );
+          response.text().then((text) => {
+            setMessage(`Login Error ${response.status}: ${text}`);
+          });
         }
       })
       .catch((error) => {
-        setMessage(`Signup Error: ${error}`);
+        setMessage(`Login Error: ${error}`);
       });
-  
-    return promise;
   }
+
 
   return (
     <>
       <div className="auth-page">
         <div className="auth-form-container">
-          <h1 className="auth-form-header">Signup</h1>
-          <SignupForm handleSubmit={signupUser}/>
+          <h1 className="auth-form-header">Login</h1>
+          <LoginForm handleSubmit={loginUser}/>
         </div>
       </div>
     </>
   );
 }
 
+export default LoginPage;

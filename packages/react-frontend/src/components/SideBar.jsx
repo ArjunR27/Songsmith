@@ -2,9 +2,9 @@ import PropTypes from "prop-types";
 import "./SideBar.css"; // Import CSS for styling
 import { Link } from "react-router-dom";
 
-const Sidebar = ({ isOpen }) => {
+function Sidebar() {
   return (
-    <div className={`sidebar ${isOpen ? "open" : "closed"}`}>
+    <div className="sidebar">
       <ul>
         <li>
           <Link to="/songs">Songs</Link>

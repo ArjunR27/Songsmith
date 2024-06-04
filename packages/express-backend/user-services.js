@@ -22,14 +22,18 @@ function findUserById(id) {
   return userModel.findById(id);
 }
 
-function getUsers() {
+function findUserByName(username) {
+    return userModel.find({ username: username });
+}
+
+function getUsers(username) {
   let promise;
-  try {
+  if (username === undefined) {
     promise = userModel.find();
-    return promise;
-  } catch (error) {
-    throw new Error(`Error fetching users: ${error.message}`);
+  } else {
+    promise = findUserByName(username);
   }
+  return promise;
 }
 
 function getPlaylistsForUser(id) {
@@ -37,8 +41,9 @@ function getPlaylistsForUser(id) {
 }
 
 export default {
-  getUsers,
-  findUserById,
-  addUser,
-  getPlaylistsForUser,
-};
+    getUsers,
+    findUserById,
+    findUserByName,
+    addUser,
+    getPlaylistsForUser,
+}

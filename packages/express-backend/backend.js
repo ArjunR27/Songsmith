@@ -29,6 +29,15 @@ app.post("/signup", registerUser);
 
 app.post("/login", loginUser);
 
+app.get('/auth', authenticateUser, (req, res) => {
+  try {
+    res.status(200).json({ message: "User is authenticated" });
+  } catch (error) {
+    res.status(400).json({ message: "User cannot be authenticated" });
+  }
+ 
+});
+
 // Database
 app.post("/users", async (req, res) => {
   console.log(req.body);
@@ -48,10 +57,7 @@ app.get("/users/:id", async (req, res) => {
   }
 });
 
-app.get("/users", async (req, res) => {
-  const users = await userServices.getUsers();
-  res.send({ user_list: users });
-});
+
 
 app.get("/songs", async (req, res) => {
   const song_name = req.query["name"];
