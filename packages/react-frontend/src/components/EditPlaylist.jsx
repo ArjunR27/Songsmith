@@ -1,6 +1,7 @@
 // EditPlaylist.jsx
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import "./EditPlaylist.css"; 
+import PropTypes from "prop-types";
 
 function EditPlaylist({ playlist, onClose }) {
   const [playlistTitle, setPlaylistTitle] = useState(playlist.playlist_name);
@@ -29,7 +30,7 @@ function EditPlaylist({ playlist, onClose }) {
 
   const handleSubmit = () => {
     // Logic to submit changes to the backend
-    fetch(`http://localhost:8000/playlists/${playlist.id}`, {
+    fetch(`https://songsmith.azurewebsites.net/playlists/${playlist.id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -85,4 +86,13 @@ function EditPlaylist({ playlist, onClose }) {
   );
 }
 
+EditPlaylist.propTypes = {
+  playlist: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    playlist_name: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    cover: PropTypes.string.isRequired,
+  }).isRequired,
+  onClose: PropTypes.func.isRequired,
+};
 export default EditPlaylist;

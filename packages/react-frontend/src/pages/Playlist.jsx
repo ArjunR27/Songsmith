@@ -5,6 +5,9 @@ import SongsTable from "../components/SongsTable";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import {faThumbsUp, faThumbsDown,faComment} from "@fortawesome/free-solid-svg-icons";
 import PropTypes from 'prop-types'; // Import PropTypes
+import EditPlaylist from "../components/EditPlaylist"
+import Comments from "../components/Comments"
+
 
 function Playlist() {
   const location = useLocation();
@@ -12,12 +15,10 @@ function Playlist() {
   const [playlist, setPlaylist] = useState([]);
   const [showComments, setShowComments] = useState(false);
   const [likes, setLikes] = useState(0);
+  const [dislikes, setDislikes] = useState(0);
   const [showEdit, setShowEdit] = useState(false);
 
-  function fetchPlaylist() {
-    const promise = fetch("http://localhost:8000/playlists/" + path);
-    return promise;
-  }
+
   
 
   const fetchPlaylist = useCallback(() => {
@@ -37,7 +38,9 @@ function Playlist() {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [fetchPlaylist]);
+
+  
   const handleLike = () => {
     setLikes(likes + 1);
   };
@@ -50,14 +53,14 @@ function Playlist() {
     setShowEdit(!showEdit);
   };
 
-  function PlaylistSongs(props) {
+  /*function PlaylistSongs(props) {
     console.log(props.songData);
     if (props.songData) {
       return <SongsTable songData={props.songData} />;
     } else {
       return <SongsTable songData={{}} />;
     }
-  }
+  }*/
 
   function AddSong() {
     const [song, setSong] = useState("");
@@ -133,14 +136,18 @@ function Playlist() {
           <div className="pl-desc">{playlist["description"]}</div>
           <div className="pl-toolbar">
             <div className="pl-buttons">
-              <FontAwesomeIcon icon={faThumbsUp} onClick={handleLike} />
-              {likes}
-              <FontAwesomeIcon icon={faThumbsDown} onClick={handleDislike} />
-              <FontAwesomeIcon
-                icon={faComment}
+              <button onClick={handleLike}>
+                Likes: {likes}
+              </button> 
+              <button onClick={handleDislike}>
+                Dislikes: {dislikes}
+              </button> 
+              <button
                 onClick={toggleComments}
-                style={{ cursor: "pointer" }}
-              />
+                style={{ cursor: "pointer" }}>
+                Comments
+                </button>
+              
               <button onClick={toggleEdit} className="pl-edit-button">
                 Edit Playlist
               </button>{" "}

@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./Comments.css";
 import Comment from "./Comment.jsx";
+import PropTypes from "prop-types";
+
 
 function Comments({ playlistId, userId }) { 
   const [newComment, setNewComment] = useState("");
@@ -11,7 +13,7 @@ function Comments({ playlistId, userId }) {
   
   const submitComment = async (commentText) => {
     try {
-      const response = await fetch(`http://localhost:8000/playlists/${playlistId}/comments`, {
+      const response = await fetch(`https://songsmith.azurewebsites.net/playlists/${playlistId}/comments`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -54,5 +56,11 @@ function Comments({ playlistId, userId }) {
     </div>
   );
 }
+
+
+Comments.propTypes = {
+  playlistId: PropTypes.string.isRequired,
+  userId: PropTypes.string.isRequired,
+};
 
 export default Comments;
