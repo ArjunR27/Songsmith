@@ -5,11 +5,20 @@ import SongsTable from "../components/SongsTable";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import {faThumbsUp, faThumbsDown,faComment} from "@fortawesome/free-solid-svg-icons";
 import PropTypes from 'prop-types'; // Import PropTypes
+import EditPlaylist from "../components/EditPlaylist"
+import Comments from "../components/Comments"
+
 
 function Playlist() {
   const location = useLocation();
   const path = location.pathname.split("/")[2];
   const [playlist, setPlaylist] = useState([]);
+  const [showComments, setShowComments] = useState(false);
+  const [likes, setLikes] = useState(0);
+  const [dislikes, setDislikes] = useState(0);
+  const [showEdit, setShowEdit] = useState(false);
+
+
   
 
   const fetchPlaylist = useCallback(() => {
@@ -31,20 +40,33 @@ function Playlist() {
       });
   }, [fetchPlaylist]);
 
-  function PlaylistSongs(props) {
+  
+  const handleLike = () => {
+    setLikes(likes + 1);
+  };
+
+  const handleDislike = () => {
+    setDislikes(dislikes + 1);
+  };
+
+  const toggleEdit = () => {
+    setShowEdit(!showEdit);
+  };
+
+  /*function PlaylistSongs(props) {
     console.log(props.songData);
     if (props.songData) {
       return <SongsTable songData={props.songData} />;
     } else {
       return <SongsTable songData={{}} />;
     }
-  }
+  }*/
 
   function AddSong() {
-    const [song, setSong] = useState('');
+    const [song, setSong] = useState("");
 
     const handleInputChange = (event) => {
-        setSong(event.target.value);
+      setSong(event.target.value);
     };
 
     const handleAddSong = () => {
@@ -70,33 +92,42 @@ function Playlist() {
               });
         })
         .catch((error) => {
-            console.error('Error:', error);
+          console.error("Error:", error);
         });
-    
-        setSong('');
+
+      setSong("");
     };
 
     return (
-        <div className="pl-add-song">
-            <input 
-                placeholder="Song" 
-                className="pl-song-input"
-                value={song}
-                onChange={handleInputChange}
-            />
-            <button onClick={handleAddSong} className="pl-song-button">Add Song</button>
-        </div>
+      <div className="pl-add-song">
+        <input
+          placeholder="Song"
+          className="pl-song-input"
+          value={song}
+          onChange={handleInputChange}
+        />
+        <button onClick={handleAddSong} className="pl-song-button">
+          Add Song
+        </button>
+      </div>
     );
-
-    
   }
+
+  const toggleComments = () => {
+    setShowComments(!showComments);
+  };
 
   return (
     <div className="playlist">
+      
       <div className="pl-top">
         <div className="pl-image">
           <img
-            src={playlist.cover ? playlist.cover : "https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTEyL2xyL21vbnoxNzU2NjItaW1hZ2UuanBn.jpg"}
+            src={
+              playlist.cover
+                ? playlist.cover
+                : "https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTEyL2xyL21vbnoxNzU2NjItaW1hZ2UuanBn.jpg"
+            }
             alt="Playlist Image"
           />
         </div>
@@ -105,17 +136,40 @@ function Playlist() {
           <div className="pl-desc">{playlist["description"]}</div>
           <div className="pl-toolbar">
             <div className="pl-buttons">
-                    Like
-                    Dislike
-                    Comment
-                </div>
+              <button onClick={handleLike}>
+                Likes: {likes}
+              </button> 
+              <button onClick={handleDislike}>
+                Dislikes: {dislikes}
+              </button> 
+              <button
+                onClick={toggleComments}
+                style={{ cursor: "pointer" }}>
+                Comments
+                </button>
+              
+              <button onClick={toggleEdit} className="pl-edit-button">
+                Edit Playlist
+              </button>{" "}
+              {/* Edit Playlist button */}
+            </div>
           </div>
-            <AddSong/>
+          <AddSong />
         </div>
+        {showEdit && (
+          <EditPlaylist
+            playlist={playlist}
+            onClose={() => setShowEdit(false)}
+          />
+        )}
       </div>
-     
+
       <div className="pl-table">
-        <PlaylistSongs songData={playlist["songs"]} />
+        {showComments ? (
+          <Comments />
+        ) : (
+          <SongsTable songData={playlist["songs"]} />
+        )}
       </div>
     </div>
   );

@@ -15,7 +15,12 @@ mongoose
 function getAllPlaylists() {
   let promise;
   try {
-    promise = playlistModel.find().populate("songs");
+    promise = playlistModel
+      .find()
+      .populate("songs")
+      .populate("comments")
+      .exec();
+
     return promise;
   } catch (error) {
     throw new Error(`Error fetching playlists: ${error.message}`);
@@ -25,7 +30,11 @@ function getAllPlaylists() {
 function getPlaylistById(id) {
   let promise;
   try {
-    promise = playlistModel.findById(id).populate("songs");
+    promise = playlistModel
+      .findById(id)
+      .populate("songs")
+      .populate("comments")
+      .exec();
     return promise;
   } catch (error) {
     throw new Error(`Error fetching playlists: ${error.message}`);
