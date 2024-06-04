@@ -10,9 +10,11 @@ export function registerUser(req, res) {
         return res.status(400).send("Bad request: Invalid input data.");
     } 
     
-    if (creds.find((c) => c.username === username)) {
+    /*
+    if (userServices.findUserByName(username)) {
         return res.status(409).send("Username already taken");
     } 
+    */
     
     bcrypt
         .genSalt(10)
@@ -20,7 +22,6 @@ export function registerUser(req, res) {
         .then((hashedPassword) => {
             return generateAccessToken(username).then((token) => {
                 console.log("Token:", token);
-                creds.push({ username, hashedPassword });
                 return userServices.addUser({username: username, password: hashedPassword}).then((result) => {
                     res.status(201).send({ token: token, user: result });
                 });

@@ -56,7 +56,7 @@ function AppContent() {
       if (token !== INVALID_TOKEN) {
         checkAuthentication();
       }
-    }, token);
+    }, [token]);
 
   return (
     <>

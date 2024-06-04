@@ -48,7 +48,7 @@ function SignupForm(props) {
     }
   }
 
-  function submitForm() {
+  function submitForm(event) {
     event.preventDefault();
     props.handleSubmit(creds);
     setCreds({ username: "", password: "" });
@@ -104,3 +104,4 @@ export default function Signup() {
     </>
   );
 }
+
