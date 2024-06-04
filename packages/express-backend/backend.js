@@ -149,41 +149,40 @@ app.post("/playlists/:id/comments", async (req, res) => {
   try {
     const playlistId = req.params["id"];
     const commentInput = req.body;
-    
-    if(!commentInput) {
-      return res.status(500).send({ error: error.message}) ;
+
+    if (!commentInput) {
+      return res.status(500).send({ error: error.message });
     }
-    const playlist = await playlistServices.getPlaylistById(playlistId)
+    const playlist = await playlistServices.getPlaylistById(playlistId);
     if (!playlist) {
-      return res.status(500).send({ error: error.message});
+      return res.status(500).send({ error: error.message });
     }
- 
-   const newComment =  await commentsServices.createComment(commentInput);
-   await playlist.addComment(newComment._id);
-   res.status(201).send(newComment);
+
+    const newComment = await commentsServices.createComment(commentInput);
+    await playlist.addComment(newComment._id);
+    res.status(201).send(newComment);
   } catch (error) {
     console.error(error);
-    res.status(500).send("Error fetching playlists")
+    res.status(500).send("Error fetching playlists");
   }
- });
- 
- app.post("/playlists/:id/likes", async (req, res) => {
+});
+
+app.post("/playlists/:id/likes", async (req, res) => {
   try {
     const playlistId = req.params["id"];
     const userId = req.body.userId;
-    
-    const playlist = await playlistServices.getPlaylistById(playlistId)
+
+    const playlist = await playlistServices.getPlaylistById(playlistId);
     if (!playlist) {
-      return res.status(500).send({ error: error.message});
+      return res.status(500).send({ error: error.message });
     }
-    
+
     await playlist.addLike(userId);
 
     res.status(200).send("Playlist liked successfully");
-
   } catch (error) {
     console.error(error);
-    res.status(500).send("Error fetching playlists")
+    res.status(500).send("Error fetching playlists");
   }
 });
 
@@ -191,19 +190,18 @@ app.post("/playlists/:id/dislikes", async (req, res) => {
   try {
     const playlistId = req.params["id"];
     const userId = req.body.userId;
-    
-    const playlist = await playlistServices.getPlaylistById(playlistId)
+
+    const playlist = await playlistServices.getPlaylistById(playlistId);
     if (!playlist) {
-      return res.status(500).send({ error: error.message});
+      return res.status(500).send({ error: error.message });
     }
-    
+
     await playlist.addDislike(userId);
 
     res.status(200).send("Playlist disliked successfully");
-
   } catch (error) {
     console.error(error);
-    res.status(500).send("Error fetching playlists")
+    res.status(500).send("Error fetching playlists");
   }
 });
 
@@ -214,7 +212,7 @@ app.put("/playlists/:id", async (req, res) => {
 
     const playlist = await playlistServices.getPlaylistById(playlistId);
     if (!playlist) {
-      return res.status(500).send({ error: error.message});
+      return res.status(500).send({ error: error.message });
     }
 
     await playlist.editPlaylist(newDetails);

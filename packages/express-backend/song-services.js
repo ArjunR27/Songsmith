@@ -16,7 +16,6 @@ mongoose
     // Read JSON file
     //const jsonData = fs.readFileSync("./songs.json");
     //const songsData = JSON.parse(jsonData);
-
     // Iterate over each song data
     /*for (const songData of songsData) {
         try {
