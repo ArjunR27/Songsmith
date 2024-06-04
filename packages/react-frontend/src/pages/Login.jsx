@@ -57,15 +57,18 @@ function LoginForm(props) {
   }
 }
 
+LoginForm.propTypes = {
+  handleSubmit: PropTypes.func.isRequired,
+};
+
 function LoginPage(props) {
-  //const [token, setToken] = useState(INVALID_TOKEN);
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
-  const API_PREFIX = "http://localhost:8000";
-
-  console.log(message);
+  const API_PREFIX = "https://songsmith.azurewebsites.net";
 
   function loginUser(creds) {
+    console.log(message);
+
     fetch(`${API_PREFIX}/login`, {
       method: "POST",
       headers: {
@@ -112,6 +115,3 @@ LoginPage.propTypes = {
   setToken: PropTypes.func.isRequired,
 };
 
-LoginForm.propTypes = {
-  handleSubmit: PropTypes.func.isRequired,
-};
