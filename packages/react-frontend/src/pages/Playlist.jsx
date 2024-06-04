@@ -166,7 +166,7 @@ function Playlist() {
 
       <div className="pl-table">
         {showComments ? (
-          <Comments />
+          <Comments comments = {playlist["comments"]}/>
         ) : (
           <SongsTable songData={playlist["songs"]} />
         )}

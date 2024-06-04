@@ -24,14 +24,4 @@ function createComment(comment) {
   }
 }
 
-function getAllCommentsByPlaylistId(playlistId) {
-  let promise;
-  try {
-    promise = playlistModel.find().populate("comments").exec();
-    return promise;
-  } catch (error) {
-    throw new Error(`Error fetching playlists: ${error.message}`);
-  }
-}
-
-export default { createComment, getAllCommentsByPlaylistId };
+export default { createComment };
