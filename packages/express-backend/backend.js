@@ -5,6 +5,7 @@ import cors from "cors";
 import songServices from "./song-services.js";
 import playlistServices from "./playlist-services.js";
 import userServices from "./user-services.js";
+import commentsServices from "./comments-services.js";
 import { registerUser, loginUser, authenticateUser } from "./auth.js";
 
 dotenv.config();
@@ -87,6 +88,22 @@ app.get("/playlists/:id", async (req, res) => {
   }
 });
 
+/*app.get("/playlists/:id/comments", async (req, res) => {
+  try {
+    const playlistId = req.params["id"];
+    const result = await commentsServices.getAllCommentsByPlaylistId(playlistId);
+    if (result == undefined || result == null)
+      res.status(404).send("Resource not found");
+    else {
+      res.send({ comments_list: result });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error fetching playlists");
+  }
+  
+});*/
+
 app.post("/playlists/:id", async (req, res) => {
   try {
     const playlistId = req.params["id"];
@@ -125,5 +142,85 @@ app.post("/playlists", async (req, res) => {
     if (result) res.status(201).send(result);
   } catch (error) {
     res.status(500).send({ error: error.mesage });
+  }
+});
+
+app.post("/playlists/:id/comments", async (req, res) => {
+  try {
+    const playlistId = req.params["id"];
+    const commentInput = req.body;
+    
+    if(!commentInput) {
+      return res.status(500).send({ error: error.message}) ;
+    }
+    const playlist = await playlistServices.getPlaylistById(playlistId)
+    if (!playlist) {
+      return res.status(500).send({ error: error.message});
+    }
+ 
+   const newComment =  await commentsServices.createComment(commentInput);
+   await playlist.addComment(newComment._id);
+   res.status(201).send(newComment);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error fetching playlists")
+  }
+ });
+ 
+ app.post("/playlists/:id/likes", async (req, res) => {
+  try {
+    const playlistId = req.params["id"];
+    const userId = req.body.userId;
+    
+    const playlist = await playlistServices.getPlaylistById(playlistId)
+    if (!playlist) {
+      return res.status(500).send({ error: error.message});
+    }
+    
+    await playlist.addLike(userId);
+
+    res.status(200).send("Playlist liked successfully");
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error fetching playlists")
+  }
+});
+
+app.post("/playlists/:id/dislikes", async (req, res) => {
+  try {
+    const playlistId = req.params["id"];
+    const userId = req.body.userId;
+    
+    const playlist = await playlistServices.getPlaylistById(playlistId)
+    if (!playlist) {
+      return res.status(500).send({ error: error.message});
+    }
+    
+    await playlist.addDislike(userId);
+
+    res.status(200).send("Playlist disliked successfully");
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error fetching playlists")
+  }
+});
+
+app.put("/playlists/:id", async (req, res) => {
+  try {
+    const playlistId = req.params["id"];
+    const newDetails = req.body;
+
+    const playlist = await playlistServices.getPlaylistById(playlistId);
+    if (!playlist) {
+      return res.status(500).send({ error: error.message});
+    }
+
+    await playlist.editPlaylist(newDetails);
+    res.send("Playlist updated");
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error fetching playlists");
   }
 });
