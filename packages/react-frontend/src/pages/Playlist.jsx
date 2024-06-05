@@ -47,13 +47,13 @@ function Playlist() {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ userId: "6658efd0fec8498cec5f9380" }),
+            body: JSON.stringify({ user: "6658efd0fec8498cec5f9380" }),
         });
         if (response.ok) {
           setLikes(likes + 1);
         } else {
           console.error('Failed to like playlist');
-        }
+        } 
       } catch (error) {
         console.error('Error liking playlist:', error);
       }
