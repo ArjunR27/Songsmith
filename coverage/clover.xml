@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1717615705478" clover="3.2.0">
-  <project timestamp="1717615705478" name="All files">
+<coverage generated="1717619001922" clover="3.2.0">
+  <project timestamp="1717619001922" name="All files">
     <metrics statements="99" coveredstatements="48" conditionals="26" coveredconditionals="10" methods="22" coveredmethods="11" elements="147" coveredelements="69" complexity="0" loc="99" ncloc="99" packages="1" files="6" classes="6"/>
     <file name="comments.js" path="/Users/arjunranade/CSC-307/Songsmith/packages/express-backend/comments.js">
       <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
