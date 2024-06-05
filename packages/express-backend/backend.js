@@ -211,7 +211,7 @@ app.post("/playlists/:id/likes", async (req, res) => {
 
     await playlist.addLike(userId);
 
-    res.status(200).send({message: "Playlist liked/unliked successfully"});
+    res.status(200).send(playlist.likes);
   } catch (error) {
     console.error(error);
     res.status(500).send("Error fetching playlists");

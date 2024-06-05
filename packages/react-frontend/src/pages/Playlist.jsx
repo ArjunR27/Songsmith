@@ -14,14 +14,14 @@ function Playlist() {
   const path = location.pathname.split("/")[2];
   const [playlist, setPlaylist] = useState([]);
   const [showComments, setShowComments] = useState(false);
-  const [likes, setLikes] = useState(0);
-  const [dislikes, setDislikes] = useState(0);
+  const [likesCount, setLikesCount] = useState(0);
+  const [dislikesCount, setDislikesCount] = useState(0);
   const [showEdit, setShowEdit] = useState(false);
 
-
+  
 
   const fetchPlaylist = useCallback(() => {
-    return fetch("https://songsmith.azurewebsites.net/playlists/" + path);
+    return fetch("http://localhost:8000/playlists/" + path);
   }, [path]);
 
   Playlist.propTypes = {
@@ -33,13 +33,14 @@ function Playlist() {
       .then((res) => res.json())
       .then((json) => {
         setPlaylist(json["playlist_list"]);
-        setLikes(json["playlist_list"].likes.length);
-        setDislikes(json["playlist_list"].dislikes.length);
+        setLikesCount(json["playlist_list"].likes.length);
+        setDislikesCount(json["playlist_list"].dislikes.length);
+        console.log("change likes");
       })
       .catch((error) => {
         console.log(error);
       });
-  }, [fetchPlaylist]);
+  }, [fetchPlaylist, likesCount]);
 
   
   const handleLike = async () => {
@@ -52,15 +53,24 @@ function Playlist() {
             body: JSON.stringify({ user: "6658efd0fec8498cec5f9380" }),
         });
         if (response.ok) {
-          const data = await response.json();
-          setLikes(data.likes.length);
+          const likeData = await response.json();
+          console.log(likeData);
+          if (likeData) {
+            setLikesCount(likeData);
+            setPlaylist((prevPlaylist) => ({
+              ...prevPlaylist,
+              likes: likeData
+            }));
+          } else {
+            console.error('Response does not contain likes:', data);
+          }
         } else {
           console.error('Failed to like playlist');
         } 
       } catch (error) {
         console.error('Error liking playlist:', error);
       }
-      window.location.reload();
+     // window.location.reload();
       
   };
 
@@ -75,14 +85,14 @@ function Playlist() {
         });
         if (response.ok) {
           const data = await response.json();
-          setDislikes(data.dislikes.length);
+          setDislikesCount(data.dislikes.length);
         } else {
           console.error('Failed to dislike playlist');
         } 
       } catch (error) {
         console.error('Error disliking playlist:', error);
       }
-      window.location.reload();
+     // window.location.reload();
       
   };
 
@@ -167,10 +177,10 @@ function Playlist() {
           <div className="pl-toolbar">
             <div className="pl-buttons">
               <button onClick={handleLike}>
-                Likes: {likes}
+                Likes: {likesCount}
               </button> 
               <button onClick={handleDislike}>
-                Dislikes: {dislikes}
+                Dislikes: {dislikesCount}
               </button> 
               <button
                 onClick={toggleComments}
