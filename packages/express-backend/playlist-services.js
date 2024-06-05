@@ -19,6 +19,8 @@ function getAllPlaylists() {
       .find()
       .populate("songs")
       .populate("comments")
+      .populate("likes")
+      .populate("dislikes")
       .exec();
 
     return promise;
@@ -34,6 +36,8 @@ function getPlaylistById(id) {
       .findById(id)
       .populate("songs")
       .populate("comments")
+      .populate("likes")
+      .populate("dislikes")
       .exec();
     return promise;
   } catch (error) {

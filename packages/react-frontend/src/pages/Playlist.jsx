@@ -13,8 +13,8 @@ function Playlist({userId}) {
   const path = location.pathname.split("/")[2];
   const [playlist, setPlaylist] = useState({});
   const [showComments, setShowComments] = useState(false);
-  const [likes, setLikes] = useState(0);
-  const [dislikes, setDislikes] = useState(0);
+  const [likesCount, setLikesCount] = useState(0);
+  const [dislikesCount, setDislikesCount] = useState(0);
   const [showEdit, setShowEdit] = useState(false);
   const [authorUsername, setAuthorUsername] = useState("");
 
@@ -23,6 +23,9 @@ function Playlist({userId}) {
       .then((res) => res.json())
       .then((json) => {
         setPlaylist(json["playlist_list"]);
+        setLikesCount(json["playlist_list"].likes.length);
+        setDislikesCount(json["playlist_list"].dislikes.length);
+        console.log("change likes");
         return json["playlist_list"];
       });
   }, [path]);
@@ -52,19 +55,66 @@ function Playlist({userId}) {
       .catch((error) => {
         console.error("Error:", error);
       });
-  }, [fetchPlaylist]);
+  }, [fetchPlaylist, likesCount]);
 
-  const handleLike = () => {
-    setLikes(likes + 1);
+  const handleLike = async () => {
+    try{
+      const response = await fetch('http://localhost:8000/playlists/' + path + "/likes",{
+        method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ user: "6658efd0fec8498cec5f9380" }),
+        });
+        if (response.ok) {
+          const likeData = await response.json();
+          console.log(likeData);
+          if (likeData) {
+            setLikesCount(likeData);
+            setPlaylist((prevPlaylist) => ({
+              ...prevPlaylist,
+              likes: likeData
+            }));
+          } else {
+            console.error('Response does not contain likes:', data);
+          }
+        } else {
+          console.error('Failed to like playlist');
+        } 
+      } catch (error) {
+        console.error('Error liking playlist:', error);
+      }
+     // window.location.reload();
+      
   };
 
-  const handleDislike = () => {
-    setDislikes(dislikes + 1);
+  const handleDislike = async () => {
+    try{
+      const response = await fetch('http://localhost:8000/playlists/' + path + "/dislikes",{
+        method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ user: "6658efd0fec8498cec5f9380" }),
+        });
+        if (response.ok) {
+          const data = await response.json();
+          setDislikesCount(data.dislikes.length);
+        } else {
+          console.error('Failed to dislike playlist');
+        } 
+      } catch (error) {
+        console.error('Error disliking playlist:', error);
+      }
+     // window.location.reload();
+      
   };
 
   const toggleEdit = () => {
     setShowEdit(!showEdit);
   };
+
+ 
 
   function AddSong() {
     const [song, setSong] = useState("");
@@ -141,10 +191,10 @@ function Playlist({userId}) {
           <div className="pl-toolbar">
             <div className="pl-buttons">
               <button onClick={handleLike}>
-                Likes: {likes}
+                Likes: {likesCount}
               </button>
               <button onClick={handleDislike}>
-                Dislikes: {dislikes}
+                Dislikes: {dislikesCount}
               </button>
               <button
                 onClick={toggleComments}
