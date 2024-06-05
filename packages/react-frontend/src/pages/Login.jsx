@@ -64,7 +64,7 @@ LoginForm.propTypes = {
 function LoginPage(props) {
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
-  const API_PREFIX = "https://songsmith.azurewebsites.net";
+  const API_PREFIX = "http://localhost:8000";
 
   function loginUser(creds) {
     console.log(message);
