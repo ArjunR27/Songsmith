@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import "./SideBar.css"; // Import CSS for styling
 import { Link } from "react-router-dom";
 
@@ -17,9 +16,5 @@ function Sidebar() {
   )
 }
 
-// Add PropTypes validation
-Sidebar.propTypes = {
-  isOpen: PropTypes.bool.isRequired,
-};
 
 export default Sidebar;

@@ -18,6 +18,9 @@ function AppContent() {
 
   const INVALID_TOKEN = "INVALID_TOKEN";
   const [token, setToken] = useState(localStorage.getItem("authToken") || INVALID_TOKEN);
+  const [username, setUsername] = useState(localStorage.getItem("username") || "INVALID_USER");
+  const [userId, setUserId] = useState(localStorage.getItem("userId") || "INVALID_USER");
+
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const API_PREFIX = "https://songsmith.azurewebsites.net";
   
@@ -51,7 +54,6 @@ function AppContent() {
         }
       }
 
-
       if (token !== INVALID_TOKEN) {
         checkAuthentication();
       }
@@ -60,14 +62,14 @@ function AppContent() {
   return (
     <>
       {!hideSidebar && <Sidebar />}
-      <Header isAuthenticated={isAuthenticated}/>
+      <Header isAuthenticated={isAuthenticated} userId={userId}/>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login isAuthenticated={isAuthenticated} setToken={setToken}/>} />
+        <Route path="/login" element={<Login isAuthenticated={isAuthenticated} setToken={setToken} setUserId={setUserId}/>} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/playlists" element={<Playlists />} />
-        <Route path="/playlists/:id" element={<Playlist />} />
-        <Route path="/createPlaylist" element={<CreatePlaylist />} />
+        <Route path="/playlists/:id" element={<Playlist userId={userId}/>} />
+        <Route path="/createPlaylist" element={<CreatePlaylist userId={userId}/>} />
         <Route path="/songs" element={<Songs />} />
         <Route path="/createSong" element={<CreateSong />} />
       </Routes>

@@ -19,6 +19,13 @@ const playlistSchema = new mongoose.Schema(
       type: String,
       trim: true,
     },
+
+    author: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: "User",
+    },
+
     songs: [
       {
         type: mongoose.Schema.Types.ObjectId,

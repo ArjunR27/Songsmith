@@ -1,19 +1,45 @@
 import "./Header.css";
 import { Link } from "react-router-dom";
 import PropTypes from 'prop-types';
+import {useState, useEffect} from "react";
 
 const INVALID_TOKEN = "INVALID_TOKEN";
 
 function Header(props) {
+  const [username, setUsername] = useState("");
+
   const logoutUser = () => { 
     localStorage.setItem("authToken", INVALID_TOKEN);
     window.location.href = "/";
   }
 
+  useEffect(()=> {
+    fetch("http://localhost:8000/users/" + props.userId, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Failed to add playlist");
+          }
+          return response.json();
+        })
+        .then((user) => {
+          setUsername(user["username"]);
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+    });
+  })
+
+
   function HeaderRight(props) {
     if (props.isAuthenticated)
       return (
         <div className="right-container">
+            <div className="welcome">Welcome, {username}!</div>
             <button onClick={logoutUser}>Logout</button>
         </div>
       );
@@ -39,7 +65,7 @@ function Header(props) {
           <div className="line"></div>
         </button>
       </div>
-      <HeaderRight isAuthenticated={props.isAuthenticated}/>
+      <HeaderRight isAuthenticated={props.isAuthenticated} username={props.username}/>
       
     </header>
   );
@@ -50,5 +76,6 @@ function Header(props) {
 export default Header;
 
 Header.propTypes = {
-  isAuthenticated: PropTypes.bool.isRequired
+  isAuthenticated: PropTypes.bool.isRequired,
+  userId: PropTypes.string.isRequired
 };

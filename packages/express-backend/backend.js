@@ -52,7 +52,7 @@ app.get("/users/:id", async (req, res) => {
   if (result === undefined || result === null)
     res.status(404).send("Resource not found");
   else {
-    res.send({ users_list: result });
+    res.send({username : result["username"]});
   }
 });
 

@@ -2,12 +2,12 @@ import { useState } from "react";
 import "./CreatePlaylist.css"
 
 
-function CreatePlaylist() {
-  
+function CreatePlaylist(props) {
   const [playlistData, setPlaylistData] = useState({
     playlist_name: "",
     description: "",
     cover: "",
+    author: props.userId,
   });
   
   const handleInputChange = (event) => {
@@ -18,11 +18,13 @@ function CreatePlaylist() {
     });
   };
 
+  
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(playlistData);
+    console.log(props.userId);
 
-    fetch("https://songsmith.azurewebsites.net/playlists", {
+    fetch("http://localhost:8000/playlists", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -77,7 +79,6 @@ function CreatePlaylist() {
             name="cover"
             value={playlistData.cover}
             onChange={handleInputChange}
-            required
           />
         </div>
         <button type="submit">Create Playlist</button>

@@ -88,7 +88,7 @@ function EditPlaylist({ playlist, onClose }) {
 
 EditPlaylist.propTypes = {
   playlist: PropTypes.shape({
-    id: PropTypes.string.isRequired,
+    _id: PropTypes.string.isRequired,
     playlist_name: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     cover: PropTypes.string.isRequired,

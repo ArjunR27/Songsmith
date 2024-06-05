@@ -64,7 +64,7 @@ LoginForm.propTypes = {
 function LoginPage(props) {
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
-  const API_PREFIX = "https://songsmith.azurewebsites.net";
+  const API_PREFIX = "http://localhost:8000";
 
   function loginUser(creds) {
     console.log(message);
@@ -79,11 +79,17 @@ function LoginPage(props) {
       .then((response) => {
         if (response.status === 200) {
           response.json().then((payload) => {
-            console.log(payload);
-            localStorage.setItem("authToken", payload.token); // Store token in localStorage
-            props.setToken(payload.token);
-            setMessage("Login successful; auth token saved");
-            navigate("/songs");
+            const { token, username, userId } = payload; 
+            if (token && userId) {
+              localStorage.setItem("authToken", token);
+              localStorage.setItem("userId", userId);
+              props.setToken(token);
+              props.setUserId(userId);
+              setMessage("Login successful; auth token saved");
+              navigate("/songs");
+            } else {
+              throw new Error("Invalid response data"); 
+            }
           });
         } else {
           response.text().then((text) => {

@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback} from "react";
+import { useState, useEffect, useCallback } from "react";
 import "./Playlist.css";
 import { useLocation } from "react-router-dom";
 import SongsTable from "../components/SongsTable";
@@ -8,39 +8,52 @@ import PropTypes from 'prop-types'; // Import PropTypes
 import EditPlaylist from "../components/EditPlaylist"
 import Comments from "../components/Comments"
 
-
-function Playlist() {
+function Playlist({userId}) {
   const location = useLocation();
   const path = location.pathname.split("/")[2];
-  const [playlist, setPlaylist] = useState([]);
+  const [playlist, setPlaylist] = useState({});
   const [showComments, setShowComments] = useState(false);
   const [likes, setLikes] = useState(0);
   const [dislikes, setDislikes] = useState(0);
   const [showEdit, setShowEdit] = useState(false);
-
-
-  
+  const [authorUsername, setAuthorUsername] = useState("");
 
   const fetchPlaylist = useCallback(() => {
-    return fetch("https://songsmith.azurewebsites.net/playlists/" + path);
-  }, [path]);
-
-  Playlist.propTypes = {
-    songData: PropTypes.array // Update the prop type as per your data structure
-  };
-
-  useEffect(() => {
-    fetchPlaylist()
+    return fetch("https://songsmith.azurewebsites.net/playlists/" + path)
       .then((res) => res.json())
       .then((json) => {
         setPlaylist(json["playlist_list"]);
+        return json["playlist_list"];
+      });
+  }, [path]);
+
+  useEffect(() => {
+    fetchPlaylist()
+      .then((playlistData) => {
+        if (playlistData && playlistData["author"]) {
+          return fetch("http://localhost:8000/users/" + playlistData["author"], {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          });
+        }
+        return Promise.reject("No author found");
+      })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Failed to fetch user");
+        }
+        return response.json();
+      })
+      .then((user) => {
+        setAuthorUsername(user["username"]);
       })
       .catch((error) => {
-        console.log(error);
+        console.error("Error:", error);
       });
   }, [fetchPlaylist]);
 
-  
   const handleLike = () => {
     setLikes(likes + 1);
   };
@@ -53,15 +66,6 @@ function Playlist() {
     setShowEdit(!showEdit);
   };
 
-  /*function PlaylistSongs(props) {
-    console.log(props.songData);
-    if (props.songData) {
-      return <SongsTable songData={props.songData} />;
-    } else {
-      return <SongsTable songData={{}} />;
-    }
-  }*/
-
   function AddSong() {
     const [song, setSong] = useState("");
 
@@ -70,26 +74,26 @@ function Playlist() {
     };
 
     const handleAddSong = () => {
-        console.log('Adding song:', song);
-        
-        fetch("https://songsmith.azurewebsites.net/playlists/" + path, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ name: song }),
-        })
+      console.log('Adding song:', song);
+
+      fetch("https://songsmith.azurewebsites.net/playlists/" + path, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name: song }),
+      })
         .then(response => response.json())
         .then(data => {
-            console.log('Success:', data);
-            fetchPlaylist()
-              .then(res => res.json())
-              .then(json => {
-                setPlaylist(json["playlist_list"]);
-              })
-              .catch(error => {
-                console.log(error);
-              });
+          console.log('Success:', data);
+          fetchPlaylist()
+            .then(res => res.json())
+            .then(json => {
+              setPlaylist(json["playlist_list"]);
+            })
+            .catch(error => {
+              console.log(error);
+            });
         })
         .catch((error) => {
           console.error("Error:", error);
@@ -119,7 +123,6 @@ function Playlist() {
 
   return (
     <div className="playlist">
-      
       <div className="pl-top">
         <div className="pl-image">
           <img
@@ -133,28 +136,30 @@ function Playlist() {
         </div>
         <div className="pl-info">
           <div className="pl-name">{playlist["playlist_name"]}</div>
+          <div className="pl-author">{authorUsername}</div>
           <div className="pl-desc">{playlist["description"]}</div>
           <div className="pl-toolbar">
             <div className="pl-buttons">
               <button onClick={handleLike}>
                 Likes: {likes}
-              </button> 
+              </button>
               <button onClick={handleDislike}>
                 Dislikes: {dislikes}
-              </button> 
+              </button>
               <button
                 onClick={toggleComments}
                 style={{ cursor: "pointer" }}>
                 Comments
-                </button>
-              
-              <button onClick={toggleEdit} className="pl-edit-button">
+              </button>
+
+              {playlist["author"] === userId && 
+                <button onClick={toggleEdit} className="pl-edit-button">
                 Edit Playlist
-              </button>{" "}
-              {/* Edit Playlist button */}
+                </button>}
+              
             </div>
           </div>
-          <AddSong />
+          {playlist["author"] === userId && <AddSong />}
         </div>
         {showEdit && (
           <EditPlaylist
@@ -166,7 +171,7 @@ function Playlist() {
 
       <div className="pl-table">
         {showComments ? (
-          <Comments comments = {playlist["comments"]}/>
+          <Comments comments={playlist["comments"]} />
         ) : (
           <SongsTable songData={playlist["songs"]} />
         )}

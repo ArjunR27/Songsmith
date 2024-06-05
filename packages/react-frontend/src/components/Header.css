@@ -48,7 +48,7 @@
 }
 
 .right-container {
-  width: 120px;
+  width: 200px;
   height: 20px;
   display: flex;
   justify-content: flex-end;
@@ -66,4 +66,8 @@
   font: inherit; 
   cursor: pointer;
   margin-left: 20px;
+}
+
+.welcome {
+  color:#EBE6D5;
 }
