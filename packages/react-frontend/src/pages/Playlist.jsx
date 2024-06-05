@@ -19,7 +19,6 @@ function Playlist() {
   const [showEdit, setShowEdit] = useState(false);
 
 
-  
 
   const fetchPlaylist = useCallback(() => {
     return fetch("https://songsmith.azurewebsites.net/playlists/" + path);
@@ -41,8 +40,24 @@ function Playlist() {
   }, [fetchPlaylist]);
 
   
-  const handleLike = () => {
-    setLikes(likes + 1);
+  const handleLike = async () => {
+    try{
+      const response = await fetch('https://songsmith.azurewebsites.net/playlists/' + path + "/likes",{
+        method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ userId: "6658efd0fec8498cec5f9380" }),
+        });
+        if (response.ok) {
+          setLikes(likes + 1);
+        } else {
+          console.error('Failed to like playlist');
+        }
+      } catch (error) {
+        console.error('Error liking playlist:', error);
+      }
+      
   };
 
   const handleDislike = () => {
@@ -53,14 +68,7 @@ function Playlist() {
     setShowEdit(!showEdit);
   };
 
-  /*function PlaylistSongs(props) {
-    console.log(props.songData);
-    if (props.songData) {
-      return <SongsTable songData={props.songData} />;
-    } else {
-      return <SongsTable songData={{}} />;
-    }
-  }*/
+ 
 
   function AddSong() {
     const [song, setSong] = useState("");

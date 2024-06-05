@@ -35,7 +35,7 @@ const playlistSchema = new mongoose.Schema(
       {
         user: {
           type: mongoose.Schema.Types.ObjectId,
-          ref: "User",
+          ref: "User"
         },
       },
     ],
@@ -51,15 +51,16 @@ const playlistSchema = new mongoose.Schema(
   { collection: "playlist_list" },
 );
 
+
 playlistSchema.methods.addSong = async function (songId) {
   try {
-    // Look up the song by ID to ensure it exists
+    
     const song = await Song.findById(songId);
     if (!song) {
       throw new Error("Song not found");
     }
 
-    // Add the song to the playlist if it's not already in the list
+
     if (this.songs.some((s) => s.equals(songId))) {
       throw new Error("Song already exists in the playlist");
     }
@@ -84,25 +85,22 @@ playlistSchema.methods.addComment = async function (commentId) {
   }
 };
 
+
 playlistSchema.methods.addLike = async function (userId) {
   try {
-    const existingLikeIndex = this.likes.findIndex((like) =>
-      like._id.equals(userId),
-    );
-    const exisitingDislikeIndex = this.dislikes.findIndex((dislike) =>
-      dislike._id.equals(userId),
-    );
+    const existingLikeIndex = this.likes.findIndex(item => item && item._id && item._id.toString() === userId.toString());
+    const existingDislikeIndex = this.dislikes.findIndex(item => item && item._id && item._id.toString() === userId.toString());
+
     if (existingLikeIndex !== -1) {
-      // If the user has already liked the playlist, remove the like
       this.likes.splice(existingLikeIndex, 1);
-    } else if (exisitingDislikeIndex !== -1) {
-      this.dislikes.splice(existingLikeIndex, 1);
+    } else if (existingDislikeIndex !== -1) {
+      this.dislikes.splice(existingDislikeIndex, 1);
       this.likes.push(userId);
     } else {
       this.likes.push(userId);
     }
 
-    this.save();
+    await this.save();
 
     return this;
   } catch (error) {
@@ -110,16 +108,20 @@ playlistSchema.methods.addLike = async function (userId) {
   }
 };
 
+
+
+
+
 playlistSchema.methods.addDislike = async function (userId) {
   try {
     const existingDislikeIndex = this.dislikes.findIndex((dislike) =>
-      dislike._id.equals(userId),
+      dislike && dislike._id && dislike._id.equals(userId),
     );
     const existingLikeIndex = this.likes.findIndex((like) =>
-      like._id.equals(userId),
+      like && like._id && like._id.equals(userId),
     );
+
     if (existingDislikeIndex !== -1) {
-      // If the user has already liked the playlist, remove the like
       this.dislikes.splice(existingDislikeIndex, 1);
     } else if (existingLikeIndex !== -1) {
       this.likes.splice(existingLikeIndex, 1);
@@ -128,13 +130,14 @@ playlistSchema.methods.addDislike = async function (userId) {
       this.dislikes.push(userId);
     }
 
-    this.save();
+    await this.save();
 
     return this;
   } catch (error) {
     throw new Error(`Error adding dislike: ${error.message}`);
   }
 };
+
 
 playlistSchema.methods.editPlaylist = async function (newInfo) {
   try {

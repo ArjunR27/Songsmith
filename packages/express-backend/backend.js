@@ -106,6 +106,36 @@ app.get("/playlists/:id/comments", async (req, res) => {
   }
 });
 
+app.get("/playlists/:id/likes", async (req, res) => {
+  try {
+    const playlistId = req.params["id"];
+    const result = await playlistServices.getPlaylistById(playlistId);
+    if (result == undefined || result == null)
+      res.status(404).send("Resource not found");
+    else {
+      res.send({ like_list: result.likes });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error fetching playlists");
+  }
+});
+
+app.get("/playlists/:id/dislikes", async (req, res) => {
+  try {
+    const playlistId = req.params["id"];
+    const result = await playlistServices.getPlaylistById(playlistId);
+    if (result == undefined || result == null)
+      res.status(404).send("Resource not found");
+    else {
+      res.send({dislike_list: result.dislikes });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error fetching playlists");
+  }
+});
+
 app.post("/playlists/:id", async (req, res) => {
   try {
     const playlistId = req.params["id"];
@@ -172,7 +202,7 @@ app.post("/playlists/:id/comments", async (req, res) => {
 app.post("/playlists/:id/likes", async (req, res) => {
   try {
     const playlistId = req.params["id"];
-    const userId = req.body.userId;
+    const userId = req.body.user;
 
     const playlist = await playlistServices.getPlaylistById(playlistId);
     if (!playlist) {
@@ -191,7 +221,7 @@ app.post("/playlists/:id/likes", async (req, res) => {
 app.post("/playlists/:id/dislikes", async (req, res) => {
   try {
     const playlistId = req.params["id"];
-    const userId = req.body.userId;
+    const userId = req.body.user;
 
     const playlist = await playlistServices.getPlaylistById(playlistId);
     if (!playlist) {
@@ -206,6 +236,7 @@ app.post("/playlists/:id/dislikes", async (req, res) => {
     res.status(500).send("Error fetching playlists");
   }
 });
+
 
 app.put("/playlists/:id", async (req, res) => {
   try {
