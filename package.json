@@ -5,8 +5,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest --passWithNoTests",
-    "lintr": "npm run -w react-frontend lint", 
+    "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest",
+    "coverage": "cross-env NODE_OPTIONS=--experimental-vm-modules jest --coverage",
+    "lintr": "npm run -w react-frontend lint",
     "linte": "npm run -w express-backend lint",
     "dev": "npm run dev --prefix packages/react-frontend",
     "prettier": "npx prettier --write \"**/*.js\""

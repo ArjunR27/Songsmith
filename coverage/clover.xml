@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1717615705478" clover="3.2.0">
+  <project timestamp="1717615705478" name="All files">
+    <metrics statements="99" coveredstatements="48" conditionals="26" coveredconditionals="10" methods="22" coveredmethods="11" elements="147" coveredelements="69" complexity="0" loc="99" ncloc="99" packages="1" files="6" classes="6"/>
+    <file name="comments.js" path="/Users/arjunranade/CSC-307/Songsmith/packages/express-backend/comments.js">
+      <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <line num="5" count="1" type="stmt"/>
+      <line num="23" count="1" type="stmt"/>
+    </file>
+    <file name="playlist.js" path="/Users/arjunranade/CSC-307/Songsmith/packages/express-backend/playlist.js">
+      <metrics statements="58" coveredstatements="7" conditionals="16" coveredconditionals="0" methods="10" coveredmethods="0"/>
+      <line num="5" count="1" type="stmt"/>
+      <line num="54" count="1" type="stmt"/>
+      <line num="55" count="0" type="stmt"/>
+      <line num="57" count="0" type="stmt"/>
+      <line num="58" count="0" type="cond" truecount="0" falsecount="2"/>
+      <line num="59" count="0" type="stmt"/>
+      <line num="63" count="0" type="cond" truecount="0" falsecount="2"/>
+      <line num="64" count="0" type="stmt"/>
+      <line num="67" count="0" type="stmt"/>
+      <line num="68" count="0" type="stmt"/>
+      <line num="70" count="0" type="stmt"/>
+      <line num="72" count="0" type="stmt"/>
+      <line num="76" count="1" type="stmt"/>
+      <line num="77" count="0" type="stmt"/>
+      <line num="78" count="0" type="stmt"/>
+      <line num="79" count="0" type="stmt"/>
+      <line num="81" count="0" type="stmt"/>
+      <line num="83" count="0" type="stmt"/>
+      <line num="87" count="1" type="stmt"/>
+      <line num="88" count="0" type="stmt"/>
+      <line num="89" count="0" type="stmt"/>
+      <line num="90" count="0" type="stmt"/>
+      <line num="92" count="0" type="stmt"/>
+      <line num="93" count="0" type="stmt"/>
+      <line num="95" count="0" type="cond" truecount="0" falsecount="2"/>
+      <line num="97" count="0" type="stmt"/>
+      <line num="98" count="0" type="cond" truecount="0" falsecount="2"/>
+      <line num="99" count="0" type="stmt"/>
+      <line num="100" count="0" type="stmt"/>
+      <line num="102" count="0" type="stmt"/>
+      <line num="105" count="0" type="stmt"/>
+      <line num="107" count="0" type="stmt"/>
+      <line num="109" count="0" type="stmt"/>
+      <line num="113" count="1" type="stmt"/>
+      <line num="114" count="0" type="stmt"/>
+      <line num="115" count="0" type="stmt"/>
+      <line num="116" count="0" type="stmt"/>
+      <line num="118" count="0" type="stmt"/>
+      <line num="119" count="0" type="stmt"/>
+      <line num="121" count="0" type="cond" truecount="0" falsecount="2"/>
+      <line num="123" count="0" type="stmt"/>
+      <line num="124" count="0" type="cond" truecount="0" falsecount="2"/>
+      <line num="125" count="0" type="stmt"/>
+      <line num="126" count="0" type="stmt"/>
+      <line num="128" count="0" type="stmt"/>
+      <line num="131" count="0" type="stmt"/>
+      <line num="133" count="0" type="stmt"/>
+      <line num="135" count="0" type="stmt"/>
+      <line num="139" count="1" type="stmt"/>
+      <line num="140" count="0" type="stmt"/>
+      <line num="141" count="0" type="cond" truecount="0" falsecount="2"/>
+      <line num="142" count="0" type="stmt"/>
+      <line num="144" count="0" type="cond" truecount="0" falsecount="2"/>
+      <line num="145" count="0" type="stmt"/>
+      <line num="147" count="0" type="stmt"/>
+      <line num="148" count="0" type="stmt"/>
+      <line num="150" count="0" type="stmt"/>
+      <line num="154" count="1" type="stmt"/>
+    </file>
+    <file name="song-services.js" path="/Users/arjunranade/CSC-307/Songsmith/packages/express-backend/song-services.js">
+      <metrics statements="20" coveredstatements="20" conditionals="8" coveredconditionals="8" methods="6" coveredmethods="5"/>
+      <line num="6" count="1" type="stmt"/>
+      <line num="7" count="1" type="stmt"/>
+      <line num="10" count="1" type="stmt"/>
+      <line num="46" count="1" type="stmt"/>
+      <line num="50" count="11" type="stmt"/>
+      <line num="51" count="11" type="stmt"/>
+      <line num="52" count="11" type="stmt"/>
+      <line num="58" count="11" type="stmt"/>
+      <line num="65" count="11" type="stmt"/>
+      <line num="66" count="11" type="stmt"/>
+      <line num="67" count="10" type="stmt"/>
+      <line num="69" count="1" type="stmt"/>
+      <line num="74" count="2" type="stmt"/>
+      <line num="78" count="2" type="stmt"/>
+      <line num="83" count="3" type="cond" truecount="4" falsecount="0"/>
+      <line num="84" count="1" type="stmt"/>
+      <line num="85" count="2" type="cond" truecount="4" falsecount="0"/>
+      <line num="86" count="1" type="stmt"/>
+      <line num="88" count="1" type="stmt"/>
+      <line num="90" count="3" type="stmt"/>
+    </file>
+    <file name="song.js" path="/Users/arjunranade/CSC-307/Songsmith/packages/express-backend/song.js">
+      <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <line num="3" count="2" type="stmt"/>
+      <line num="37" count="2" type="stmt"/>
+    </file>
+    <file name="user-services.js" path="/Users/arjunranade/CSC-307/Songsmith/packages/express-backend/user-services.js">
+      <metrics statements="15" coveredstatements="15" conditionals="2" coveredconditionals="2" methods="6" coveredmethods="6"/>
+      <line num="5" count="1" type="stmt"/>
+      <line num="6" count="1" type="stmt"/>
+      <line num="7" count="1" type="stmt"/>
+      <line num="8" count="1" type="stmt"/>
+      <line num="13" count="1" type="stmt"/>
+      <line num="16" count="7" type="stmt"/>
+      <line num="17" count="7" type="stmt"/>
+      <line num="18" count="7" type="stmt"/>
+      <line num="22" count="1" type="stmt"/>
+      <line num="26" count="1" type="stmt"/>
+      <line num="31" count="2" type="cond" truecount="2" falsecount="0"/>
+      <line num="32" count="1" type="stmt"/>
+      <line num="34" count="1" type="stmt"/>
+      <line num="36" count="2" type="stmt"/>
+      <line num="40" count="1" type="stmt"/>
+    </file>
+    <file name="user.js" path="/Users/arjunranade/CSC-307/Songsmith/packages/express-backend/user.js">
+      <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <line num="3" count="1" type="stmt"/>
+      <line num="28" count="1" type="stmt"/>
+    </file>
+  </project>
+</coverage>
