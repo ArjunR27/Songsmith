@@ -67,7 +67,7 @@ function Comments({comments, userId}) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          userId: username, 
+          username: username, 
           comment: commentText,
         }),
       })
