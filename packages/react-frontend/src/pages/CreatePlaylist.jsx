@@ -1,15 +1,15 @@
 import { useState } from "react";
-import "./CreatePlaylist.css"
+import PropTypes from 'prop-types';
+import "./CreatePlaylist.css";
 
-
-function CreatePlaylist(props) {
+function CreatePlaylist({ userId }) {
   const [playlistData, setPlaylistData] = useState({
     playlist_name: "",
     description: "",
     cover: "",
-    author: props.userId,
+    author: userId,
   });
-  
+
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setPlaylistData({
@@ -18,13 +18,11 @@ function CreatePlaylist(props) {
     });
   };
 
-  
-
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(props.userId);
+    console.log(userId);
 
-    fetch("http://localhost:8000/playlists", {
+    fetch("https://songsmith.azurewebsites.net/playlists", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -51,7 +49,7 @@ function CreatePlaylist(props) {
       
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label htmlFor="name">Playlist Name</label>
+          <label htmlFor="playlist_name">Playlist Name</label>
           <input
             type="text"
             id="playlist_name"
@@ -72,7 +70,7 @@ function CreatePlaylist(props) {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="coverImage">Cover URL </label>
+          <label htmlFor="cover">Cover URL</label>
           <input
             type="text"
             id="cover"
@@ -86,5 +84,9 @@ function CreatePlaylist(props) {
     </div>
   );
 }
+
+CreatePlaylist.propTypes = {
+  userId: PropTypes.string.isRequired,
+};
 
 export default CreatePlaylist;

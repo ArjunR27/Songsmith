@@ -12,7 +12,7 @@ function Comments({comments, userId}) {
   const [username, setUsername] = useState("");
 
   useEffect(()=> {
-    fetch("http://localhost:8000/users/" + userId, {
+    fetch("https://songsmith.azurewebsites.net/users/" + userId, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -116,7 +116,8 @@ function Comments({comments, userId}) {
 
 
 Comments.propTypes = {
-  comments: PropTypes.array.isRequired
+  comments: PropTypes.array.isRequired,
+  userId: PropTypes.string.isRequired,
 };
 
 export default Comments;

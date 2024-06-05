@@ -78,7 +78,9 @@ export function loginUser(req, res) {
           if (matched) {
             generateAccessToken(username)
               .then((token) => {
-                return res.status(200).json({ token: token, userId: retrievedUser[0]["_id"] });
+                return res
+                  .status(200)
+                  .json({ token: token, userId: retrievedUser[0]["_id"] });
               })
               .catch((error) => {
                 console.error("Error generating token:", error);

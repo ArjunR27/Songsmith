@@ -40,7 +40,6 @@ function getPlaylistsForUser(id) {
   return userModel.findById(id).populate("playlists");
 }
 
-
 export default {
   getUsers,
   findUserById,

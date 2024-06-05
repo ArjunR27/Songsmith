@@ -52,7 +52,7 @@ app.get("/users/:id", async (req, res) => {
   if (result === undefined || result === null)
     res.status(404).send("Resource not found");
   else {
-    res.send({username : result["username"]});
+    res.send({ username: result["username"] });
   }
 });
 
@@ -128,7 +128,7 @@ app.get("/playlists/:id/dislikes", async (req, res) => {
     if (result == undefined || result == null)
       res.status(404).send("Resource not found");
     else {
-      res.send({dislike_list: result.dislikes });
+      res.send({ dislike_list: result.dislikes });
     }
   } catch (error) {
     console.error(error);
@@ -237,7 +237,6 @@ app.post("/playlists/:id/dislikes", async (req, res) => {
   }
 });
 
-
 app.put("/playlists/:id", async (req, res) => {
   try {
     const playlistId = req.params["id"];
@@ -249,7 +248,7 @@ app.put("/playlists/:id", async (req, res) => {
     }
 
     await playlist.editPlaylist(newDetails);
-    res.send({message: "Playlist updated", playlist});
+    res.send({ message: "Playlist updated", playlist });
   } catch (error) {
     console.error(error);
     res.status(500).send("Error fetching playlists");

@@ -1,6 +1,4 @@
 import mongoose from "mongoose";
-import User from "./user.js";
-import Playlist from "./playlist.js";
 
 const userSchema = new mongoose.Schema(
   {

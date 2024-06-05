@@ -18,7 +18,6 @@ function AppContent() {
 
   const INVALID_TOKEN = "INVALID_TOKEN";
   const [token, setToken] = useState(localStorage.getItem("authToken") || INVALID_TOKEN);
-  const [username, setUsername] = useState(localStorage.getItem("username") || "INVALID_USER");
   const [userId, setUserId] = useState(localStorage.getItem("userId") || "INVALID_USER");
 
   const [isAuthenticated, setIsAuthenticated] = useState(false);

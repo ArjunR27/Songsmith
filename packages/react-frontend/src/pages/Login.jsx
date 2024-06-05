@@ -64,7 +64,7 @@ LoginForm.propTypes = {
 function LoginPage(props) {
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
-  const API_PREFIX = "http://localhost:8000";
+  const API_PREFIX = "https://songsmith.azurewebsites.net";
 
   function loginUser(creds) {
     console.log(message);
@@ -79,7 +79,7 @@ function LoginPage(props) {
       .then((response) => {
         if (response.status === 200) {
           response.json().then((payload) => {
-            const { token, username, userId } = payload; 
+            const { token, userId } = payload; 
             if (token && userId) {
               localStorage.setItem("authToken", token);
               localStorage.setItem("userId", userId);
@@ -119,5 +119,6 @@ export default LoginPage;
 
 LoginPage.propTypes = {
   setToken: PropTypes.func.isRequired,
+  setUserId: PropTypes.func.isRequired,
 };
 

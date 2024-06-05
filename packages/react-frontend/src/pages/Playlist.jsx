@@ -2,9 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import "./Playlist.css";
 import { useLocation } from "react-router-dom";
 import SongsTable from "../components/SongsTable";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import {faThumbsUp, faThumbsDown,faComment} from "@fortawesome/free-solid-svg-icons";
-import PropTypes from 'prop-types'; // Import PropTypes
+import PropTypes from 'prop-types';
 import EditPlaylist from "../components/EditPlaylist"
 import Comments from "../components/Comments"
 
@@ -33,7 +31,7 @@ function Playlist({userId}) {
     fetchPlaylist()
       .then((playlistData) => {
         if (playlistData && playlistData["author"]) {
-          return fetch("http://localhost:8000/users/" + playlistData["author"], {
+          return fetch("https://songsmith.azurewebsites.net/users/" + playlistData["author"], {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
@@ -58,7 +56,7 @@ function Playlist({userId}) {
 
   const handleLike = async () => {
     try{
-      const response = await fetch('http://localhost:8000/playlists/' + path + "/likes",{
+      const response = await fetch('https://songsmith.azurewebsites.net/playlists/' + path + "/likes",{
         method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -74,7 +72,7 @@ function Playlist({userId}) {
               likes: likeData
             }));
           } else {
-            console.error('Response does not contain likes:', data);
+            console.error('Response does not contain likes:', likeData);
           }
         } else {
           console.error('Failed to like playlist');
@@ -88,7 +86,7 @@ function Playlist({userId}) {
 
   const handleDislike = async () => {
     try{
-      const response = await fetch('http://localhost:8000/playlists/' + path + "/dislikes",{
+      const response = await fetch('https://songsmith.azurewebsites.net/playlists/' + path + "/dislikes",{
         method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -106,7 +104,7 @@ function Playlist({userId}) {
               dislikes: dislikeData
             }));
           } else {
-            console.error('Response does not contain dislikes:', data);
+            console.error('Response does not contain dislikes:', dislikeData);
           }
         } else {
           console.error('Failed to dislike playlist');
@@ -235,5 +233,9 @@ function Playlist({userId}) {
     </div>
   );
 }
+
+Playlist.propTypes = {
+  userId: PropTypes.string.isRequired,
+};
 
 export default Playlist;

@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import "./EditPlaylist.css"; 
 import PropTypes from "prop-types";
-import { faWindowRestore } from "@fortawesome/free-solid-svg-icons";
 
 function EditPlaylist({ playlist, onClose }) {
   const [playlistTitle, setPlaylistTitle] = useState(playlist.playlist_name);
@@ -30,7 +29,7 @@ function EditPlaylist({ playlist, onClose }) {
   };
 
   const handleSubmit = () => {
-    fetch('http://localhost:8000/playlists/' + path, {
+    fetch('https://songsmith.azurewebsites.net/playlists/' + path, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
