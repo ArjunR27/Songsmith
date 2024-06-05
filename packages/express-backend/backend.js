@@ -249,7 +249,7 @@ app.put("/playlists/:id", async (req, res) => {
     }
 
     await playlist.editPlaylist(newDetails);
-    res.send("Playlist updated");
+    res.send({message: "Playlist updated", playlist});
   } catch (error) {
     console.error(error);
     res.status(500).send("Error fetching playlists");

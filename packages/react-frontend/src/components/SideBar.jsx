@@ -19,7 +19,7 @@ function Sidebar() {
 
 // Add PropTypes validation
 Sidebar.propTypes = {
-  isOpen: PropTypes.bool.isRequired,
+  isOpen: PropTypes.bool,
 };
 
 export default Sidebar;

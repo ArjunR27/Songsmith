@@ -147,6 +147,9 @@ playlistSchema.methods.editPlaylist = async function (newInfo) {
     if (newInfo.description) {
       this.description = newInfo.description;
     }
+    if (newInfo.cover) {
+      this.cover = newInfo.cover;
+    }
     await this.save();
     return this;
   } catch (error) {
