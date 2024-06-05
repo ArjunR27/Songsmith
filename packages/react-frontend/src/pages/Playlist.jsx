@@ -33,6 +33,8 @@ function Playlist() {
       .then((res) => res.json())
       .then((json) => {
         setPlaylist(json["playlist_list"]);
+        setLikes(json["playlist_list"].likes.length);
+        setDislikes(json["playlist_list"].dislikes.length);
       })
       .catch((error) => {
         console.log(error);
@@ -42,7 +44,7 @@ function Playlist() {
   
   const handleLike = async () => {
     try{
-      const response = await fetch('https://songsmith.azurewebsites.net/playlists/' + path + "/likes",{
+      const response = await fetch('http://localhost:8000/playlists/' + path + "/likes",{
         method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -50,18 +52,38 @@ function Playlist() {
             body: JSON.stringify({ user: "6658efd0fec8498cec5f9380" }),
         });
         if (response.ok) {
-          setLikes(likes + 1);
+          const data = await response.json();
+          setLikes(data.likes.length);
         } else {
           console.error('Failed to like playlist');
         } 
       } catch (error) {
         console.error('Error liking playlist:', error);
       }
+      window.location.reload();
       
   };
 
-  const handleDislike = () => {
-    setDislikes(dislikes + 1);
+  const handleDislike = async () => {
+    try{
+      const response = await fetch('http://localhost:8000/playlists/' + path + "/dislikes",{
+        method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ user: "6658efd0fec8498cec5f9380" }),
+        });
+        if (response.ok) {
+          const data = await response.json();
+          setDislikes(data.dislikes.length);
+        } else {
+          console.error('Failed to dislike playlist');
+        } 
+      } catch (error) {
+        console.error('Error disliking playlist:', error);
+      }
+      window.location.reload();
+      
   };
 
   const toggleEdit = () => {
