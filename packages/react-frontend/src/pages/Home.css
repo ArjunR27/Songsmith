@@ -1,7 +1,11 @@
 .home {
-  width: 100%;
-  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
+
 .blacksmith-bg {
   z-index: -1;
   box-sizing: border-box;
@@ -18,7 +22,7 @@
 }
 
 .songsmith-title {
-  margin-top: 42vh;
+  margin-top: 15vh;
   height: 10vh;
   z-index: 10;
 
@@ -38,7 +42,7 @@
 
 .songsmith-subtitle {
   margin-top: 5px;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 
   font-family: "League Spartan", sans-serif;
   font-style: normal;
@@ -51,10 +55,10 @@
 .login-button {
   box-sizing: border-box;
 
-  padding: 10px 50px;
+  padding: 14px 54px;
+  margin-bottom: 20px;
 
   background: #ebe6d5;
-  border: 4px solid #ebe6d5;
   border-radius: 40px;
 
   color: #5a585c;
@@ -64,3 +68,17 @@
   font-size: 20px;
   text-decoration: none;
 }
+
+.login-button:hover {
+  background-color: #f2d77d;
+  text-decoration: none;
+}
+.signup-button {
+  color: #ebe6d5;
+  text-decoration: none;
+}
+.signup-button:hover {
+  color: #87f5ff;
+  text-decoration: none;
+}
+

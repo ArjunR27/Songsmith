@@ -10,8 +10,11 @@ export default function Home() {
         <h2 className="songsmith-subtitle">
           Forge breathtaking collections of songs.
         </h2>
-        <Link className="login-button" to="/songs">
-          Start
+        <Link className="login-button" to="/login">
+          Log in
+        </Link>
+        <Link className="signup-button" to="/signup">
+          Not a member? Sign up!
         </Link>
       </div>
     </>

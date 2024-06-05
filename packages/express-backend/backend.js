@@ -21,13 +21,21 @@ app.get("/", (req, res) => {
 });
 
 app.listen(process.env.PORT || port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
+  console.log(`Example app listening at https://songsmith.azurewebsites.net`);
 });
 
 // Login and Register
 app.post("/signup", registerUser);
 
 app.post("/login", loginUser);
+
+app.get("/auth", authenticateUser, (req, res) => {
+  try {
+    res.status(200).json({ message: "User is authenticated" });
+  } catch (error) {
+    res.status(400).json({ message: "User cannot be authenticated" });
+  }
+});
 
 // Database
 app.post("/users", async (req, res) => {
@@ -46,11 +54,6 @@ app.get("/users/:id", async (req, res) => {
   else {
     res.send({ users_list: result });
   }
-});
-
-app.get("/users", async (req, res) => {
-  const users = await userServices.getUsers();
-  res.send({ user_list: users });
 });
 
 app.get("/songs", async (req, res) => {
@@ -88,21 +91,20 @@ app.get("/playlists/:id", async (req, res) => {
   }
 });
 
-/*app.get("/playlists/:id/comments", async (req, res) => {
+app.get("/playlists/:id/comments", async (req, res) => {
   try {
     const playlistId = req.params["id"];
-    const result = await commentsServices.getAllCommentsByPlaylistId(playlistId);
+    const result = await playlistServices.getPlaylistById(playlistId);
     if (result == undefined || result == null)
       res.status(404).send("Resource not found");
     else {
-      res.send({ comments_list: result });
+      res.send({ comment_list: result.comments });
     }
   } catch (error) {
     console.error(error);
     res.status(500).send("Error fetching playlists");
   }
-  
-});*/
+});
 
 app.post("/playlists/:id", async (req, res) => {
   try {
