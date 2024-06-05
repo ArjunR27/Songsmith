@@ -1,3 +1,4 @@
 /.env
 /packages/express-backend/.env
 /node_modules
+/packages/express-backed/coverage
