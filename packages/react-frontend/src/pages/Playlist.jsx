@@ -25,7 +25,6 @@ function Playlist({userId}) {
         setPlaylist(json["playlist_list"]);
         setLikesCount(json["playlist_list"].likes.length);
         setDislikesCount(json["playlist_list"].dislikes.length);
-        console.log("change likes");
         return json["playlist_list"];
       });
   }, [path]);
@@ -55,7 +54,7 @@ function Playlist({userId}) {
       .catch((error) => {
         console.error("Error:", error);
       });
-  }, [fetchPlaylist, likesCount]);
+  }, [fetchPlaylist, likesCount, dislikesCount]);
 
   const handleLike = async () => {
     try{
@@ -64,13 +63,12 @@ function Playlist({userId}) {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ user: "6658efd0fec8498cec5f9380" }),
+            body: JSON.stringify({ user: userId }),
         });
         if (response.ok) {
           const likeData = await response.json();
-          console.log(likeData);
           if (likeData) {
-            setLikesCount(likeData);
+            setLikesCount(likeData.length);
             setPlaylist((prevPlaylist) => ({
               ...prevPlaylist,
               likes: likeData
@@ -95,19 +93,27 @@ function Playlist({userId}) {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ user: "6658efd0fec8498cec5f9380" }),
+            body: JSON.stringify({ user: userId }),
         });
         if (response.ok) {
-          const data = await response.json();
-          setDislikesCount(data.dislikes.length);
+          const dislikeData = await response.json();
+          console.log(dislikeData)
+          console.log(dislikeData.length)
+          if (dislikeData) {
+            setDislikesCount(dislikeData.length);
+            setPlaylist((prevPlaylist) => ({
+              ...prevPlaylist,
+              dislikes: dislikeData
+            }));
+          } else {
+            console.error('Response does not contain dislikes:', data);
+          }
         } else {
           console.error('Failed to dislike playlist');
         } 
       } catch (error) {
         console.error('Error disliking playlist:', error);
       }
-     // window.location.reload();
-      
   };
 
   const toggleEdit = () => {
@@ -221,7 +227,7 @@ function Playlist({userId}) {
 
       <div className="pl-table">
         {showComments ? (
-          <Comments comments={playlist["comments"]} />
+          <Comments comments={playlist["comments"]} userId={userId} />
         ) : (
           <SongsTable songData={playlist["songs"]} />
         )}

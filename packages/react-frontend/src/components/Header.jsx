@@ -56,14 +56,12 @@ function Header(props) {
   return (
     <header className="header">
       <div className="left-container">
+          <Link to="/">
+            <img className="songsmith-icon" src="songsmith-icon.png" alt="" />
+          </Link>
         <div className="logo-container">
           <div className="logo kumar-one-font">Songsmith</div>
         </div>
-        <button className="menu-icon" aria-label="Menu" >
-          <div className="line"></div>
-          <div className="line"></div>
-          <div className="line"></div>
-        </button>
       </div>
       <HeaderRight isAuthenticated={props.isAuthenticated} username={props.username}/>
       

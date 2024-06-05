@@ -230,7 +230,7 @@ app.post("/playlists/:id/dislikes", async (req, res) => {
 
     await playlist.addDislike(userId);
 
-    res.status(200).send({message: "Playlist disliked successfully"});
+    res.status(200).send(playlist.dislikes);
   } catch (error) {
     console.error(error);
     res.status(500).send("Error fetching playlists");

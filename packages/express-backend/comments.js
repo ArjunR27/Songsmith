@@ -10,10 +10,9 @@ const userSchema = new mongoose.Schema(
       trim: true,
     },
     userId: {
-      //type: mongoose.Schema.Types.ObjectId,
-      //ref: "User",
-      type: String,
-      required: false,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
     },
   },
 
