@@ -3,7 +3,6 @@ import "./PlaylistBox.css";
 import { Link } from "react-router-dom";
 
 export default function PlaylistBox({ playlist }) {
-  console.log(playlist._id);
   return (
     <div>
       <div className="playlist-box">

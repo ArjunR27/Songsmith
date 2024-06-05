@@ -5,11 +5,33 @@ import PropTypes from "prop-types";
 import { useLocation } from "react-router-dom";
 
 
-function Comments({comments}) { 
+function Comments({comments, userId}) { 
   const [newComment, setNewComment] = useState("");
   console.log(comments)
   const [comms, setComms] = useState(comments);
-  
+  const [username, setUsername] = useState("");
+
+  useEffect(()=> {
+    fetch("https://songsmith.azurewebsites.net/users/" + userId, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Failed to add playlist");
+          }
+          return response.json();
+        })
+        .then((user) => {
+          setUsername(user["username"]);
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+    });
+  })
+
   
   const location = useLocation();
   const commentUrl = "https://songsmith.azurewebsites.net" + location.pathname + "/comments";
@@ -45,7 +67,7 @@ function Comments({comments}) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          userId: "Anonymous", 
+          userId: username, 
           comment: commentText,
         }),
       })
@@ -94,7 +116,8 @@ function Comments({comments}) {
 
 
 Comments.propTypes = {
-  comments: PropTypes.array.isRequired
+  comments: PropTypes.array.isRequired,
+  userId: PropTypes.string.isRequired,
 };
 
 export default Comments;

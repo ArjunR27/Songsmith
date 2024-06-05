@@ -78,7 +78,9 @@ export function loginUser(req, res) {
           if (matched) {
             generateAccessToken(username)
               .then((token) => {
-                return res.status(200).send({ token: token });
+                return res
+                  .status(200)
+                  .json({ token: token, userId: retrievedUser[0]["_id"] });
               })
               .catch((error) => {
                 console.error("Error generating token:", error);
@@ -87,7 +89,6 @@ export function loginUser(req, res) {
                   .send("Server error: Could not generate token.");
               });
           } else {
-            // invalid password
             return res.status(401).send("Unauthorized");
           }
         })

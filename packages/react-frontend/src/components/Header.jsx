@@ -1,20 +1,45 @@
 import "./Header.css";
 import { Link } from "react-router-dom";
 import PropTypes from 'prop-types';
+import { useState, useEffect } from "react";
 
 const INVALID_TOKEN = "INVALID_TOKEN";
 
-function Header(props) {
+function Header({ userId, isAuthenticated }) {
+  const [username, setUsername] = useState("");
+
   const logoutUser = () => { 
     localStorage.setItem("authToken", INVALID_TOKEN);
     window.location.href = "/";
-  }
+  };
 
-  function HeaderRight(props) {
-    if (props.isAuthenticated)
+  useEffect(() => {
+    fetch(`https://songsmith.azurewebsites.net/users/${userId}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Failed to fetch user");
+        }
+        return response.json();
+      })
+      .then((user) => {
+        setUsername(user.username);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  }, [userId]);
+
+  function HeaderRight({ isAuthenticated }) {
+    if (isAuthenticated)
       return (
         <div className="right-container">
-            <button onClick={logoutUser}>Logout</button>
+          <div className="welcome">Welcome, {username}!</div>
+          <button onClick={logoutUser}>Logout</button>
         </div>
       );
     else {
@@ -26,29 +51,29 @@ function Header(props) {
       );
     }
   }
-  
+
+  HeaderRight.propTypes = {
+    isAuthenticated: PropTypes.bool.isRequired,
+  };
+
   return (
     <header className="header">
       <div className="left-container">
+        <Link to="/">
+          <img className="songsmith-icon" src="songsmith-icon.png" alt="" />
+        </Link>
         <div className="logo-container">
           <div className="logo kumar-one-font">Songsmith</div>
         </div>
-        <button className="menu-icon" aria-label="Menu" >
-          <div className="line"></div>
-          <div className="line"></div>
-          <div className="line"></div>
-        </button>
       </div>
-      <HeaderRight isAuthenticated={props.isAuthenticated}/>
-      
+      <HeaderRight isAuthenticated={isAuthenticated} />
     </header>
   );
-  
-  
 }
 
-export default Header;
-
 Header.propTypes = {
-  isAuthenticated: PropTypes.bool.isRequired
+  isAuthenticated: PropTypes.bool.isRequired,
+  userId: PropTypes.string.isRequired,
 };
+
+export default Header;
