@@ -78,19 +78,18 @@ playlistSchema.methods.addSong = async function (songId) {
   }
 };
 
-playlistSchema.methods.deleteSong = async function(songId) {
+playlistSchema.methods.deleteSong = async function (songId) {
   try {
     const songIndex = this.songs.findIndex((s) => s.equals(songId));
-    if (songIndex === -1) 
-    {
+    if (songIndex === -1) {
       throw new Error("Song not found");
     }
     this.songs.splice(songIndex, 1);
     this.save();
 
     return this;
-  } catch(error) {
-    throw new Error(`Error deleting song: ${error.message}`); 
+  } catch (error) {
+    throw new Error(`Error deleting song: ${error.message}`);
   }
 };
 
