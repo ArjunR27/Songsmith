@@ -155,7 +155,35 @@ function Playlist({userId}) {
 
       setSong("");
     };
+    
+    const handleDeleteSong = () => {
+      console.log('Deleting song:', song);
 
+      fetch("https://songsmith.azurewebsites.net/playlists/" + path, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name: song }),
+      })
+        .then(response => response.json())
+        .then(data => {
+          console.log('Success:', data);
+          fetchPlaylist()
+            .then(res => res.json())
+            .then(json => {
+              setPlaylist(json["playlist_list"]);
+            })
+            .catch(error => {
+              console.log(error);
+            });
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+
+      setSong("");
+    };
     return (
       <div className="pl-add-song">
         <input
@@ -166,6 +194,9 @@ function Playlist({userId}) {
         />
         <button onClick={handleAddSong} className="pl-song-button">
           Add Song
+        </button>
+        <button onClick={handleDeleteSong} className="pl-song-button">
+          Delete Song
         </button>
       </div>
     );

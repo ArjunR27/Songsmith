@@ -152,6 +152,23 @@ app.post("/playlists/:id", async (req, res) => {
   }
 });
 
+app.delete("/playlists/:id", async (req, res) => {
+  try {
+    const playlistId = req.params["id"];
+    const songInput = req.body;
+
+    const result = await playlistServices.getPlaylistById(playlistId);
+
+    const song = await songServices.getSongs(songInput["name"]);
+    await result.deleteSong(song[0]["_id"]);
+    res.send(result);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error fetching playlists");
+  }
+});
+
+
 app.post("/songs", async (req, res) => {
   try {
     const songAddition = req.body;
