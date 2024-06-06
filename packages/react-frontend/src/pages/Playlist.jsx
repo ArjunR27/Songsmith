@@ -137,6 +137,7 @@ function Playlist({ userId }) {
         .then(response => response.json())
         .then(() => {
           fetchPlaylist()
+            .then(res => res.json())
             .then(json => {
               setPlaylist(json["playlist_list"]);
             })
