@@ -1,6 +1,6 @@
 import "./CreateSong.css";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import InputFields from "../components/inputFields";
 
 function CreateSong() {
@@ -9,7 +9,7 @@ function CreateSong() {
   const [album, setAlbum] = useState("");
   const [duration, setDuration] = useState(0);
   const [songImg, setImg] = useState("");
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -34,16 +34,12 @@ function CreateSong() {
         return response.json();
       })
       .then(() => {
-        setIsSubmitted(true);
+        navigate("/songs");
       })
       .catch((error) => {
         console.error("Error:", error);
       });
   };
-
-  if (isSubmitted) {
-    return <Link to="/songs">Go to Songs</Link>;
-  }
 
   return (
     <div className="page">
