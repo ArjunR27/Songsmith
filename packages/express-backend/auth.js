@@ -1,31 +1,33 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import userServices from "./user-services.js";
+
 export function registerUser(req, res) {
-  const { username, password } = req.body; // from form
+  const { username, password } = req.body;
 
   if (!username || !password) {
     return res.status(400).send("Bad request: Invalid input data.");
   }
 
-  /*
-    if (userServices.findUserByName(username)) {
+  userServices
+    .findUserByName(username)
+    .then((user) => {
+      if (user.length > 0) {
         return res.status(409).send("Username already taken");
-    } 
-    */
+      }
 
-  bcrypt
-    .genSalt(10)
-    .then((salt) => bcrypt.hash(password, salt))
-    .then((hashedPassword) => {
-      return generateAccessToken(username).then((token) => {
-        console.log("Token:", token);
-        return userServices
-          .addUser({ username: username, password: hashedPassword })
-          .then((result) => {
-            res.status(201).send({ token: token, user: result });
-          });
-      });
+      return bcrypt
+        .genSalt(10)
+        .then((salt) => bcrypt.hash(password, salt))
+        .then((hashedPassword) =>
+          generateAccessToken(username).then((token) => {
+            return userServices
+              .addUser({ username: username, password: hashedPassword })
+              .then((result) => {
+                res.status(201).send({ token: token, user: result });
+              });
+          }),
+        );
     })
     .catch((error) => {
       console.error(error);

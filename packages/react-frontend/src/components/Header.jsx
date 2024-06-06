@@ -14,7 +14,7 @@ function Header({ userId, isAuthenticated }) {
   };
 
   useEffect(() => {
-    fetch(`http://localhost:8000/playlists/users/${userId}`, {
+    fetch(`https://songsmith.azurewebsites.net/users/${userId}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

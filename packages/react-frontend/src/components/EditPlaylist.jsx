@@ -27,7 +27,7 @@ function EditPlaylist({ playlist, onClose, onUpdate }) {
   };
 
   const handleSubmit = () => {
-    fetch('http://localhost:8000/playlists/' + path, {
+    fetch('https://songsmith.azurewebsites.net/playlists/' + path, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

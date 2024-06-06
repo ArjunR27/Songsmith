@@ -10,11 +10,8 @@ function Comments({comments, userId}) {
   const [comms, setComms] = useState(comments);
   const [username, setUsername] = useState("");
 
-  console.log(comments);
-  console.log(username);
-
   useEffect(()=> {
-    fetch("http://localhost:8000/users/" + userId, {
+    fetch("https://songsmith.azurewebsites.net/users/" + userId, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -33,12 +30,11 @@ function Comments({comments, userId}) {
           setUsername("Anonymous");
           console.error("Error:", error);
     });
-  }, [username])
+  }, [username, setUsername, userId])
 
   
   const location = useLocation();
-  const commentUrl = "http://localhost:8000" + location.pathname + "/comments";
-  console.log(commentUrl);
+  const commentUrl = "https://songsmith.azurewebsites.net" + location.pathname + "/comments";
 
   const handleCommentChange = (event) => {
     setNewComment(event.target.value);
@@ -62,7 +58,6 @@ function Comments({comments, userId}) {
   }, [fetchComments]);
   
   const submitComment = async (commentText) => {
-    console.log(commentText)
     try {
       const response = await fetch(commentUrl, {
         method: "POST",

@@ -63,7 +63,7 @@ function AppContent() {
       {!hideSidebar && <Sidebar />}
       <Header isAuthenticated={isAuthenticated} userId={userId}/>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home isAuthenticated={isAuthenticated}/>} />
         <Route path="/login" element={<Login isAuthenticated={isAuthenticated} setToken={setToken} setUserId={setUserId}/>} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/playlists" element={<Playlists />} />

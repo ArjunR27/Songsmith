@@ -18,7 +18,7 @@ function Playlist({ userId }) {
   
 
   const fetchPlaylist = useCallback(() => {
-    return fetch(`http://localhost:8000/playlists/${path}`)
+    return fetch(`https://songsmith.azurewebsites.net/playlists/${path}`)
       .then((res) => res.json())
       .then((json) => {
         setPlaylist(json["playlist_list"]);
@@ -36,7 +36,7 @@ function Playlist({ userId }) {
     fetchPlaylist()
       .then((playlistData) => {
         if (playlistData && playlistData["author"]) {
-          return fetch(`http://localhost:8000/users/${playlistData["author"]}`, {
+          return fetch(`https://songsmith.azurewebsites.net/users/${playlistData["author"]}`, {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
@@ -61,7 +61,7 @@ function Playlist({ userId }) {
 
   const handleLike = async () => {
     try {
-      const response = await fetch(`http://localhost:8000/playlists/${path}/likes`, {
+      const response = await fetch(`https://songsmith.azurewebsites.net/playlists/${path}/likes`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -89,7 +89,7 @@ function Playlist({ userId }) {
 
   const handleDislike = async () => {
     try {
-      const response = await fetch(`http://localhost:8000/playlists/${path}/dislikes`, {
+      const response = await fetch(`https://songsmith.azurewebsites.net/playlists/${path}/dislikes`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -127,7 +127,7 @@ function Playlist({ userId }) {
     };
 
     const handleAddSong = () => {
-      fetch(`http://localhost:8000/playlists/${path}`, {
+      fetch(`https://songsmith.azurewebsites.net/playlists/${path}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -135,7 +135,7 @@ function Playlist({ userId }) {
         body: JSON.stringify({ name: song }),
       })
         .then(response => response.json())
-        .then(data => {
+        .then(() => {
           fetchPlaylist()
             .then(json => {
               setPlaylist(json["playlist_list"]);
@@ -168,10 +168,6 @@ function Playlist({ userId }) {
 
   const toggleComments = () => {
     setShowComments(!showComments);
-  };
-
-  const handleUpdatePlaylist = (updatedPlaylist) => {
-    setPlaylist(updatedPlaylist);
   };
 
   return (
