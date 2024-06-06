@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import PropTypes from 'prop-types';
 import "./CreatePlaylist.css";
 
@@ -11,7 +11,7 @@ function CreatePlaylist({ userId }) {
     author: userId,
   });
 
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const navigate = useNavigate();
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -38,16 +38,12 @@ function CreatePlaylist({ userId }) {
         return response.json();
       })
       .then(() => {
-        setIsSubmitted(true);
+        navigate("/playlists");
       })
       .catch((error) => {
         console.error("Error:", error);
       });
   };
-
-  if (isSubmitted) {
-    return <Link to="/playlists">Go to Playlists</Link>;
-  }
 
   return (
     <div className="page">
