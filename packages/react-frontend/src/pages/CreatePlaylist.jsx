@@ -20,7 +20,6 @@ function CreatePlaylist({ userId }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(userId);
 
     fetch("https://songsmith.azurewebsites.net/playlists", {
       method: "POST",

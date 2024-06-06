@@ -27,9 +27,12 @@ export default function Playlists() {
         setLoading(false);
       }
     };
+    
 
     fetchPlaylists();
   }, []);
+
+
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);

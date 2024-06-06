@@ -7,7 +7,6 @@ import { useLocation } from "react-router-dom";
 
 function Comments({comments, userId}) { 
   const [newComment, setNewComment] = useState("");
-  console.log(comments)
   const [comms, setComms] = useState(comments);
   const [username, setUsername] = useState("");
 
@@ -28,14 +27,14 @@ function Comments({comments, userId}) {
           setUsername(user["username"]);
         })
         .catch((error) => {
+          setUsername("Anonymous");
           console.error("Error:", error);
     });
-  })
+  }, [username, setUsername, userId])
 
   
   const location = useLocation();
   const commentUrl = "https://songsmith.azurewebsites.net" + location.pathname + "/comments";
-  console.log(commentUrl);
 
   const handleCommentChange = (event) => {
     setNewComment(event.target.value);
@@ -59,7 +58,6 @@ function Comments({comments, userId}) {
   }, [fetchComments]);
   
   const submitComment = async (commentText) => {
-    console.log(commentText)
     try {
       const response = await fetch(commentUrl, {
         method: "POST",
