@@ -6,7 +6,7 @@ function Comment ({comment}) {
     <div className="comment">
       <div className="comment-profile-circle"></div>
       <div className="comment-content">
-        <div className="comment-username">{comment.userId}</div>
+        <div className="comment-username">{comment.username}</div>
         <div className="comment-text">{comment.comment}</div>
       </div>
     </div>
@@ -16,7 +16,7 @@ function Comment ({comment}) {
 
 Comment.propTypes = {
   comment: PropTypes.shape({
-    userId: PropTypes.string.isRequired,
+    username: PropTypes.string.isRequired,
     comment: PropTypes.string.isRequired,
   }).isRequired,
 };

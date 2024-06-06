@@ -11,7 +11,6 @@ function CreateSong() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("Adding song:", name);
 
     fetch("https://songsmith.azurewebsites.net/songs", {
       method: "POST",

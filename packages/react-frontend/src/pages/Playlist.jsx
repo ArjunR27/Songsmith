@@ -1,12 +1,12 @@
 import { useState, useEffect, useCallback } from "react";
+import PropTypes from 'prop-types';
 import "./Playlist.css";
 import { useLocation } from "react-router-dom";
 import SongsTable from "../components/SongsTable";
-import PropTypes from 'prop-types';
-import EditPlaylist from "../components/EditPlaylist"
-import Comments from "../components/Comments"
+import EditPlaylist from "../components/EditPlaylist";
+import Comments from "../components/Comments";
 
-function Playlist({userId}) {
+function Playlist({ userId }) {
   const location = useLocation();
   const path = location.pathname.split("/")[2];
   const [playlist, setPlaylist] = useState({});
@@ -15,9 +15,10 @@ function Playlist({userId}) {
   const [dislikesCount, setDislikesCount] = useState(0);
   const [showEdit, setShowEdit] = useState(false);
   const [authorUsername, setAuthorUsername] = useState("");
+  
 
   const fetchPlaylist = useCallback(() => {
-    return fetch("https://songsmith.azurewebsites.net/playlists/" + path)
+    return fetch(`https://songsmith.azurewebsites.net/playlists/${path}`)
       .then((res) => res.json())
       .then((json) => {
         setPlaylist(json["playlist_list"]);
@@ -27,11 +28,15 @@ function Playlist({userId}) {
       });
   }, [path]);
 
+  const handlePlaylistUpdate = (updatedPlaylist) => {
+    setPlaylist(updatedPlaylist);
+  };
+
   useEffect(() => {
     fetchPlaylist()
       .then((playlistData) => {
         if (playlistData && playlistData["author"]) {
-          return fetch("https://songsmith.azurewebsites.net/users/" + playlistData["author"], {
+          return fetch(`https://songsmith.azurewebsites.net/users/${playlistData["author"]}`, {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
@@ -55,70 +60,64 @@ function Playlist({userId}) {
   }, [fetchPlaylist, likesCount, dislikesCount]);
 
   const handleLike = async () => {
-    try{
-      const response = await fetch('https://songsmith.azurewebsites.net/playlists/' + path + "/likes",{
+    try {
+      const response = await fetch(`https://songsmith.azurewebsites.net/playlists/${path}/likes`, {
         method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ user: userId }),
-        });
-        if (response.ok) {
-          const likeData = await response.json();
-          if (likeData) {
-            setLikesCount(likeData.length);
-            setPlaylist((prevPlaylist) => ({
-              ...prevPlaylist,
-              likes: likeData
-            }));
-          } else {
-            console.error('Response does not contain likes:', likeData);
-          }
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ user: userId }),
+      });
+      if (response.ok) {
+        const likeData = await response.json();
+        if (likeData) {
+          setLikesCount(likeData.length);
+          setPlaylist((prevPlaylist) => ({
+            ...prevPlaylist,
+            likes: likeData,
+          }));
         } else {
-          console.error('Failed to like playlist');
-        } 
-      } catch (error) {
-        console.error('Error liking playlist:', error);
+          console.error('Response does not contain likes:', likeData);
+        }
+      } else {
+        console.error('Failed to like playlist');
       }
-     // window.location.reload();
-      
+    } catch (error) {
+      console.error('Error liking playlist:', error);
+    }
   };
 
   const handleDislike = async () => {
-    try{
-      const response = await fetch('https://songsmith.azurewebsites.net/playlists/' + path + "/dislikes",{
+    try {
+      const response = await fetch(`https://songsmith.azurewebsites.net/playlists/${path}/dislikes`, {
         method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ user: userId }),
-        });
-        if (response.ok) {
-          const dislikeData = await response.json();
-          console.log(dislikeData)
-          console.log(dislikeData.length)
-          if (dislikeData) {
-            setDislikesCount(dislikeData.length);
-            setPlaylist((prevPlaylist) => ({
-              ...prevPlaylist,
-              dislikes: dislikeData
-            }));
-          } else {
-            console.error('Response does not contain dislikes:', dislikeData);
-          }
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ user: userId }),
+      });
+      if (response.ok) {
+        const dislikeData = await response.json();
+        if (dislikeData) {
+          setDislikesCount(dislikeData.length);
+          setPlaylist((prevPlaylist) => ({
+            ...prevPlaylist,
+            dislikes: dislikeData,
+          }));
         } else {
-          console.error('Failed to dislike playlist');
-        } 
-      } catch (error) {
-        console.error('Error disliking playlist:', error);
+          console.error('Response does not contain dislikes:', dislikeData);
+        }
+      } else {
+        console.error('Failed to dislike playlist');
       }
+    } catch (error) {
+      console.error('Error disliking playlist:', error);
+    }
   };
 
   const toggleEdit = () => {
     setShowEdit(!showEdit);
   };
-
- 
 
   function AddSong() {
     const [song, setSong] = useState("");
@@ -128,9 +127,7 @@ function Playlist({userId}) {
     };
 
     const handleAddSong = () => {
-      console.log('Adding song:', song);
-
-      fetch("https://songsmith.azurewebsites.net/playlists/" + path, {
+      fetch(`https://songsmith.azurewebsites.net/playlists/${path}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -138,10 +135,8 @@ function Playlist({userId}) {
         body: JSON.stringify({ name: song }),
       })
         .then(response => response.json())
-        .then(data => {
-          console.log('Success:', data);
+        .then(() => {
           fetchPlaylist()
-            .then(res => res.json())
             .then(json => {
               setPlaylist(json["playlist_list"]);
             })
@@ -236,12 +231,10 @@ function Playlist({userId}) {
                 style={{ cursor: "pointer" }}>
                 Comments
               </button>
-
-              {playlist["author"] === userId && 
+              {playlist["author"] === userId &&
                 <button onClick={toggleEdit} className="pl-edit-button">
-                Edit Playlist
+                  Edit Playlist
                 </button>}
-              
             </div>
           </div>
           {playlist["author"] === userId && <AddSong />}
@@ -250,6 +243,7 @@ function Playlist({userId}) {
           <EditPlaylist
             playlist={playlist}
             onClose={() => setShowEdit(false)}
+            onUpdate={handlePlaylistUpdate}
           />
         )}
       </div>
