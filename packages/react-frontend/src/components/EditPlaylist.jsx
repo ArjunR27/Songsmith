@@ -2,11 +2,9 @@ import { useState, useEffect } from "react";
 import "./EditPlaylist.css"; 
 import PropTypes from "prop-types";
 
-function EditPlaylist({ playlist, onClose }) {
+function EditPlaylist({ playlist, onClose, onUpdate }) {
   const [playlistTitle, setPlaylistTitle] = useState(playlist.playlist_name);
-  const [playlistDescription, setPlaylistDescription] = useState(
-    playlist.description
-  );
+  const [playlistDescription, setPlaylistDescription] = useState(playlist.description);
   const [playlistCoverURL, setPlaylistCoverURL] = useState(playlist.cover);
   const path = location.pathname.split("/")[2];
 
@@ -29,7 +27,7 @@ function EditPlaylist({ playlist, onClose }) {
   };
 
   const handleSubmit = () => {
-    fetch('https://songsmith.azurewebsites.net/playlists/' + path, {
+    fetch('http://localhost:8000/playlists/' + path, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -43,17 +41,13 @@ function EditPlaylist({ playlist, onClose }) {
       .then((response) => response.json())
       .then((data) => {
         console.log("Playlist updated successfully:", data);
+        onUpdate(data["playlist"]); 
         onClose(); // Close the popup after saving changes
-        setTimeout(() => {
-          window.location.reload(); // Reload the page after a delay
-        }, 100); // Adjust the delay time as needed (in milliseconds)
       })
       .catch((error) => {
         console.error("Error updating playlist:", error.message);
       });
   };
-  
-  
 
   return (
     <div className="edit-popup">
@@ -97,5 +91,7 @@ EditPlaylist.propTypes = {
     cover: PropTypes.string.isRequired,
   }).isRequired,
   onClose: PropTypes.func.isRequired,
+  onUpdate: PropTypes.func.isRequired, // Add this line
 };
+
 export default EditPlaylist;

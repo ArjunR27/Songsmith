@@ -7,12 +7,14 @@ import { useLocation } from "react-router-dom";
 
 function Comments({comments, userId}) { 
   const [newComment, setNewComment] = useState("");
-  console.log(comments)
   const [comms, setComms] = useState(comments);
   const [username, setUsername] = useState("");
 
+  console.log(comments);
+  console.log(username);
+
   useEffect(()=> {
-    fetch("https://songsmith.azurewebsites.net/users/" + userId, {
+    fetch("http://localhost:8000/users/" + userId, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -28,13 +30,14 @@ function Comments({comments, userId}) {
           setUsername(user["username"]);
         })
         .catch((error) => {
+          setUsername("Anonymous");
           console.error("Error:", error);
     });
-  })
+  }, [username])
 
   
   const location = useLocation();
-  const commentUrl = "https://songsmith.azurewebsites.net" + location.pathname + "/comments";
+  const commentUrl = "http://localhost:8000" + location.pathname + "/comments";
   console.log(commentUrl);
 
   const handleCommentChange = (event) => {
