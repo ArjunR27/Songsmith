@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import PropTypes from 'prop-types';
 import "./CreatePlaylist.css";
 
@@ -9,6 +10,8 @@ function CreatePlaylist({ userId }) {
     cover: "",
     author: userId,
   });
+
+  const navigate = useNavigate();
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -35,7 +38,7 @@ function CreatePlaylist({ userId }) {
         return response.json();
       })
       .then(() => {
-        window.location.href = "/playlists";
+        navigate("/playlists");
       })
       .catch((error) => {
         console.error("Error:", error);
