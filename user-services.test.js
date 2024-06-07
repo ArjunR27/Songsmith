@@ -91,12 +91,12 @@ describe("User Model Tests", () => {
       const playlist = new Playlist({
         playlist_name: `Playlist ${i + 1}`,
         description: `Description for Playlist ${i + 1}`,
-        cover: "testcover", 
+        cover: "testcover",
         author: addedUser._id,
         songs: [],
-        comments: [], 
-        likes: [], 
-        dislikes: [], 
+        comments: [],
+        likes: [],
+        dislikes: [],
       });
       await playlist.save();
       playlists.push(playlist._id.toString());

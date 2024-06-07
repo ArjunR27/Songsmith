@@ -9,7 +9,7 @@
   width: 40vw;
   padding: 20px;
   padding-top: 30px;
-  padding-bottom: 40px;
+  padding-bottom: 20px;
   background-color: rgb(73, 73, 81);
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -75,4 +75,18 @@ input[type="submit"] {
 
 input[type="submit"]:hover {
   background-color: #1e1f23;
+}
+
+.auth-message {
+  color: #ff4769;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.auth-message.success {
+  color: #87f5ff;
+}
+
+.auth-message.error {
+  color: #ff4769;
 }

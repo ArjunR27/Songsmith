@@ -89,7 +89,7 @@ playlistSchema.methods.deleteSong = async function (songId) {
 
     return this;
   } catch (error) {
-    throw new Error(`Error deleting song: ${error.message}`);
+    throw new Error(`Song not found`);
   }
 };
 

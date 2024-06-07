@@ -144,8 +144,14 @@ app.post("/playlists/:id", async (req, res) => {
     const result = await playlistServices.getPlaylistById(playlistId);
 
     const song = await songServices.getSongs(songInput["name"]);
+    if (song.length == 0 || song == undefined) {
+      return res
+        .status(404)
+        .json({ message: `Could not find song ${songInput["name"]}.` });
+    }
     await result.addSong(song[0]["_id"]);
-    res.send(result);
+
+    res.send(await playlistServices.getPlaylistById(playlistId));
   } catch (error) {
     console.error(error);
     res.status(500).send("Error fetching playlists");
@@ -156,15 +162,27 @@ app.delete("/playlists/:id", async (req, res) => {
   try {
     const playlistId = req.params["id"];
     const songInput = req.body;
-
     const result = await playlistServices.getPlaylistById(playlistId);
-
     const song = await songServices.getSongs(songInput["name"]);
+    // Song doesn't exist
+    if (song.length == 0 || song == undefined) {
+      return res
+        .status(404)
+        .json({ message: `Could not find song ${songInput["name"]}.` });
+    }
+
     await result.deleteSong(song[0]["_id"]);
-    res.send(result);
+    res.send(await playlistServices.getPlaylistById(playlistId));
   } catch (error) {
-    console.error(error);
-    res.status(500).send("Error fetching playlists");
+    if (error.message !== "Song not found") {
+      console.error(error);
+      return res.status(500).send("Error deleting song from playlist.");
+    }
+
+    // Song is not in playlist
+    return res
+      .status(404)
+      .json({ message: `Song ${req.body["name"]} is not in the playlist.` });
   }
 });
 

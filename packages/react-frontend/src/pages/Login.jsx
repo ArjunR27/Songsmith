@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 
 
-function LoginForm(props) {
+function LoginForm({handleSubmit, setMessage}) {
   const [creds, setCreds] = useState({
     username: "",
     password: "",
@@ -52,13 +52,25 @@ function LoginForm(props) {
 
   function submitForm(event) {
     event.preventDefault();
-    props.handleSubmit(creds);
+    if (creds.username === "" && creds.password === "") {
+      setMessage("Username and password not provided");
+      return;
+    } else if (creds.username === "") {
+      setMessage("Username not provided");
+      return;
+    } else if (creds.password === "") {
+      setMessage("Password not provided");
+      return;
+    } 
+    handleSubmit(creds)
     setCreds({ username: "", password: "" });
   }
 }
 
 LoginForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
+  setMessage: PropTypes.func.isRequired,
+  
 };
 
 function LoginPage(props) {
@@ -92,8 +104,8 @@ function LoginPage(props) {
             }
           });
         } else {
-          response.text().then((text) => {
-            setMessage(`Login Error ${response.status}: ${text}`);
+          response.text().then(() => {
+            setMessage(`Invalid username or password.`);
           });
         }
       })
@@ -108,7 +120,8 @@ function LoginPage(props) {
       <div className="auth-page">
         <div className="auth-form-container">
           <h1 className="auth-form-header">Login</h1>
-          <LoginForm handleSubmit={loginUser}/>
+          <LoginForm handleSubmit={loginUser} setMessage={setMessage}/>
+          <div className={`auth-message`}>{message}</div>
         </div>
       </div>
     </>
@@ -121,4 +134,5 @@ LoginPage.propTypes = {
   setToken: PropTypes.func.isRequired,
   setUserId: PropTypes.func.isRequired,
 };
+
 
