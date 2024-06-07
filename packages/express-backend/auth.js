@@ -62,16 +62,16 @@ export function loginUser(req, res) {
   userServices
     .findUserByName(username)
     .then((retrievedUser) => {
-      const hashedPassword = retrievedUser[0]["password"];
-
-      if (!retrievedUser) {
+      if (!retrievedUser || retrievedUser.length === 0) {
         // invalid username
-        res.status(401).send("Unauthorized");
+        return res.status(401).send("Unauthorized");
       }
+
+      const hashedPassword = retrievedUser[0]["password"];
 
       if (!hashedPassword) {
         // Handle case where hashedPassword is missing
-        res.status(500).send("Server error: User data is corrupted.");
+        return res.status(500).send("Server error: User data is corrupted.");
       }
 
       bcrypt

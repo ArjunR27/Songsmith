@@ -15,16 +15,21 @@ function Playlist({ userId }) {
   const [dislikesCount, setDislikesCount] = useState(0);
   const [showEdit, setShowEdit] = useState(false);
   const [authorUsername, setAuthorUsername] = useState("");
-  
+  const [message, setMessage] = useState("");
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [playlistUpdated, setPlaylistUpdated] = useState(false);
 
   const fetchPlaylist = useCallback(() => {
     return fetch(`https://songsmith.azurewebsites.net/playlists/${path}`)
       .then((res) => res.json())
       .then((json) => {
-        setPlaylist(json["playlist_list"]);
-        setLikesCount(json["playlist_list"].likes.length);
-        setDislikesCount(json["playlist_list"].dislikes.length);
-        return json["playlist_list"];
+        let pl = json["playlist_list"];
+
+        console.log(pl);
+        setPlaylist(pl);
+        setLikesCount(pl.likes.length);
+        setDislikesCount(pl.dislikes.length);
+        return pl;
       });
   }, [path]);
 
@@ -57,7 +62,7 @@ function Playlist({ userId }) {
       .catch((error) => {
         console.error("Error:", error);
       });
-  }, [fetchPlaylist, likesCount, dislikesCount]);
+  }, [fetchPlaylist, playlistUpdated]);
 
   const handleLike = async () => {
     try {
@@ -119,14 +124,19 @@ function Playlist({ userId }) {
     setShowEdit(!showEdit);
   };
 
-  function AddSong() {
+  function AddDelSong() {
     const [song, setSong] = useState("");
-
+  
     const handleInputChange = (event) => {
       setSong(event.target.value);
     };
-
+  
     const handleAddSong = () => {
+      if (song === "") {
+        setMessage(`Song not provided.`);
+        setIsSuccess(false);
+        return;
+      } 
       fetch(`https://songsmith.azurewebsites.net/playlists/${path}`, {
         method: 'POST',
         headers: {
@@ -134,67 +144,85 @@ function Playlist({ userId }) {
         },
         body: JSON.stringify({ name: song }),
       })
-        .then(response => response.json())
-        .then(() => {
-          fetchPlaylist()
-            .then(res => res.json())
-            .then(json => {
-              setPlaylist(json["playlist_list"]);
-            })
-            .catch(error => {
-              console.log(error);
+        .then(response => {
+          if (!response.ok) {
+            return response.json().then(data => {
+              throw new Error(data.message || 'Failed to add song');
             });
+          }
+          return response.json();
+        })
+        .then((newPlaylist) => {
+          setPlaylist(newPlaylist);
+          setMessage(`Successfully added ${song} to playlist`);
+          setIsSuccess(true);
+          setPlaylistUpdated(!playlistUpdated); 
         })
         .catch((error) => {
-          console.error("Error:", error);
+          setMessage(`${error.message}`);
+          setIsSuccess(false);
         });
-
+  
       setSong("");
     };
-    
+  
     const handleDeleteSong = () => {
-      console.log('Deleting song:', song);
-
-      fetch("https://songsmith.azurewebsites.net/playlists/" + path, {
+      if (song === "") {
+        setMessage(`Song not provided.`);
+        setIsSuccess(false);
+        return;
+      }
+      fetch(`https://songsmith.azurewebsites.net/playlists/${path}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ name: song }),
       })
-        .then(response => response.json())
-        .then(data => {
-          console.log('Success:', data);
-          fetchPlaylist()
-            .then(res => res.json())
-            .then(json => {
-              setPlaylist(json["playlist_list"]);
-            })
-            .catch(error => {
-              console.log(error);
+        .then(response => {
+          if (!response.ok) {
+            return response.json().then(data => {
+              throw new Error(data.message || 'Failed to add song.');
             });
+          }
+          return response.json();
+        })
+        .then((newPlaylist) => {
+          setPlaylist(newPlaylist);
+          setMessage(`Successfully deleted ${song} from playlist.`);
+          setIsSuccess(true);
+          setPlaylistUpdated(!playlistUpdated); // Toggle state to trigger useEffect
         })
         .catch((error) => {
-          console.error("Error:", error);
+          setMessage(`${error.message}`);
+          setIsSuccess(false);
         });
-
+  
       setSong("");
     };
+
     return (
-      <div className="pl-add-song">
-        <input
-          placeholder="Song"
-          className="pl-song-input"
-          value={song}
-          onChange={handleInputChange}
-        />
-        <button onClick={handleAddSong} className="pl-song-button">
-          Add Song
-        </button>
-        <button onClick={handleDeleteSong} className="pl-song-button">
-          Delete Song
-        </button>
-      </div>
+      <>
+        <div className="pl-add-song">
+          <input
+            id="song-input"
+            name="song-input"
+            placeholder="Song"
+            className="pl-song-input"
+            value={song}
+            onChange={handleInputChange}
+          />
+          <button onClick={handleAddSong} className="pl-song-button">
+            Add Song
+          </button>
+          <button onClick={handleDeleteSong} className="pl-song-button">
+            Delete Song
+          </button>
+        </div>
+        <div className={`song-message ${isSuccess ? 'success' : 'error'}`}>
+          {message}
+        </div>
+      </>
     );
   }
 
@@ -238,7 +266,7 @@ function Playlist({ userId }) {
                 </button>}
             </div>
           </div>
-          {playlist["author"] === userId && <AddSong />}
+          {playlist["author"] === userId && <AddDelSong />}
         </div>
         {showEdit && (
           <EditPlaylist

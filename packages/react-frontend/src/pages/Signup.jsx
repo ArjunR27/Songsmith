@@ -2,7 +2,7 @@ import { useState } from "react";
 import PropTypes from "prop-types";
 import "./Auth.css"
 
-function SignupForm(props) {
+function SignupForm({handleSubmit, setMessage, setIsSuccess}) {
   const [creds, setCreds] = useState({
     username: "",
     password: "",
@@ -52,47 +52,62 @@ function SignupForm(props) {
 
   function submitForm(event) {
     event.preventDefault();
-    props.handleSubmit(creds);
+    if (creds.username === "" && creds.password === "") {
+      setMessage("Username and password not provided");
+      setIsSuccess(false);
+      return;
+    } else if (creds.username === "") {
+      setMessage("Username not provided");
+      setIsSuccess(false);
+      return;
+    } else if (creds.password === "") {
+      setMessage("Password not provided");
+      setIsSuccess(false);
+      return;
+    } 
+    handleSubmit(creds)
     setCreds({ username: "", password: "" });
+  
   }
 }
 
 SignupForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
+  setMessage: PropTypes.func.isRequired,
+  setIsSuccess: PropTypes.func.isRequired,
 };
 
 export default function Signup() {
   const [message, setMessage] = useState("");
+  const [isSuccess, setIsSuccess] = useState(false);
 
   function signupUser(creds) {
     const API_PREFIX = "https://songsmith.azurewebsites.net";
 
-    console.log(message);
-  
     const promise = fetch(`${API_PREFIX}/signup`, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(creds)
+      body: JSON.stringify(creds),
     })
       .then((response) => {
         if (response.status === 201) {
-          response
-            .json()
-          setMessage(
-            `Signup successful for user: ${creds.username}; auth token saved`
-          );
+          setMessage("Signup successful!");
+          setIsSuccess(true);
+        } else if (response.status === 409) {
+          setMessage("Username already taken");
+          setIsSuccess(false);
         } else {
-          setMessage(
-            `Signup Error ${response.status}: ${response.data}`
-          );
+          setMessage("Signup Error");
+          setIsSuccess(false);
         }
       })
       .catch((error) => {
         setMessage(`Signup Error: ${error}`);
+        setIsSuccess(false);
       });
-  
+
     return promise;
   }
 
@@ -101,7 +116,8 @@ export default function Signup() {
       <div className="auth-page">
         <div className="auth-form-container">
           <h1 className="auth-form-header">Signup</h1>
-          <SignupForm handleSubmit={signupUser}/>
+          <SignupForm handleSubmit={signupUser} setMessage={setMessage} setIsSuccess={setIsSuccess}/>
+          <div className={`auth-message ${isSuccess ? 'success' : 'error'}`}>{message}</div>
         </div>
       </div>
     </>
