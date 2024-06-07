@@ -13,7 +13,7 @@ git clone https://github.com/ArjunR27/Songsmith.git
 
 
 UI prototype: 
-You can view the UI prototype on figma [here](url): 
+You can view the UI prototype on figma [here](https://www.figma.com/design/OgyeXZ1LFCofufhBaVEOjh/Songsmith-Wireframe?node-id=0-1&t=AkLdluBx2LVHt53C-1): 
 
 
 
