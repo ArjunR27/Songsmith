@@ -70,7 +70,7 @@ playlistSchema.methods.addSong = async function (songId) {
     }
 
     this.songs.push(songId);
-    this.save();
+    await this.save();
 
     return this;
   } catch (error) {
@@ -85,7 +85,7 @@ playlistSchema.methods.deleteSong = async function (songId) {
       throw new Error("Song not found");
     }
     this.songs.splice(songIndex, 1);
-    this.save();
+    await this.save();
 
     return this;
   } catch (error) {
@@ -96,8 +96,7 @@ playlistSchema.methods.deleteSong = async function (songId) {
 playlistSchema.methods.addComment = async function (commentId) {
   try {
     this.comments.push(commentId);
-    this.save();
-
+    await this.save();
     return this;
   } catch (error) {
     throw new Error(`Error adding comment: ${error.message}`);

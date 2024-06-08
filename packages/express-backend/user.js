@@ -13,13 +13,6 @@ const userSchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
-
-    playlists: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Playlist",
-      },
-    ],
   },
 
   { collection: "user_list" },

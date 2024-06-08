@@ -15,13 +15,9 @@ mongoose
   .catch((error) => console.log(error));
 
 function createComment(comment) {
-  try {
-    const comToAdd = new commentModel(comment);
-    const promise = comToAdd.save();
-    return promise;
-  } catch (error) {
-    throw new Error(`Error creating playlist: ${error.message}`);
-  }
+  const comToAdd = new commentModel(comment);
+  const promise = comToAdd.save();
+  return promise;
 }
 
 export default { createComment };

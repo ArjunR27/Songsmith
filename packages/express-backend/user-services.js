@@ -36,14 +36,9 @@ function getUsers(username) {
   return promise;
 }
 
-function getPlaylistsForUser(id) {
-  return userModel.findById(id).populate("playlists");
-}
-
 export default {
   getUsers,
   findUserById,
   findUserByName,
   addUser,
-  getPlaylistsForUser,
 };

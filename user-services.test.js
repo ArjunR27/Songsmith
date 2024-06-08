@@ -78,39 +78,4 @@ describe("User Model Tests", () => {
       expect(allUsers.some((u) => u.username === user.username)).toBe(true);
     });
   });
-
-  test("Get playlists for user", async () => {
-    const user = {
-      username: `${testDataPrefix}testUser`,
-      password: "password123",
-    };
-    const addedUser = await userModel.addUser(user);
-
-    const playlists = [];
-    for (let i = 0; i < 2; i++) {
-      const playlist = new Playlist({
-        playlist_name: `Playlist ${i + 1}`,
-        description: `Description for Playlist ${i + 1}`,
-        cover: "testcover",
-        author: addedUser._id,
-        songs: [],
-        comments: [],
-        likes: [],
-        dislikes: [],
-      });
-      await playlist.save();
-      playlists.push(playlist._id.toString());
-    }
-
-    addedUser.playlists = playlists;
-    await addedUser.save();
-
-    const userPlaylists = await userModel.getPlaylistsForUser(addedUser._id);
-
-    expect(userPlaylists).toBeDefined();
-    expect(userPlaylists.playlists.length).toBe(playlists.length);
-    userPlaylists.playlists.forEach((playlist) => {
-      expect(playlists.includes(playlist._id.toString())).toBe(true);
-    });
-  });
 });
