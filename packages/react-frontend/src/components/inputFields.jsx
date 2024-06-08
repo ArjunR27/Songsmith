@@ -1,4 +1,4 @@
-import "./inputFields.css"; // Ensure the correct path to the CSS file
+import "./inputFields.css"; 
 
 const inputFields = ({ type, placeholder, value, onChange, id, labelName }) => {
   return (

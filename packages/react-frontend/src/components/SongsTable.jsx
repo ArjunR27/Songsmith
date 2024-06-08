@@ -1,4 +1,4 @@
-import PropTypes from "prop-types"; // Add PropTypes import
+import PropTypes from "prop-types"; 
 import "./SongsTable.css";
 
 function TableHeader() {
@@ -48,7 +48,7 @@ function TableBody(props) {
   return <tbody>{rows}</tbody>;
 }
 
-// Add PropTypes validation for TableBody component
+
 TableBody.propTypes = {
   songData: PropTypes.arrayOf(
     PropTypes.shape({
@@ -72,7 +72,7 @@ function Table(props) {
   );
 }
 
-// Add PropTypes validation for Table component
+
 Table.propTypes = {
   songData: PropTypes.arrayOf(
     PropTypes.shape({

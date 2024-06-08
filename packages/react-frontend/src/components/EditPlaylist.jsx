@@ -42,7 +42,7 @@ function EditPlaylist({ playlist, onClose, onUpdate }) {
       .then((data) => {
         console.log("Playlist updated successfully:", data);
         onUpdate(data["playlist"]); 
-        onClose(); // Close the popup after saving changes
+        onClose(); 
       })
       .catch((error) => {
         console.error("Error updating playlist:", error.message);
@@ -91,7 +91,7 @@ EditPlaylist.propTypes = {
     cover: PropTypes.string.isRequired,
   }).isRequired,
   onClose: PropTypes.func.isRequired,
-  onUpdate: PropTypes.func.isRequired, // Add this line
+  onUpdate: PropTypes.func.isRequired, 
 };
 
 export default EditPlaylist;

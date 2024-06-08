@@ -194,7 +194,7 @@ function Playlist({ userId }) {
           setPlaylist(newPlaylist);
           setMessage(`Successfully deleted ${song} from playlist.`);
           setIsSuccess(true);
-          setPlaylistUpdated(!playlistUpdated); // Toggle state to trigger useEffect
+          setPlaylistUpdated(!playlistUpdated); 
         })
         .catch((error) => {
           setMessage(`${error.message}`);

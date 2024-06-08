@@ -18,9 +18,9 @@ th {
   color: #ffffff;
 }
 
-/* Album Image styles */
+
 td img {
   max-width: 75px;
   max-height: 75px;
-  object-fit: scale-down; /* Ensures the image covers the specified dimensions */
+  object-fit: scale-down; 
 }
