@@ -29,9 +29,12 @@ function Playlist({ userId }) {
         setPlaylist(pl);
         setLikesCount(pl.likes.length);
         setDislikesCount(pl.dislikes.length);
+        console.log(likesCount)
+        console.log(dislikesCount)
         return pl;
       });
-  }, [path]);
+  }, [path, likesCount, dislikesCount]);
+  
 
   const handlePlaylistUpdate = (updatedPlaylist) => {
     setPlaylist(updatedPlaylist);
