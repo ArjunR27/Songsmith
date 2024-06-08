@@ -22,7 +22,7 @@ npm start
 You can view the UI prototype on figma [here](https://www.figma.com/design/OgyeXZ1LFCofufhBaVEOjh/Songsmith-Wireframe?node-id=0-1&t=AkLdluBx2LVHt53C-1): [insert date]
 
 ## UML Class Diagram:
-You can view the UML class diagram here [insert date]
+You can view the UML class diagram [here] (https://github.com/ArjunR27/Songsmith/wiki/UML-Diagram) [insert date]
 
 
 
