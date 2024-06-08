@@ -13,13 +13,16 @@ git clone https://github.com/ArjunR27/Songsmith.git
 ## Install dependencies:
 npm install
 
+## Running dev server:
+npm start
+
 
 ## UI prototype: 
 
-You can view the UI prototype on figma [here](https://www.figma.com/design/OgyeXZ1LFCofufhBaVEOjh/Songsmith-Wireframe?node-id=0-1&t=AkLdluBx2LVHt53C-1): 
+You can view the UI prototype on figma [here](https://www.figma.com/design/OgyeXZ1LFCofufhBaVEOjh/Songsmith-Wireframe?node-id=0-1&t=AkLdluBx2LVHt53C-1): [insert date]
 
 ## UML Class Diagram:
-You can view the UML class diagram here
+You can view the UML class diagram here [insert date]
 
 
 
