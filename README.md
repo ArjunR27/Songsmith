@@ -1,5 +1,5 @@
 # Songsmith
-Songsmith is a social media platform for music where you can create, rate, share, and review playlists. Designed for those who want a platform to organize their music and for those who want to curate music and share their collections with others, Songsmith offers a unique space for music enthusiasts. Unlike other platforms, Songsmith allows users to review playlists by liking, disliking, and commenting.
+Songsmith is a social media platform for music where you can create, rate, and review playlists. Designed for those who want a platform to organize their music, Songsmith offers a unique space for music enthusiasts. Unlike other platforms, Songsmith allows users to review playlists by liking, disliking, and commenting.
 
 # Setup Instructions:
 
