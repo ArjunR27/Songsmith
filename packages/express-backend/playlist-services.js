@@ -14,45 +14,20 @@ mongoose
 
 function getAllPlaylists() {
   let promise;
-  try {
-    promise = playlistModel
-      .find()
-      .populate("songs")
-      .populate("comments")
-      .populate("likes")
-      .populate("dislikes")
-      .exec();
-
-    return promise;
-  } catch (error) {
-    throw new Error(`Error fetching playlists: ${error.message}`);
-  }
-}
-
-function getPlaylistById(id) {
-  let promise;
-  try {
-    promise = playlistModel
-      .findById(id)
-      .populate("songs")
-      .populate("comments")
-      .populate("likes")
-      .populate("dislikes")
-      .exec();
-    return promise;
-  } catch (error) {
-    throw new Error(`Error fetching playlists: ${error.message}`);
-  }
+  promise = playlistModel
+    .find()
+    .populate("songs")
+    .populate("comments")
+    .populate("likes")
+    .populate("dislikes")
+    .exec();
+  return promise;
 }
 
 function createPlaylist(playlist) {
-  try {
-    const playlistToAdd = new playlistModel(playlist);
-    const promise = playlistToAdd.save();
-    return promise;
-  } catch (error) {
-    throw new Error(`Error creating playlist: ${error.message}`);
-  }
+  const playlistToAdd = new playlistModel(playlist);
+  const promise = playlistToAdd.save();
+  return promise;
 }
 
-export default { getAllPlaylists, createPlaylist, getPlaylistById };
+export default { getAllPlaylists, createPlaylist };

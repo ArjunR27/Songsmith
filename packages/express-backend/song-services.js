@@ -18,12 +18,6 @@ mongoose
 async function addSong(song) {
   console.log(song);
   try {
-    const existingSong = await songModel.find({
-      name: song.name,
-      artist: song.artist,
-      album: song.album,
-    });
-
     const songToAdd = new songModel({
       name: song.name,
       artist: song.artist,
