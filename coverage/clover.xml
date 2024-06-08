@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1717811136454" clover="3.2.0">
-  <project timestamp="1717811136454" name="All files">
-    <metrics statements="125" coveredstatements="125" conditionals="42" coveredconditionals="42" methods="27" coveredmethods="27" elements="194" coveredelements="194" complexity="0" loc="125" ncloc="125" packages="1" files="8" classes="8"/>
+<coverage generated="1717813252494" clover="3.2.0">
+  <project timestamp="1717813252494" name="All files">
+    <metrics statements="127" coveredstatements="127" conditionals="42" coveredconditionals="42" methods="28" coveredmethods="28" elements="197" coveredelements="197" complexity="0" loc="127" ncloc="127" packages="1" files="8" classes="8"/>
     <file name="comments-services.js" path="/Users/hahns_pena/Documents/University/CSC 307/Songsmith/packages/express-backend/comments-services.js">
       <metrics statements="8" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
       <line num="7" count="2" type="stmt"/>
@@ -19,16 +19,18 @@
       <line num="19" count="3" type="stmt"/>
     </file>
     <file name="playlist-services.js" path="/Users/hahns_pena/Documents/University/CSC 307/Songsmith/packages/express-backend/playlist-services.js">
-      <metrics statements="9" coveredstatements="9" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
+      <metrics statements="11" coveredstatements="11" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="4"/>
       <line num="5" count="1" type="stmt"/>
       <line num="7" count="1" type="stmt"/>
       <line num="8" count="1" type="stmt"/>
       <line num="13" count="1" type="stmt"/>
       <line num="17" count="1" type="stmt"/>
       <line num="24" count="1" type="stmt"/>
-      <line num="28" count="25" type="stmt"/>
-      <line num="29" count="25" type="stmt"/>
-      <line num="30" count="25" type="stmt"/>
+      <line num="30" count="2" type="stmt"/>
+      <line num="37" count="2" type="stmt"/>
+      <line num="41" count="26" type="stmt"/>
+      <line num="42" count="26" type="stmt"/>
+      <line num="43" count="26" type="stmt"/>
     </file>
     <file name="playlist.js" path="/Users/hahns_pena/Documents/University/CSC 307/Songsmith/packages/express-backend/playlist.js">
       <metrics statements="69" coveredstatements="69" conditionals="32" coveredconditionals="32" methods="12" coveredmethods="12"/>

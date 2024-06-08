@@ -24,10 +24,22 @@ function getAllPlaylists() {
   return promise;
 }
 
+function getPlaylistById(id) {
+  let promise;
+  promise = playlistModel
+    .findById(id)
+    .populate("songs")
+    .populate("comments")
+    .populate("likes")
+    .populate("dislikes")
+    .exec();
+  return promise;
+}
+
 function createPlaylist(playlist) {
   const playlistToAdd = new playlistModel(playlist);
   const promise = playlistToAdd.save();
   return promise;
 }
 
-export default { getAllPlaylists, createPlaylist };
+export default { getAllPlaylists, createPlaylist, getPlaylistById };

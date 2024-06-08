@@ -602,4 +602,29 @@ describe("Playlist Model Tests", () => {
 
     playlist.save.mockRestore();
   });
+
+  test("should return a playlist when a valid ID is provided", async () => {
+    const playlistToAdd = {
+      playlist_name: "test_playlist",
+      description: "test descriptions",
+      cover: "test cover",
+      author: new mongoose.Types.ObjectId(),
+      songs: [],
+      comments: [],
+      likes: [],
+      dislikes: [],
+    };
+    const addedPlaylist = await playlistModel.createPlaylist(playlistToAdd);
+
+    const playlist = await playlistModel.getPlaylistById(addedPlaylist._id);
+
+    expect(playlist.playlist_name).toBe(playlistToAdd.playlist_name);
+  });
+
+  test("should throw an error when the playlist is not found", async () => {
+    const nonExistentId = new mongoose.Types.ObjectId();
+    const playlist = await playlistModel.getPlaylistById(nonExistentId);
+
+    expect(playlist).toBe(null);
+  });
 });

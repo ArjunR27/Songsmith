@@ -24,7 +24,6 @@ function Playlist({ userId }) {
       .then((res) => res.json())
       .then((json) => {
         let pl = json["playlist_list"];
-
         console.log(pl);
         setPlaylist(pl);
         setLikesCount(pl.likes.length);
