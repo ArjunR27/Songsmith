@@ -1,4 +1,4 @@
-import "./SideBar.css"; // Import CSS for styling
+import "./SideBar.css"; 
 import { Link } from "react-router-dom";
 
 function Sidebar() {

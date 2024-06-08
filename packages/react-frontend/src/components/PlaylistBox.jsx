@@ -24,7 +24,7 @@ export default function PlaylistBox({ playlist }) {
   );
 }
 
-// Add PropTypes validation
+
 PlaylistBox.propTypes = {
   playlist: PropTypes.shape({
     _id: PropTypes.string.isRequired,

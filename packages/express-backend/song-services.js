@@ -6,7 +6,6 @@ import songModel from "./song.js";
 dotenv.config();
 mongoose.set("debug", true);
 
-// Connect to MongoDB
 mongoose
   .connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,

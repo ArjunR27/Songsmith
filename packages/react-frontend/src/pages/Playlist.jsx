@@ -29,9 +29,12 @@ function Playlist({ userId }) {
         setPlaylist(pl);
         setLikesCount(pl.likes.length);
         setDislikesCount(pl.dislikes.length);
+        console.log(likesCount)
+        console.log(dislikesCount)
         return pl;
       });
   }, [path, likesCount, dislikesCount]);
+  
 
   const handlePlaylistUpdate = (updatedPlaylist) => {
     setPlaylist(updatedPlaylist);
@@ -191,7 +194,7 @@ function Playlist({ userId }) {
           setPlaylist(newPlaylist);
           setMessage(`Successfully deleted ${song} from playlist.`);
           setIsSuccess(true);
-          setPlaylistUpdated(!playlistUpdated); // Toggle state to trigger useEffect
+          setPlaylistUpdated(!playlistUpdated); 
         })
         .catch((error) => {
           setMessage(`${error.message}`);

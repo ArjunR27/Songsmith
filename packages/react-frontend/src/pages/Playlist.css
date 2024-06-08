@@ -118,12 +118,12 @@
   font-family: 'League Spartan', sans-serif;
   font-style: normal;
   font-weight: 400;
-  font-size: 12px; /* Adjusted font size */
+  font-size: 12px; 
   text-decoration: none;
 }
 
 button {
-  font-size: 12px; /* Adjusted font size for button text */
+  font-size: 12px; 
   color: #5A585C;
   font-family: 'League Spartan', sans-serif;
   font-style: normal;
