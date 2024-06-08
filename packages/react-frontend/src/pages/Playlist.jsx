@@ -31,7 +31,7 @@ function Playlist({ userId }) {
         setDislikesCount(pl.dislikes.length);
         return pl;
       });
-  }, [path, likesCount, dislikesCount]);
+  }, [path]);
 
   const handlePlaylistUpdate = (updatedPlaylist) => {
     setPlaylist(updatedPlaylist);

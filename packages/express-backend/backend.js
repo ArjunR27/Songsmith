@@ -1,4 +1,3 @@
-// backend.js
 import dotenv from "dotenv";
 import express from "express";
 import cors from "cors";
@@ -191,9 +190,9 @@ app.post("/songs", async (req, res) => {
     const songAddition = req.body;
     const result = await songServices.addSong(songAddition);
     if (result) {
-      res.status(201).send(result); // Send the result if successful
+      res.status(201).send(result);
     } else {
-      res.status(500).send({ error: "Failed to add song" }); // Handle the error case appropriately
+      res.status(500).send({ error: "Failed to add song" });
     }
   } catch (error) {
     res.status(500).send({ error: error.message });
